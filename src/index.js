@@ -4,6 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+class Doc extends React.Component{
+  componentDidMount(){
+    document.title = "多村控制台"
+  }
+
+  render(){
+    return(
+      <div></div>
+    )
+  }
+}
 ReactDOM.render(
   <React.StrictMode>
     <App />

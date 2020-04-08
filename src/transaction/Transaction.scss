@@ -1,0 +1,15 @@
+
+$label-w: 100px;
+
+.l-label{
+  width: $label-w;
+}
+
+.r-text{
+  width: calc(100% - #{$label-w});
+}
+
+.col{
+  width: 100%;
+  float: left;
+}
