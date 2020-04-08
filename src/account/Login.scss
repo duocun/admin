@@ -1,5 +1,29 @@
 @import '../base';
 
-input {
-  border: 1px solid #eee;
+
+
+.login-form{
+  width: 400px;
+  margin: auto;
+  padding-top: 40px;
+  
+  .field{
+    margin-top: 20px;
+  }
+
+  .btn{
+    margin-top: 30px;
+  }
+}
+.form-wrapper{
+  padding: 15px;
+}
+@media #{$mobile}{
+  .login-form{
+    width: 100%;
+    
+    .btn{
+      width: 100%;
+    }
+  }
 }

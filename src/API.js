@@ -51,7 +51,7 @@ export class Http {
     return new Promise((resolve, reject) => {
       axios.post(url, data, {headers: headers})
         .then(json => {
-          const data = JSON.parse(json.data);
+          const data = json.data;
           resolve({ data, status: json.status, statusText: json.statusText });
         });
     });
