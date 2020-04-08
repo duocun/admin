@@ -16,6 +16,7 @@ function App() {
               return null;
             }} /> */}
             
+            <Route exact path="/admin2/" component={Login} />
             <Route path="/login" component={Login} />
             <Route exact path="/merchant/" component={Merchant} />
             <Route exact path="/admin2/" component={Order} />
