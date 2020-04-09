@@ -2,6 +2,7 @@ import React from 'react';
 import { OrderAPI } from './API';
 import { AccountAPI } from '../account/API';
 import './Order.scss';
+import { NavBar, Menu } from '../ui/NavBar';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -17,19 +18,21 @@ export class Order extends React.Component {
 
   render() {
     const payments = this.state.payments;
+    // const Menu = Menu;
     return (
       <div>
-        {
+        <NavBar selected={Menu.Order} />
+        {/* {
           payments.length &&
           payments.map(m =>
             <div className="row" key={m.paymentId}>
-              {/* <div className="col">{m.paymentId}</div> */}
+              <div className="col">{m.paymentId}</div>
               <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div>
               <div className="col date">{m.date}</div>
               <div className="col client">{m.client}</div>
             </div>
           )
-        }
+        } */}
       </div>
     );
   }
