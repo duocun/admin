@@ -31,6 +31,13 @@ $font-s: 12px;
 $font-m: 14px;
 $font-b: 16px;
 
+$nav-w: 160px;
+
+a:hover, a:visited, a:link, a:active
+{
+  text-decoration: none;
+}
+
 .page{
   position: fixed;
   top: 0px;
