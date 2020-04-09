@@ -19,6 +19,8 @@ export class Area extends React.Component{
 
   componentDidMount(){
     const q = { type: MerchantType.GROCERY };
-    this.areaSvc.find(q)
+    this.areaSvc.find(q).then(areas => {
+
+    });
   }
 }
