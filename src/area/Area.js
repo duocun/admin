@@ -3,6 +3,8 @@ import { AreaAPI } from './API';
 // import { MerchantAPI } from '../merchant/API';
 import { NavBar, Menu } from '../ui/NavBar';
 import { AreaList } from './AreaList';
+// import { MapContainer } from '../ui/Map';
+import GoogleApiWrapper from '../ui/DrawingMap';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -25,6 +27,7 @@ export class Area extends React.Component {
           areas && areas.length>0 &&
           <AreaList areas={areas}/>
         }
+        <GoogleApiWrapper />
       </div>
     )
   }
@@ -32,7 +35,7 @@ export class Area extends React.Component {
   componentDidMount() {
     const q = { appType: MerchantType.GROCERY };
     this.areaSvc.find(q).then(areas => {
-      this.setState({areas});
+      // this.setState({areas});
     });
   }
 }

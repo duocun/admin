@@ -13,26 +13,27 @@ export class Order extends React.Component {
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { payments: [] };
+    this.state = { orders: [] };
   }
 
   render() {
-    const payments = this.state.payments;
+    const orders = this.state.orders;
     // const Menu = Menu;
     return (
       <div>
         <NavBar selected={Menu.Order} />
-        {/* {
-          payments.length &&
-          payments.map(m =>
-            <div className="row" key={m.paymentId}>
-              <div className="col">{m.paymentId}</div>
-              <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div>
-              <div className="col date">{m.date}</div>
-              <div className="col client">{m.client}</div>
+        <div>订单数: x{orders.length}</div>
+        {
+          orders && orders.length > 0 &&
+          orders.map(m =>
+            <div className="row" key={m._id}>
+              <div className="col">{m.clientName}</div>
+              {/* <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div> */}
+              {/* <div className="col date">{m.date}</div> */}
+              <div className="col">{m.code}</div>
             </div>
           )
-        } */}
+        }
       </div>
     );
   }
@@ -42,11 +43,15 @@ export class Order extends React.Component {
   componentDidMount() {
     this.accountSvc.getCurrentAccount().then(account => {
       if (account) {
-        this.orderSvc.reqMissingWechatPayments().then((payments) => {
+        const q = {deliverDate: '2020-04-10'};
+        const fields = ['id', 'code', 'clientName']; // 'items'
+        this.orderSvc.find(q, fields).then(orders => {
+          this.setState({ orders });
+        });
+        // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
         // this.orderSvc.checkWechatpay().then((payments) => {
-          this.setState({ payments });
-        });
+        // });
 
         // const qMerchant = { type: MerchantType.GROCERY };
         // const fields = ['_id', 'name', 'rules'];
