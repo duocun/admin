@@ -6,6 +6,7 @@ import { OrderAPI } from './API';
 import { AccountAPI } from '../account/API';
 import './Order.scss';
 import { NavBar, Menu } from '../ui/NavBar';
+import { Footer } from '../ui/Footer';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -58,6 +59,7 @@ export class Order extends React.Component {
             </div>
           )
         }
+        <Footer selected={Menu.Order}/>
       </div>
     );
   }

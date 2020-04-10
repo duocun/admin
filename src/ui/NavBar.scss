@@ -22,3 +22,14 @@ $icon-w: 40px;
     flex-direction: row;
   }
 }
+
+
+@media #{$tablet}{
+
+}
+
+@media #{$mobile}{
+  .nav-list{
+    display: none;
+  }
+}
