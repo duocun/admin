@@ -1,4 +1,7 @@
-export class Map extends React.Component {
+import React from 'react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
+export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     // this.select = this.select.bind(this);
@@ -7,8 +10,14 @@ export class Map extends React.Component {
   render() {
     // const selected = this.props.selected;
     return (
-      <div className="map">
+      <div>
+      <Map google={this.props.google} zoom={14}/>
+      <Marker onClick={this.onMarkerClick} name={'Current location'} />
       </div>
     )
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: ('AIzaSyCEd6D6vc9K-YzMH-QtQWRSs5HZkLKSWyk')
+})(MapContainer)
