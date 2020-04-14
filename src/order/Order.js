@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // import * as moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,6 +8,7 @@ import { AccountAPI } from '../account/API';
 import './Order.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
+import { loadOrders } from '../store/actions';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -29,7 +31,7 @@ export const OrderStatus = {
   MERCHANT_CHECKED: 'MC'  // VIEWED BY MERCHANT
 };
 
-export class Order extends React.Component {
+class Order extends React.Component {
   accountSvc = new AccountAPI();
   orderSvc = new OrderAPI();
   constructor(props) {
@@ -99,6 +101,7 @@ export class Order extends React.Component {
     const dd = d.getDate();
     const yy = d.getFullYear();
     const deliverDate = yy + '-' + (mm>9? mm : '0'+mm) + '-' + (dd>9? dd : '0'+dd);
+    this.setState({ deliverDate: new Date(deliverDate) });
     // const start = date + 'T00:00:00.000Z';
     // const end = date + 'T23:59:59.000Z';
     // const time = d.toLocaleTimeString('en-US', { hour12: false });
@@ -106,7 +109,17 @@ export class Order extends React.Component {
     const q = {deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }};
     const fields = ['_id', 'code', 'clientName']; // 'items'
     this.orderSvc.find(q, fields).then(orders => {
-      this.setState({ orders });
+      this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
     });
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    orders: state.orders
+  }
+}
+export default connect(
+  mapStateToProps,
+  {loadOrders}
+)(Order);
