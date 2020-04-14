@@ -31,6 +31,16 @@ $font-s: 12px;
 $font-m: 14px;
 $font-b: 16px;
 
+$nav-w: 160px;
+
+a:hover, a:visited, a:link, a:active
+{
+  text-decoration: none;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+}
 .page{
   position: fixed;
   top: 0px;
@@ -131,6 +141,9 @@ textarea:focus, input:focus{
 }
 
 @media #{$mobile}{
+  .page{
+    width: 100%;
+  }
   .bottom-bar{
     border-right: none;
     border-left: none;

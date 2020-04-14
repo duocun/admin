@@ -3,8 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { Merchant } from './merchant/Merchant';
 import { Transaction } from './transaction/Transaction';
-import { Order } from './order/Order';
+import Order from './order/Order';
 import { Login } from './account/Login';
+import { Area } from './area/Area';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route exact path="/merchant/" component={Merchant} />
             <Route exact path="/order/" component={Order} />
+            <Route exact path="/area/" component={Area} />
             <Route exact path="/transaction/" component={Transaction} />
             {/* <Route path="/merchant/:id" component={Merchant} />
             <Route path="/order" component={Order} />

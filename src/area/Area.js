@@ -1,24 +1,41 @@
 import React from 'react';
-import { AreaApi } from './API';
-import { MerchantAPI } from '../merchant/API';
+import { AreaAPI } from './API';
+// import { MerchantAPI } from '../merchant/API';
+import { NavBar, Menu } from '../ui/NavBar';
+import { AreaList } from './AreaList';
+// import { MapContainer } from '../ui/Map';
+import GoogleApiWrapper from '../ui/DrawingMap';
 
 export const MerchantType = {
   GROCERY: 'G'
 }
 
-export class Area extends React.Component{
-  areaSvc = new AreaApi();
-  merchantSvc = new MerchantAPI();
-  constructor(props){
+export class Area extends React.Component {
+  areaSvc = new AreaAPI();
+  // merchantSvc = new MerchantAPI();
+  constructor(props) {
     super(props);
+    this.state = {areas:[]};
   }
 
-  render(){
-
+  render() {
+    const areas = this.state.areas;
+    return (
+      <div>
+        <NavBar selected={Menu.Order} />
+        {
+          areas && areas.length>0 &&
+          <AreaList areas={areas}/>
+        }
+        <GoogleApiWrapper />
+      </div>
+    )
   }
 
-  componentDidMount(){
-    const q = { type: MerchantType.GROCERY };
-    this.areaSvc.find(q)
+  componentDidMount() {
+    const q = { appType: MerchantType.GROCERY };
+    this.areaSvc.find(q).then(areas => {
+      // this.setState({areas});
+    });
   }
 }

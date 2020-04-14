@@ -1,0 +1,35 @@
+@import '../base';
+
+$icon-w: 40px;
+.nav-list{
+  width: $nav-w;
+  height: 100%;
+
+  .icon{
+    width: $icon-w;
+    float: left;
+  }
+
+  .icon-text{
+    float: left;
+    width: calc(100% -#{$icon-w});
+  }
+
+  .menu{
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+
+@media #{$tablet}{
+
+}
+
+@media #{$mobile}{
+  .nav-list{
+    display: none;
+  }
+}

@@ -33,7 +33,14 @@ export class Login extends React.Component {
       </form>
     )
   }
-
+  componentDidMount() {
+    this.accountSvc.getCurrentAccount().then((account) => {
+      if (account) {
+        this.props.history.push('/order');
+      }
+    });
+  }
+  
   handleChange(e) {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });

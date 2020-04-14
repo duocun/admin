@@ -1,49 +1,83 @@
 import React from 'react';
+import { connect } from 'react-redux';
+// import * as moment from 'moment';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { OrderAPI } from './API';
 import { AccountAPI } from '../account/API';
 import './Order.scss';
+import { NavBar, Menu } from '../ui/NavBar';
+import { Footer } from '../ui/Footer';
+import { loadOrders } from '../store/actions';
 
 export const MerchantType = {
   GROCERY: 'G'
 }
 
-export class Order extends React.Component {
+export const OrderType = {
+  FOOD_DELIVERY: 'F',
+  MOBILE_PLAN_SETUP: 'MS',
+  MOBILE_PLAN_MONTHLY: 'MM',
+  GROCERY: 'G'
+};
+
+export const OrderStatus = {
+  BAD:     'B',          // client return, compansate
+  DELETED: 'D',          // cancellation
+  TEMP:    'T',             // generate a temp order for electronic order
+  NEW:     'N',
+  LOADED:  'L',           // The driver took the food from Merchant
+  DONE:    'F',             // Finish delivery
+  MERCHANT_CHECKED: 'MC'  // VIEWED BY MERCHANT
+};
+
+class Order extends React.Component {
   accountSvc = new AccountAPI();
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { payments: [] };
+    this.state = { orders: [], deliverDate: new Date() };
+    this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
   }
 
   render() {
-    const payments = this.state.payments;
+    const orders = this.state.orders;
+    // const Menu = Menu;
     return (
       <div>
+        <NavBar selected={Menu.Order} />
+        <DatePicker selected={this.state.deliverDate}
+        onChange={this.handelDeliverDateChange}
+        />
+        <div>订单数: x{orders.length}</div>
         {
-          payments.length &&
-          payments.map(m =>
-            <div className="row" key={m.paymentId}>
-              {/* <div className="col">{m.paymentId}</div> */}
-              <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div>
-              <div className="col date">{m.date}</div>
-              <div className="col client">{m.client}</div>
+          orders && orders.length > 0 &&
+          orders.map(m =>
+            <div className="row" key={m._id}>
+              <div className="col">{m.clientName}</div>
+              {/* <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div> */}
+              {/* <div className="col date">{m.date}</div> */}
+              <div className="col">{m.code}</div>
             </div>
           )
         }
+        <Footer selected={Menu.Order}/>
       </div>
     );
   }
 
-
-
   componentDidMount() {
     this.accountSvc.getCurrentAccount().then(account => {
       if (account) {
-        this.orderSvc.reqMissingWechatPayments().then((payments) => {
+        const q = {deliverDate: '2020-04-10'};
+        const fields = ['id', 'code', 'clientName']; // 'items'
+        this.orderSvc.find(q, fields).then(orders => {
+          this.setState({ orders });
+        });
+        // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
         // this.orderSvc.checkWechatpay().then((payments) => {
-          this.setState({ payments });
-        });
+        // });
 
         // const qMerchant = { type: MerchantType.GROCERY };
         // const fields = ['_id', 'name', 'rules'];
@@ -61,4 +95,31 @@ export class Order extends React.Component {
       }
     })
   }
+
+  handelDeliverDateChange(d){
+    const mm = d.getMonth() + 1;
+    const dd = d.getDate();
+    const yy = d.getFullYear();
+    const deliverDate = yy + '-' + (mm>9? mm : '0'+mm) + '-' + (dd>9? dd : '0'+dd);
+    this.setState({ deliverDate: new Date(deliverDate) });
+    // const start = date + 'T00:00:00.000Z';
+    // const end = date + 'T23:59:59.000Z';
+    // const time = d.toLocaleTimeString('en-US', { hour12: false });
+
+    const q = {deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }};
+    const fields = ['_id', 'code', 'clientName']; // 'items'
+    this.orderSvc.find(q, fields).then(orders => {
+      this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
+    });
+  }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    orders: state.orders
+  }
+}
+export default connect(
+  mapStateToProps,
+  {loadOrders}
+)(Order);

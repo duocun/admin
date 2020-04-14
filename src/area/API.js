@@ -1,7 +1,7 @@
 import { Http, HttpStatus } from '../API';
 
 export class AreaAPI {
-  url = 'Area';
+  url = 'Areas';
   http = new Http();
 
   find(query = null, fields = null) {
