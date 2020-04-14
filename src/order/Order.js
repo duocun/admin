@@ -36,12 +36,29 @@ class Order extends React.Component {
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date() };
+    this.state = { orders: [], deliverDate: new Date(), search :'' };
     this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
   }
 
+  updateSearch(e){
+    console.log(e.target.value);
+    this.setState({search:e.target.value})
+  }
   render() {
     const orders = this.state.orders;
+    const filteredOrders = this.state.orders.filter(
+      (od)=> {
+        console.log(od.driverName);
+        return od.clientName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        || od.merchantName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        || od.code.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        || (od.driverName!=undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) ;
+       ;
+        
+
+        
+      }
+    );
     // const Menu = Menu;
     return (
       <div>
@@ -49,15 +66,23 @@ class Order extends React.Component {
         <DatePicker selected={this.state.deliverDate}
         onChange={this.handelDeliverDateChange}
         />
-        <div>订单数: x{orders.length}</div>
+        <div className="searchBar"> <input type="text" value = {this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机"/></div>
+        <div>订单数: x{filteredOrders.length}</div>
+        <div className="title">
+        <span>Client Name</span>
+        <span>Order Code</span>
+        <span>Driver Name</span>
+        </div>
         {
-          orders && orders.length > 0 &&
-          orders.map(m =>
+          filteredOrders && filteredOrders.length > 0 &&
+          filteredOrders.map(m =>
             <div className="row" key={m._id}>
               <div className="col">{m.clientName}</div>
               {/* <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div> */}
               {/* <div className="col date">{m.date}</div> */}
               <div className="col">{m.code}</div>
+              <div className="col">{m.driverName}</div>
+       
             </div>
           )
         }
