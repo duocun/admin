@@ -103,11 +103,16 @@ for (var did in driverMap) {
 
     return (
       <div>
-        <NavBar selected={Menu.Order} />
+      <div div className="naviBar">
+      <NavBar selected={Menu.Order} />
+      </div>
+
+      <div className="summaryPage">
+        
         <h3>送货日期 <DatePicker selected={this.state.deliverDate}
         onChange={this.handelDeliverDateChange}
         /></h3>
-        {console.log(driverArray)}
+        
       
 
         <div className="summaryCard" >
@@ -171,6 +176,14 @@ for (var did in driverMap) {
        
 
       </div>
+     
+
+     
+       <div>
+      <Footer selected={Menu.Order}/>
+      </div>
+      </div>
+     
     );
   }
 
