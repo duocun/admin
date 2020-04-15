@@ -104,7 +104,7 @@ for (var did in driverMap) {
     return (
       <div>
         <NavBar selected={Menu.Order} />
-        <h3>Select Date <DatePicker selected={this.state.deliverDate}
+        <h3>送货日期 <DatePicker selected={this.state.deliverDate}
         onChange={this.handelDeliverDateChange}
         /></h3>
         {console.log(driverArray)}
@@ -118,17 +118,24 @@ for (var did in driverMap) {
         </div>
 
         <div className="summaryCard">
+        <div className="title">
+        <span>厂家名称</span>
+        <span>花费总额</span>
+        <span>订单总数</span>
+        <span>产品总数</span>
+        </div>
             {
             merchantArray&&merchantArray.length>0&&
             merchantArray.map(m=>
                 <div className="orderRow" key={m.merchantId}>
-                    <span>厂家:{m.details[3]}</span>
-                    <span>花费总数:{m.details[2].reduce(function(a, b){
+                    <div className="col">{m.details[3]}</div>
+                    <div className="col">{m.details[2].reduce(function(a, b){
                         var num =a+b;  
                         return parseFloat(num.toFixed(2)) }, 0)}
-                    </span>
-                    <span>订单总数:{m.details[0]}</span>
-                    <span>产品总数:{m.details[1]}</span>
+                    </div>
+                    <div className="col">{m.details[0]}</div>
+                    <div className="col">{m.details[1]}</div>
+                    
                  
                 </div>
                     )
@@ -138,17 +145,24 @@ for (var did in driverMap) {
         
 
         <div className="summaryCard">
+        <div className="title">
+        <span>司机名称</span>
+        <span>花费总额</span>
+        <span>订单总数</span>
+        <span>产品总数</span>
+        </div>
             {
             driverArray&&driverArray.length>0&&
             driverArray.map(m=>
                 <div className="orderRow" key={m.driverId}>
-                    <span>送货员:{m.details[3]}</span>
-                    <span>花费总数:{m.details[2].reduce(function(a, b){
+                    <div className="col">{m.details[3]}</div>
+                    <div className="col">{m.details[2].reduce(function(a, b){
                         var num =a+b;  
                         return parseFloat(num.toFixed(2)) }, 0)}
-                    </span>
-                    <span>订单总数:{m.details[0]}</span>
-                    <span>产品总数:{m.details[1]}</span>
+                    </div>
+                    <div className="col">{m.details[0]}</div>
+                    <div className="col">{m.details[1]}</div>
+                    
                  
                 </div>
                     )
