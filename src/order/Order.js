@@ -11,6 +11,7 @@ import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
 import { Link } from 'react-router-dom';
 
+
 export const MerchantType = {
   GROCERY: 'G'
 }
@@ -37,16 +38,25 @@ class Order extends React.Component {
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date(), search :'' };
+    this.state = { orders: [], deliverDate: new Date(), search :'',selectOrder:undefined};
     this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+    this.onSelectOrder = this.onSelectOrder.bind(this);
   }
-
+  
   updateSearch(e){
    
     this.setState({search:e.target.value})
   }
+
+  onSelectOrder(m){
+    this.setState({selectOrder:m});
+  }
   render() {
-   
+    const selectedOrder = this.state.selectOrder;
+    // const jsonStr = JSON.stringify(selectedOrder);
+    // const orderObj = JSON.parse(jsonStr);
+    // console.log(orderObj);
+    
     const filteredOrders = this.state.orders.filter(
       (od)=> {
 
@@ -63,51 +73,118 @@ class Order extends React.Component {
     // const Menu = Menu;
     return (
       <div>
-      <div>
-      <NavBar selected={Menu.Order} />
-      </div>
-      <div className="orderPage">
+
+        <div className="naviBar">
+          <NavBar selected={Menu.Order} />
+        </div>
+
+        <div className="orderPage">
+           <div className="detailAll">
+              <div>
+                   选择日期： <DatePicker className="datePick" selected={this.state.deliverDate}
+         onChange={this.handelDeliverDateChange}
+        />
+             </div>
+
+             <div className="searchBar"> 
+                 <input type="text" value = {this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机"/>
+             </div>
+
+          
+
+             <div className="operationButtons">
+               <button className="button">删除订单</button>
+               <button className="button">修改地址</button>
+               <button className="button">修改日期</button>
+               <button className="button">历史记录</button>
+            </div>
+               
 
         <div className="detailCard">
-                   <DatePicker selected={this.state.deliverDate}
-        onChange={this.handelDeliverDateChange}
-        />
-         <div className="searchBar"> <input type="text" value = {this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机"/></div>
 
+          <div className="detailContent">
+            <div className="detailRow">客户:</div>
+           <div className="detailRow">订单号:</div>
+           <div className="detailRow">商家:</div>
+           <div className="detailRow">司机:</div>
+           <div className="detailRow">备注:</div>
+           <div className="detailRow">总计:</div>
+   
+
+          </div>
+        </div>
+        </div>
+
+
+
+      <div className="detailAll"> 
+
+
+
+<div>
+      <span className="summaryButton">
          <Link to="/order/summary">
-     <button type="button">
-          Order Summary Page
+     <button className = "button" type="button">
+          详情
      </button>
-    </Link>
-        </div>
+    </Link></span>
 
-      <div className="selectCard">
+    <span className="summaryButton">
+         <Link to="/order/summary">
+     <button className = "button" type="button">
+          汇总
+     </button>
+    </Link></span>
 
-       
-        <div>订单数: x{filteredOrders.length}</div>
+    <span className="summaryButton">
+         <Link to="/order/summary">
+     <button className = "button" type="button">
+          分类
+     </button>
+    </Link></span>
+
+    <span className="summaryButton">
+         <Link to="/order/summary">
+     <button className = "button" type="button">
+          地图
+     </button>
+    </Link></span>
+ 
+      </div>
+
+       <div  className="selectCard">
+        <div >订单数: {filteredOrders.length} 
+</div>
         <div className="title">
-        <span>Client Name</span>
-        <span>Order Code</span>
-        <span>Driver Name</span>
+        <span>客户名称</span>
+        <span>订单号</span>
+       
         </div>
+        <div>
         {
           filteredOrders && filteredOrders.length > 0 &&
           filteredOrders.map(m =>
-            <div className="orderRow" key={m._id}>
-              <div className="col">{m.clientName}</div>
-              {/* <div className={m.status==='valid' ? 'status valid' : 'status invalid'}>{m.status}</div> */}
-              {/* <div className="col date">{m.date}</div> */}
+            <div className={selectedOrder==m?"orderRowSelected":"orderRow"} key={m._id}>
+            <div onClick ={this.onSelectOrder.bind(this,m)} className={selectedOrder==m?"orderRowSelected":"orderRow"} >
               <div className="col">{m.code}</div>
-              <div className="col">{m.driverName}</div>
+        
+              <div className="col">{m.note.length>0?(" * " + m.clientName):m.clientName}</div>
        
             </div>
-          )
-        }
 
- 
+            </div>
+            
+
+          )       
+        }
+        </div>
+
+ </div>
         </div>
       </div>
+      <div className="footer">
       <Footer selected={Menu.Order}/>
+      </div>
       </div>
 
       
@@ -121,7 +198,8 @@ class Order extends React.Component {
         const q = {deliverDate: '2020-04-10'};
         const fields = ['id', 'code', 'clientName']; // 'items'
         this.orderSvc.find(q, fields).then(orders => {
-          this.setState({ orders });
+          this.setState({ orders,selectOrder:orders[0] });
+          
         });
         // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
