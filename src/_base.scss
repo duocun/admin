@@ -41,6 +41,10 @@ a:hover, a:visited, a:link, a:active
   display: flex;
   flex-direction: row;
 }
+.col{
+  display: flex;
+  flex-direction: column;
+}
 .page{
   position: fixed;
   top: 0px;

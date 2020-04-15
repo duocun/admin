@@ -63,16 +63,27 @@ class Order extends React.Component {
     // const Menu = Menu;
     return (
       <div>
-        <NavBar selected={Menu.Order} />
-        <DatePicker selected={this.state.deliverDate}
+      <div>
+      <NavBar selected={Menu.Order} />
+      </div>
+      <div className="orderPage">
+
+        <div className="detailCard">
+                   <DatePicker selected={this.state.deliverDate}
         onChange={this.handelDeliverDateChange}
         />
+         <div className="searchBar"> <input type="text" value = {this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机"/></div>
+
          <Link to="/order/summary">
      <button type="button">
           Order Summary Page
      </button>
     </Link>
-        <div className="searchBar"> <input type="text" value = {this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机"/></div>
+        </div>
+
+      <div className="selectCard">
+
+       
         <div>订单数: x{filteredOrders.length}</div>
         <div className="title">
         <span>Client Name</span>
@@ -92,8 +103,15 @@ class Order extends React.Component {
             </div>
           )
         }
-        <Footer selected={Menu.Order}/>
+
+ 
+        </div>
       </div>
+      <Footer selected={Menu.Order}/>
+      </div>
+
+      
+            
     );
   }
 
