@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { Merchant } from './merchant/Merchant';
 import { Transaction } from './transaction/Transaction';
-import Order from './order/Order';
+import OrderDetail from './order/OrderDetail';
 import { Login } from './account/Login';
 import { Area } from './area/Area';
 import OrderSummary from './order/OrderSummary';
@@ -21,7 +21,7 @@ function App() {
             <Route exact path="/admin2/" component={Login} />
             <Route path="/login" component={Login} />
             <Route exact path="/merchant/" component={Merchant} />
-            <Route exact path="/order/" component={Order} />
+            <Route exact path="/order/" component={OrderDetail} />
             <Route exact path="/order/summary" component={OrderSummary} />
             <Route exact path="/area/" component={Area} />
             <Route exact path="/transaction/" component={Transaction} />
