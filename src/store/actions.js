@@ -4,3 +4,8 @@ export const loadOrders = payload => {
     payload
   }
 }
+
+export const selectOrder = payload => ({
+  type: 'SELECT_ORDER',
+  payload
+})
