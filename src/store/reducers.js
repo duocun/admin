@@ -1,6 +1,41 @@
 
-export const orderReducer = (state=[], action) => {
-  if(action.type === 'LOAD_ORDERS'){
+export const orders = (state=[], action) => {
+  if(action && action.type === 'LOAD_ORDERS'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const order = (state={}, action) => {
+  if(action && action.type === 'SELECT_ORDER'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const accounts = (state=[], action) => {
+  if(action && action.type === 'LOAD_ACCOUNTS'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const account = (state={}, action) => {
+  if(action && action.type === 'SELECT_ACCOUNT'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const accountKeyword = (state='', action) => {
+  if(action && action.type === 'SET_ACCOUNT_KEYWORD'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const transactions = (state=[], action) => {
+  if(action && action.type === 'LOAD_TRANSACTIONS'){
     return action.payload;
   }
   return state;

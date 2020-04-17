@@ -41,6 +41,10 @@ a:hover, a:visited, a:link, a:active
   display: flex;
   flex-direction: row;
 }
+.col{
+  display: flex;
+  flex-direction: column;
+}
 .page{
   position: fixed;
   top: 0px;
@@ -127,6 +131,20 @@ textarea:focus, input:focus{
   color: $inverse-font-color;
 }
 
+.list{
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  overflow-y: scroll;
+
+  .list-item{
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    float: left;
+    border-bottom: 1px solid $border-color;
+    padding: 8px 15px;
+  }
+}
 
 @media #{$tablet}{
   .bottom-bar{

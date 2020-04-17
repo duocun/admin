@@ -47,9 +47,10 @@ export class AccountAPI {
     });
   }
 
-  find(query = null, fields = null) {
+  find(query = null, keyword=null, fields = null) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + '/qFind', query, fields).then(rsp => {
+      const url = this.url + '/' + (keyword ? ('?keyword=' + keyword) : '');
+      this.http.get(url, query, fields).then(rsp => {
         if (rsp.status === HttpStatus.OK.code) {
           resolve(rsp.data);
         } else {

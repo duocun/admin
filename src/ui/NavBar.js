@@ -16,7 +16,7 @@ export class NavBar extends React.Component {
     const selected = this.props.selected;
     return (
       <div className="nav-list">
-        <div className="row nav-menus">
+        <div className="col nav-menus">
           <Link style={{ textDecoration: 'none' }} to={{ pathname: "/order" }}>
             <div className={selected === Menu.Order ? 'menu active' : 'menu'}>
               <div className="icon">
