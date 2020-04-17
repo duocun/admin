@@ -13,6 +13,13 @@ export const order = (state={}, action) => {
   return state;
 }
 
+export const driver = (state={}, action) => {
+  if(action && action.type === 'SELECT_DRIVER'){
+    return action.payload;
+  }
+  return state;
+}
+
 export const accounts = (state=[], action) => {
   if(action && action.type === 'LOAD_ACCOUNTS'){
     return action.payload;

@@ -14,6 +14,13 @@ export const selectOrder = payload => ({
   payload
 })
 
+// payload --- order object
+export const selectDriver = payload => ({
+  type: 'SELECT_DRIVER',
+  payload
+})
+
+
 // payload --- keyword string
 export const setAccountKeyword = (payload) => ({
   type: 'SET_ACCOUNT_KEYWORD',

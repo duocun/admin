@@ -9,7 +9,9 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
-import { Link } from 'react-router-dom';
+import OrderMerchantList from './OrderMerchantList';
+import OrderDriverList from './OrderDriverList';
+import OrderDriverCard from './OrderDriverCard';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -38,61 +40,20 @@ class OrderSummary extends React.Component {
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date(), };
+    this.state = { orders: [], deliverDate: new Date() };
     this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+   
   }
 
-  
+
 
 
   render() {
    
-    const order = this.state.orders;
-//reformating merchant detail array 
-    let merchantMap = {};
-    for(var i=0;i<order.length;i++){
-        var mid = order[i].merchantId;
-        if(!merchantMap[mid]){
-            merchantMap[mid]=[0,0,[],[]]; //idx 0 for orderNum, idx 1 for productNum, idx 2 for cost
-        }
-        merchantMap[mid][0]++;
-        for(var item in order[i].items){
-            merchantMap[mid][1]++;
-        }
-        merchantMap[mid][2].push(order[i].cost);
-        if(merchantMap[mid][3].length==0||!merchantMap[mid][3].includes(order[i].merchantName)){
-        merchantMap[mid][3].push(order[i].merchantName)}
-    }
-    var merchantArray = [];
-    for (var mid in merchantMap) {
-        merchantArray.push({merchantId: mid, details: merchantMap[mid]});
-      }
-//reformating driver detail array 
-let driverMap = {};
-for(var i=0;i<order.length;i++){
-    var did = order[i].driverId;
-    if(did!=undefined){
-        if(!driverMap[did]){
-            driverMap[did]=[0,0,[],[]]; //idx 0 for orderNum, idx 1 for productNum, idx 2 for cost
-        }
-        driverMap[did][0]++;
-        for(var item in order[i].items){
-            driverMap[did][1]++;
-        }
-        driverMap[did][2].push(order[i].cost);
-        driverMap[did][3] = order[i].driverName;
-
-}
-var driverArray = [];
-for (var did in driverMap) {
-    driverArray.push({driverId: did, details: driverMap[did]});
-  }
-}
-
-
+    const orders = this.state.orders;
 
   
-    const productArray = order.map(function(od){ return od.items });
+    const productArray = orders.map(function(od){ return od.items });
     //get total item
     var totalItems = 0;
     for(var i =0;i<productArray.length;i++){
@@ -103,7 +64,7 @@ for (var did in driverMap) {
 
     return (
       <div>
-      <div div className="naviBar">
+      <div className="naviBar">
       <NavBar selected={Menu.Order} />
       </div>
 
@@ -118,63 +79,13 @@ for (var did in driverMap) {
         <div className="summaryCard" >
             <h3>统计</h3>
             <div>商品总数: {totalItems}</div>
-            <div>订单总数: {order.length}</div>
+            <div>订单总数: {orders.length}</div>
       
         </div>
 
-        <div className="summaryCard">
-        <div className="title">
-        <span>厂家名称</span>
-        <span>花费总额</span>
-        <span>订单总数</span>
-        <span>产品总数</span>
-        </div>
-            {
-            merchantArray&&merchantArray.length>0&&
-            merchantArray.map(m=>
-                <div className="orderRow" key={m.merchantId}>
-                    <div className="col">{m.details[3]}</div>
-                    <div className="col">{m.details[2].reduce(function(a, b){
-                        var num =a+b;  
-                        return parseFloat(num.toFixed(2)) }, 0)}
-                    </div>
-                    <div className="col">{m.details[0]}</div>
-                    <div className="col">{m.details[1]}</div>
-                    
-                 
-                </div>
-                    )
-            }
-        </div>
-        
-        
-
-        <div className="summaryCard">
-        <div className="title">
-        <span>司机名称</span>
-        <span>花费总额</span>
-        <span>订单总数</span>
-        <span>产品总数</span>
-        </div>
-            {
-            driverArray&&driverArray.length>0&&
-            driverArray.map(m=>
-                <div className="orderRow" key={m.driverId}>
-                    <div className="col">{m.details[3]}</div>
-                    <div className="col">{m.details[2].reduce(function(a, b){
-                        var num =a+b;  
-                        return parseFloat(num.toFixed(2)) }, 0)}
-                    </div>
-                    <div className="col">{m.details[0]}</div>
-                    <div className="col">{m.details[1]}</div>
-                    
-                 
-                </div>
-                    )
-            }
-        </div>
-       
-
+        <OrderMerchantList />
+        <OrderDriverList />
+        <OrderDriverCard />
       </div>
      
 
@@ -191,9 +102,10 @@ for (var did in driverMap) {
     this.accountSvc.getCurrentAccount().then(account => {
       if (account) {
         const q = {deliverDate: '2020-04-10'};
-        const fields = ['id', 'code', 'clientName']; // 'items'
-        this.orderSvc.find(q, fields).then(orders => {
-          this.setState({ orders });
+        // const fields = ['id', 'code', 'clientName']; // 'items'
+        this.orderSvc.find(q).then(orders => {
+          this.setState({ orders, selectOrder: orders[0] });
+          this.props.loadOrders(orders);
         });
         // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
@@ -231,7 +143,7 @@ for (var did in driverMap) {
     const fields = ['_id', 'code', 'clientName']; // 'items'
     this.orderSvc.find(q, fields).then(orders => {
       this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
-    });
+    }); 
   }
 }
 
