@@ -1,0 +1,58 @@
+.orderRowSelected{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    margin-top:10px;
+    cursor: pointer;
+    background-color: lightgrey;
+  }
+
+
+  .orderRow{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    margin-top:10px;
+    cursor: pointer;
+   
+  } 
+
+  .title{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: larger;
+  }
+  @media only screen and (max-width: 600px) {
+
+    .title{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: medium;
+      }
+
+    .orderRow{
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      height: auto;
+      font-size: x-small;
+    }
+    .orderRowSelected{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        height: auto;
+        margin-top:10px;
+        cursor: pointer;
+        background-color: lightgrey;
+        font-size: x-small;
+      }
+  }
