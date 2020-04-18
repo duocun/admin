@@ -9,10 +9,11 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
-import { Link } from 'react-router-dom';
+
 
 import OrderList from './OrderList';
 import OrderCard from './OrderCard';
+import OrderNav from './OrderNav';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -109,44 +110,15 @@ class Order extends React.Component {
           <div className="detailAll">
 
 
+        <OrderNav />
 
-            <div>
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    详情
-     </button>
-                </Link></span>
-
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    汇总
-     </button>
-                </Link></span>
-
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    分类
-     </button>
-                </Link></span>
-
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    地图
-     </button>
-                </Link></span>
-
-            </div>
 
             <div className="selectCard">
               <div >订单数: {filteredOrders.length}
               </div>
               <div className="title">
-                <span>客户名称</span>
                 <span>订单号</span>
+                <span>客户名称</span>
 
               </div>
               <div>
