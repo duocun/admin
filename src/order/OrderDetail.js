@@ -9,10 +9,11 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
-import { Link } from 'react-router-dom';
+
 
 import OrderList from './OrderList';
 import OrderCard from './OrderCard';
+import OrderNav from './OrderNav';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -42,29 +43,23 @@ class Order extends React.Component {
     super(props);
     this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined };
     this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-    this.onSelectOrder = this.onSelectOrder.bind(this);
+   
   }
 
   updateSearch(e) {
     this.setState({ search: e.target.value })
   }
 
-  onSelectOrder(m) {
-    this.setState({ selectOrder: m });
-  }
-  render() {
-    const selectedOrder = this.state.selectOrder;
-    // const jsonStr = JSON.stringify(selectedOrder);
-    // const orderObj = JSON.parse(jsonStr);
-    // console.log(orderObj);
 
+  render() {
+   
     const filteredOrders = this.state.orders.filter(
       (od) => {
 
         return od.clientName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || od.merchantName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || od.code.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || (od.driverName != undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+          || (od.driverName !== undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
         ;
 
 
@@ -109,50 +104,21 @@ class Order extends React.Component {
           <div className="detailAll">
 
 
+        <OrderNav />
 
-            <div>
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    详情
-     </button>
-                </Link></span>
-
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    汇总
-     </button>
-                </Link></span>
-
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    分类
-     </button>
-                </Link></span>
-
-              <span className="summaryButton">
-                <Link to="/order/summary">
-                  <button className="button" type="button">
-                    地图
-     </button>
-                </Link></span>
-
-            </div>
 
             <div className="selectCard">
               <div >订单数: {filteredOrders.length}
               </div>
               <div className="title">
-                <span>客户名称</span>
                 <span>订单号</span>
+                <span>客户姓名</span>
 
               </div>
               <div>
                 {
                   filteredOrders && filteredOrders.length > 0 &&
-                  <OrderList />
+                  <OrderList orders={filteredOrders} />
                 }
               </div>
 
@@ -173,7 +139,7 @@ class Order extends React.Component {
     this.accountSvc.getCurrentAccount().then(account => {
       if (account) {
         const q = { deliverDate: '2020-04-10' };
-        const fields = ['id', 'code', 'clientName']; // 'items'
+        // const fields = ['id', 'code', 'clientName']; // 'items'
         this.orderSvc.find(q).then(orders => {
           this.setState({ orders, selectOrder: orders[0] });
           this.props.loadOrders(orders);

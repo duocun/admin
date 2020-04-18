@@ -1,5 +1,9 @@
 @import '../base';
-
+@import './OrderCard.scss';
+@import './OrderList.scss';
+@import './OrderListItem.scss';
+@import './OrderNav.scss';
+@import './OrderSummary.scss';
 .row{
   width: 100%;
   height: 40px;
@@ -58,36 +62,12 @@
 
 }
 
-.title{
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: larger;
-}
+
 .seperateLine{
   border: 0.5px solid rgb(190, 185, 185)
 }
-.orderRow{
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: auto;
-  margin-top:10px;
-  cursor: pointer;
- 
-}
-.orderRowSelected{
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: auto;
-  margin-top:10px;
-  cursor: pointer;
-  background-color: lightgrey;
 
-}
+
 
 .naviBar{
   margin-top: 20px;
@@ -101,9 +81,7 @@
 .summaryPage{
   margin-left: 50px;
 }
-.summaryButton{
-  margin-left:7px;
-}
+
 
 .orderPage{
   display: flex;
@@ -114,7 +92,7 @@
   box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
   margin-top:20px;
   margin-left:10px;
-  height: 80vh;
+  height: 72vh;
   overflow-y: scroll;
    width: 50vw;
    
@@ -132,34 +110,13 @@
 cursor: pointer;
 }
 
-.detailCard{
-  box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
-  margin-top:20px;
-  width:30vw;
-  margin-left: 20px;
-  height: 62vh;
-  overflow-y: scroll;
 
-}
-.detailContent{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  float: left;
-}
-
-.detailRow{
-  margin: 10px;
-  font-size: x-small;
-  font-weight: bold;
-}
-.detailAll{
-
-}
 
 
 
 @media only screen and (max-width: 600px) {
+
+
   .detailAll{
     position: relative;
     right: 30%;
