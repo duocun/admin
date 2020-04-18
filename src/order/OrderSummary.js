@@ -9,6 +9,7 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
+import { selectDriver } from '../store/actions';
 import OrderMerchantList from './OrderMerchantList';
 import OrderDriverList from './OrderDriverList';
 import OrderDriverCard from './OrderDriverCard';
@@ -106,6 +107,7 @@ class OrderSummary extends React.Component {
         this.orderSvc.find(q).then(orders => {
           this.setState({ orders, selectOrder: orders[0] });
           this.props.loadOrders(orders);
+        
         });
         // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
@@ -144,6 +146,7 @@ class OrderSummary extends React.Component {
     this.orderSvc.find(q, fields).then(orders => {
       this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
       this.props.loadOrders(this.state.orders);
+      this.props.selectDriver({});
     }); 
   }
 }
@@ -155,5 +158,5 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps,
-  {loadOrders}
+  {loadOrders,selectDriver}
 )(OrderSummary);
