@@ -27,7 +27,7 @@
     font-weight: bold;
     font-size: larger;
   }
-  @media only screen and (max-width: 600px) {
+@media #{$cellphone} {
 
     .title{
         display: flex;
@@ -35,24 +35,55 @@
         margin-bottom: 20px;
         margin-top: 10px;
         font-weight: bold;
-        font-size: medium;
+        font-size: small;
       }
 
     .orderRow{
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
+      width: 100px;
       height: auto;
-      font-size: x-small;
+      font-size: xx-small;
+      position: relative;
+      right: 10px;
+      cursor: pointer;
     }
     .orderRowSelected{
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
+        width: 100px;
         height: auto;
         margin-top:10px;
         cursor: pointer;
         background-color: lightgrey;
-        font-size: x-small;
+        font-size: xx-small;
+        position: relative;
+        right: 10px;
+      }
+  }
+  @media #{$mobile} {
+
+    .title{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: small;
+      }
+
+    .orderRow{
+      width: 100px;
+      height: auto;
+      font-size: xx-small;
+      position: relative;
+      right: 10px;
+      cursor: pointer;
+    }
+    .orderRowSelected{
+        width: 100px;
+        height: auto;
+        margin-top:10px;
+        cursor: pointer;
+        background-color: lightgrey;
+        font-size: xx-small;
+        position: relative;
+        right: 10px;
       }
   }
