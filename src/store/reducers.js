@@ -34,6 +34,13 @@ export const accountKeyword = (state='', action) => {
   return state;
 }
 
+export const bAccountOptions = (state=false, action) => {
+  if(action && action.type === 'SHOW_ACCOUNT_OPTIONS'){
+    return action.payload;
+  }
+  return state;
+}
+
 export const transactions = (state=[], action) => {
   if(action && action.type === 'LOAD_TRANSACTIONS'){
     return action.payload;

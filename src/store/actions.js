@@ -31,6 +31,11 @@ export const selectAccount = payload => ({
   payload
 })
 
+// payload --- true or false
+export const showAccountOptions = payload => ({
+  type: 'SHOW_ACCOUNT_OPTIONS',
+  payload
+})
 
 export const loadTransactions = (payload) => ({
   type: 'LOAD_TRANSACTIONS',

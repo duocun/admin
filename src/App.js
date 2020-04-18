@@ -7,7 +7,7 @@ import OrderDetail from './order/OrderDetail';
 import { Login } from './account/Login';
 import { Area } from './area/Area';
 import OrderSummary from './order/OrderSummary';
-import { FinanceDetail } from './finance/FinanceDetail';
+import FinanceDetail from './finance/FinanceDetail';
 
 function App() {
   return (
