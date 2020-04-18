@@ -83,7 +83,7 @@ class OrderSummary extends React.Component {
       
         </div>
 
-        <OrderMerchantList />
+        <OrderMerchantList  />
         <OrderDriverList />
         <OrderDriverCard />
       </div>
@@ -143,6 +143,7 @@ class OrderSummary extends React.Component {
     const fields = ['_id', 'code', 'clientName']; // 'items'
     this.orderSvc.find(q, fields).then(orders => {
       this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
+      this.props.loadOrders(this.state.orders);
     }); 
   }
 }

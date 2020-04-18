@@ -5,7 +5,7 @@ import { loadOrders } from '../store/actions';
 import OrderMerchantListItem from './OrderMerchantListItem';
 
 function OrderMerchantList({ orders }) {
-  console.log(orders)
+  
   let merchantMap = {};
   for(var i=0;i<orders.length;i++){
       var mid = orders[i].merchantId;

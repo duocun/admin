@@ -118,7 +118,7 @@ class Order extends React.Component {
               <div>
                 {
                   filteredOrders && filteredOrders.length > 0 &&
-                  <OrderList />
+                  <OrderList orders={filteredOrders} />
                 }
               </div>
 

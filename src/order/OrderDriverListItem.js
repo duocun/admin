@@ -4,6 +4,7 @@ import { selectDriver } from '../store/actions';
 
 
 function OrderDriverListItem({data,selectedDriver,selectDriver}) {
+
   return(
     <div onClick={ () => selectDriver(data) } 
     className={selectedDriver.driverId === data.driverId ? "orderRowSelected" : "orderRow"} 
@@ -17,8 +18,9 @@ function OrderDriverListItem({data,selectedDriver,selectDriver}) {
     <div className="col">{data.details[1]}</div>
 
 </div>
-  )
-}
+  )}
+  
+
 
 const mapStateToProps = (state) => ({ selectedDriver: state.driver });
 

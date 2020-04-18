@@ -19,6 +19,12 @@ export const driver = (state={}, action) => {
   }
   return state;
 }
+export const filterOrders = (state={}, action) => {
+  if(action && action.type === 'LOAD_FILTER_ORDERS'){
+    return action.payload;
+  }
+  return state;
+}
 
 export const accounts = (state=[], action) => {
   if(action && action.type === 'LOAD_ACCOUNTS'){

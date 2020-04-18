@@ -37,7 +37,7 @@ var driverArray = [];
 for (did in driverMap) {
     driverArray.push({driverId: did, details: driverMap[did],driverName:driverMap[did][3],pickList:driverMap[did][4]});
   }
-console.log(driverArray)
+
 
     return (
       <div className="summaryCard">
@@ -50,8 +50,8 @@ console.log(driverArray)
           {
           driverArray&&driverArray.length>0&&
           driverArray.map(m=>
-             
-             <OrderDriverListItem data={m} key={m.driverId} />
+            
+            <OrderDriverListItem data={m} key={m.driverId} />
 
                   )
           }

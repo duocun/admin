@@ -12,9 +12,12 @@ function OrderList({ orders }) {
   )
 }
 
-const mapStateToProps = (state) => ({ orders: state.orders });
+// const mapStateToProps = (state) => ({ orders: state.orders });
 
-export default connect(
-  mapStateToProps,
-  { loadOrders }
-)(OrderList);
+// export default connect(
+//   mapStateToProps,
+//   { loadOrders }
+// )(OrderList);
+
+export default 
+(OrderList);

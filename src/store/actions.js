@@ -7,6 +7,12 @@ export const loadOrders = payload => {
     payload
   }
 }
+export const loadFilterOrders = payload => {
+  return {
+    type: 'LOAD_FILTER_ORDERS',
+    payload
+  }
+}
 
 // payload --- order object
 export const selectOrder = payload => ({
