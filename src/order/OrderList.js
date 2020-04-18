@@ -4,6 +4,7 @@ import OrderListItem from './OrderListItem';
 import { loadOrders } from '../store/actions';
 
 function OrderList({ orders }) {
+
   return (
     orders.map(m =>
       <OrderListItem key={m._id} order={m} />
@@ -11,9 +12,12 @@ function OrderList({ orders }) {
   )
 }
 
-const mapStateToProps = (state) => ({ orders: state.orders });
+// const mapStateToProps = (state) => ({ orders: state.orders });
 
-export default connect(
-  mapStateToProps,
-  { loadOrders }
-)(OrderList);
+// export default connect(
+//   mapStateToProps,
+//   { loadOrders }
+// )(OrderList);
+
+export default 
+(OrderList);

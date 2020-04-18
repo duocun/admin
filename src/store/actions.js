@@ -7,12 +7,25 @@ export const loadOrders = payload => {
     payload
   }
 }
+export const loadFilterOrders = payload => {
+  return {
+    type: 'LOAD_FILTER_ORDERS',
+    payload
+  }
+}
 
 // payload --- order object
 export const selectOrder = payload => ({
   type: 'SELECT_ORDER',
   payload
 })
+
+// payload --- order object
+export const selectDriver = payload => ({
+  type: 'SELECT_DRIVER',
+  payload
+})
+
 
 // payload --- keyword string
 export const setAccountKeyword = (payload) => ({
