@@ -64,6 +64,7 @@ a:hover, a:visited, a:link, a:active
 
 .page-content{
   width: calc(100% - #{$nav-w});
+  height: 100%;
 }
 
 .title-row{
@@ -193,8 +194,11 @@ textarea:focus, input:focus{
     }
   }
 
+  
   .page-content{
     width: 100%;
+    padding: 10px;
+    height: calc(100% - #{$bottom-bar-h});
   }
   // .page-body{
   //   padding: 10px;
@@ -239,6 +243,8 @@ textarea:focus, input:focus{
 
   .page-content{
     width: 100%;
+    padding: 10px;
+    height: calc(100% - #{$bottom-bar-h});
   }
   // .page-body{
   //   padding: 10px;
