@@ -1,62 +1,81 @@
-.detailTitle{
-      
-  font-weight: bold;
-  margin-right:5px;
+@import '../base';
+
+$search-bar-h: 50px;
+
+.order-card{
+  // box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
+  // margin-top:20px;
+  height: 100%;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 10px 4px;
 }
 
-.detailRow{
-    display: flex;
-    flex-direction: row;
-    
-    margin: 10px;
-    font-size: x-small;
-  
+.btn-area{
+  display: flex;
+  .btn{
+    font-size: 12px;
+    height: 32px;
   }
-  .detailCard{
-    box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
-    margin-top:20px;
-    width:30vw;
-    margin-left: 20px;
-    height: 54.2vh;
-    overflow-y: scroll;
-  
-  }
-  .detailContent{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    float: left;
-  }
-  @media #{$mobile} {
-    .detailCard{
-      box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
-      margin-top:20px;
-      width:65vw;
-      margin-left: 20px;
-      height: 56vh;
-      overflow-y: scroll;
-  }
-  .detailRow {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
-    font-size: x-small;
 }
+
+.order-detail-content{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-evenly;
+  float: left;
+  padding: 15px 6px;
+
+  .detail-row{
+    display: flex;
+    flex-direction: row;
+    height: 22px;
+    font-size: 12px;
+  }
+}
+
+.label-md{
+  display: flex;
+  font-size: 12px;
+  font-weight: bold;
+  width: 56px;
+}
+
+  
+
+  @media #{$mobile} {
+  //   .order-card{
+  //     box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
+  //     margin-top:20px;
+  //     width:65vw;
+  //     margin-left: 20px;
+  //     height: 56vh;
+  //     overflow-y: scroll;
+  // }
+//   .detail-row {
+//     display: flex;
+//     flex-direction: row;
+//     margin: 20px;
+//     font-size: x-small;
+// }
 }
   @media #{$cellphone} {   
-    .detailCard{
-      box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
-      margin-top:20px;
-      width:65vw;
-      margin-left: 20px;
-      height: 56vh;
-      overflow-y: scroll;
-  }
-  .detailRow {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
-    font-size: x-small;
-}
+  //   .order-card{
+  //     box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
+  //     margin-top:20px;
+  //     width:65vw;
+  //     margin-left: 20px;
+  //     height: 56vh;
+  //     overflow-y: scroll;
+  // }
+//   .detail-row {
+//     display: flex;
+//     flex-direction: row;
+//     margin: 20px;
+//     font-size: x-small;
+// }
   }
   

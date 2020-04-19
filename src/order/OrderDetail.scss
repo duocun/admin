@@ -4,6 +4,19 @@
 @import './OrderListItem.scss';
 @import './OrderNav.scss';
 @import './OrderSummary.scss';
+
+$header-area-h: 88px;
+$search-bar-h: 40px;
+
+.nav-menu-bar{
+  height: 100%;
+}
+
+.page-content{
+  padding: 10px;
+  height: calc(100% - #{$bottom-bar-h});
+}
+
 .row{
   width: 100%;
   height: 40px;
@@ -12,6 +25,43 @@
 }
 .col{
   float: left;
+}
+
+.page-body{
+  display: flex;
+  height: calc(100% - 100px);
+  .left{
+    width: 70vw;
+    float: left;
+  }
+  .right{
+    left: 30vw;
+    float: left;
+  }
+}
+
+.search-bar {
+  width: 100%;
+  height: $search-bar-h;
+  background: 0 0;
+  outline: 0;
+  font-weight: 400;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  display: block;
+  margin: 5px 0px;
+  input{
+    height: $search-bar-h;
+  }
+}
+
+.btn{
+  margin-right: 5px;
+}
+
+.order-card{
+  height: calc(100% - #{$search-bar-h} - 35px);
 }
 
 .status.valid{
@@ -42,44 +92,18 @@
     height: 38px;
   }
 }
-.datePick{
-  width: 18vw;
-  margin: 5px;
-}
-.searchBar {
-  width: auto;
-  color: #212529;
-  background: 0 0;
-  outline: 0;
-  margin-left:10px;
-  margin-top:10px;
-  font-weight: 400;
-  font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 18px;
-  display: block;
-  padding: 10px;
 
-}
 
 
 .seperateLine{
   border: 0.5px solid rgb(190, 185, 185)
 }
-.topFunctionArea{
-  display: flex;
-  justify-content: space-around;
-}
-
-.selectDateArea{
-  position: relative;
-  left:80px;
-}
 
 
-.naviBar{
-  margin-top: 20px;
-}
+// .select-date-area{
+//   width: 100%;
+// }
+
 .summaryCard{
   border: thick double #32a1ce;
   margin: 10px;
@@ -91,11 +115,11 @@
 }
 
 
-.orderPage{
-  display: flex;
-  flex-direction: row;
-  padding-left: 100px;
-}
+// .orderPage{
+//   display: flex;
+//   flex-direction: row;
+//   padding-left: 100px;
+// }
 .selectCard{
   box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
   margin-top:20px;
@@ -105,54 +129,31 @@
    width: 50vw;
    
 }
-.button{
-  margin: 5px;
- background-color: #007bff;
- border: none;
- color: white;
- padding: 5px 15px;
- text-align: center;
- text-decoration: none;
- display: inline-block;
- font-size: 8px;
-cursor: pointer;
-}
-.navButton{
-  width: 140px;
-  margin: 5px;
- background-color: #007bff;
- border: none;
- color: white;
- padding: 5px 15px;
- text-align: center;
- text-decoration: none;
- display: inline-block;
- font-size: 8px;
-cursor: pointer;
-}
-
-
-
-
+// .button{
+//   margin: 5px;
+//  background-color: #007bff;
+//  border: none;
+//  color: white;
+//  padding: 5px 15px;
+//  text-align: center;
+//  text-decoration: none;
+//  display: inline-block;
+//  font-size: 8px;
+// cursor: pointer;
+// }
 
 
 @media #{$mobile} {
-  .topFunctionArea{
-    display: initial;
-    position: relative;
-    right: 20px;
+
+  .nav-menu-bar{
+    height: 100%;
   }
 
-  .datePick{
-    margin:5px;
-    width: 63vw;
-  }
-
-  .footer{
-    position:absolute;
-    width:100%;
-    bottom:0px;
-  }
+  // .footer{
+  //   position:absolute;
+  //   width:100%;
+  //   bottom:0px;
+  // }
 
   .summaryPage{
     margin-left: 0px;
@@ -162,33 +163,15 @@ cursor: pointer;
     float: left;
 
   }
-  .selectDateArea {
+  
 
-    margin-left: 50px;
-  }
-  .navButtons{
-    margin-top: 10px;
-    display: flex;
-    margin-left: 40px;
-  }
-  .navButton{
-    width: 80px;
-    margin: 5px;
-   background-color: #007bff;
-   border: none;
-   color: white;
-   padding: 5px 15px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 8px;
-  cursor: pointer;
-  }
-  .orderPage{
-    display: flex;
-    flex-direction: row;
-    padding-left: 0px;
-  }
+
+
+  // .orderPage{
+  //   display: flex;
+  //   flex-direction: row;
+  //   padding-left: 0px;
+  // }
   .mobileHide{
     display: none !important;
   }
@@ -200,69 +183,36 @@ cursor: pointer;
     height: 72vh;
     overflow-y: scroll;
     width: 20vw;
-    position: relative;
 
 }
-.right{
-  position: relative;
-  left: 40px;
-}
-.left{
-  width: 60vw;
-}
-.button{
-  margin-left: 10px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    width: 150px;
-    display: block;
-    font-variant: all-petite-caps;
-    font-size: small;
-}
+
+// .button{
+//   margin-left: 10px;
+//     background-color: #007bff;
+//     border: none;
+//     color: white;
+//     text-align: center;
+//     text-decoration: none;
+//     cursor: pointer;
+//     width: 150px;
+//     display: block;
+//     font-variant: all-petite-caps;
+//     font-size: small;
+// }
 
 
-.searchBar {
-    width: 250px;
-    color: #212529;
-    background: 0 0;
-    outline: 0;
-    margin-left: 10px;
-    margin-top: 10px;
-    font-weight: 400;
-    font-family: Roboto,Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 18px;
-    display: block;
-    padding: 10px;
-}
-.operationButtons{
-  display: flex;
-  width: 70vw;
-  position: relative;
-  left: 10px;
-}
+
   
 }
 
 @media #{$cellphone} {
 
-  .topFunctionArea{
-    display: initial;
-  }
-  .datePick{
-    margin:5px;
-    width: 60vw;
-  }
 
-  .footer{
-    position:absolute;
-    width:100%;
-    bottom:0px;
-  }
+  // .footer{
+  //   position:absolute;
+  //   width:100%;
+  //   bottom:0px;
+  // }
 
   .summaryPage{
     margin-left: 0px;
@@ -273,32 +223,13 @@ cursor: pointer;
     align-self: center;
     margin-bottom: 15px;;
   }
-  .selectDateArea {
-    position: relative;
-    left: 0px;
-}
-.navButtons{
-  margin-top: 10px;
-  display: flex;
-}
-.navButton{
-  width: 80px;
-  margin: 5px;
- background-color: #007bff;
- border: none;
- color: white;
- padding: 5px 15px;
- text-align: center;
- text-decoration: none;
- display: inline-block;
- font-size: 8px;
-cursor: pointer;
-}
-.orderPage{
-  display: flex;
-  flex-direction: row;
-  padding-left: 0px;
-}
+
+
+// .orderPage{
+//   display: flex;
+//   flex-direction: row;
+//   padding-left: 0px;
+// }
 .mobileHide{
   display: none !important;
 }
@@ -310,51 +241,38 @@ cursor: pointer;
   height: 72vh;
   overflow-y: scroll;
   width: 20vw;
-  position: relative;
 
 }
-.right{
-position: relative;
-left: 40px;
-}
-.left{
-width: 60vw;
-}
-.button{
-margin-left: 10px;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  width: 150px;
-  display: block;
-  font-variant: all-petite-caps;
-  font-size: small;
-}
+// .button{
+// margin-left: 10px;
+//   background-color: #007bff;
+//   border: none;
+//   color: white;
+//   text-align: center;
+//   text-decoration: none;
+//   cursor: pointer;
+//   width: 150px;
+//   display: block;
+//   font-variant: all-petite-caps;
+//   font-size: small;
+// }
 
 
-.searchBar {
-  width: 250px;
-  color: #212529;
-  background: 0 0;
-  outline: 0;
-  margin-left: 10px;
-  margin-top: 10px;
-  font-weight: 400;
-  font-family: Roboto,Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 18px;
-  display: block;
-  padding: 10px;
-}
-.operationButtons{
-display: flex;
-width: 70vw;
-position: relative;
-left: 10px;
-}
+// .search-bar {
+//   width: 250px;
+//   color: #212529;
+//   background: 0 0;
+//   outline: 0;
+//   margin-left: 10px;
+//   margin-top: 10px;
+//   font-weight: 400;
+//   font-family: Roboto,Helvetica,Arial,sans-serif;
+//   font-size: 14px;
+//   line-height: 18px;
+//   display: block;
+//   padding: 10px;
+// }
+
 
 
 

@@ -23,6 +23,7 @@ $bottom-btn-w: 125px;
 $pagination-h: 36px;
 
 $input-h: 50px;
+$btn-h: 40px;
 
 $form-padding: 20px;
 $radius: 4px;
@@ -45,23 +46,25 @@ a:hover, a:visited, a:link, a:active
   display: flex;
   flex-direction: column;
 }
+
 .page{
-  position: fixed;
-  top: 0px;
+  // position: fixed;
+  // top: 0px;
   height: 100%;
   width: 100%;
 }
+
 .title-row{
   height: $head-h;
   padding: 15px;
   border-bottom: 1px solid $border-color;
 }
-.page-body{
-  position: fixed;
-  top: $head-h;
-  width: 100%;
-  height: calc(100% - #{$head-h} - #{$bottom-bar-h});
-}
+// .page-body{
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+//   height: calc(100% - #{$head-h} - #{$bottom-bar-h});
+// }
 
 .footer{
   z-index: 9900;
@@ -124,11 +127,15 @@ textarea:focus, input:focus{
 
 .btn {
   width: 100%;
-  height: $input-h;
+  height: $btn-h;
   border-radius: $radius;
   font-size: $font-b;
   background: $primary-color;
   color: $inverse-font-color;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .list{
@@ -152,23 +159,32 @@ textarea:focus, input:focus{
     border-left: none;
   }
 
-  .page-body{
-    padding: 10px;
-    margin: 0px;
-  }
+
+  // .footer{
+  //   position:absolute;
+  //   width:100%;
+  //   bottom:0px;
+  // }
+
+  // .page-body{
+  //   padding: 10px;
+  //   margin: 0px;
+  // }
 }
 
 @media #{$mobile}{
-  .page{
-    width: 100%;
+  
+  .nav-menu-bar{
+    display: none;
   }
+
   .bottom-bar{
     border-right: none;
     border-left: none;
   }
 
-  .page-body{
-    padding: 10px;
-    margin: 0px;
-  }
+  // .page-body{
+  //   padding: 10px;
+  //   margin: 0px;
+  // }
 }

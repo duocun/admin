@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import * as moment from 'moment';
-import DatePicker from 'react-datepicker';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import { OrderAPI } from './API';
 import { AccountAPI } from '../account/API';
@@ -10,10 +9,9 @@ import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
 
-
+import OrderHeader from './OrderHeader';
 import OrderList from './OrderList';
 import OrderCard from './OrderCard';
-import OrderNav from './OrderNav';
 
 export const MerchantType = {
   GROCERY: 'G'
@@ -43,7 +41,7 @@ class Order extends React.Component {
     super(props);
     this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined };
     this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-   
+
   }
 
   updateSearch(e) {
@@ -52,7 +50,7 @@ class Order extends React.Component {
 
 
   render() {
-   
+
     const filteredOrders = this.state.orders.filter(
       (od) => {
 
@@ -68,76 +66,56 @@ class Order extends React.Component {
     );
     // const Menu = Menu;
     return (
- <div>
+      <div className="page">
 
-        <div className="naviBar">
+        <div className="nav-menu-bar">
           <NavBar selected={Menu.Order} />
         </div>
 
-        <div>     
+        <div className="page-content">
 
-          <div className="topFunctionArea">
-            <div className="selectDateArea">
-              选择日期： <DatePicker className="datePick" selected={this.state.deliverDate}
-                onChange={this.handelDeliverDateChange}
-              />
-            </div>
-            <OrderNav />
-          </div>
+          <OrderHeader />
 
-      <div className="orderPage">
+          <div className="page-body">
 
-          <div className="left">
+            <div className="left">
 
-            <div className="searchBar">
+              <div className="search-bar">
                 <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机" />
-               </div>
+              </div>
 
+                <OrderCard />
 
-            <div className="operationButtons">
-              <button className="button">删除订单</button>
-              <button className="button">修改地址</button>
-              <button className="button">修改日期</button>
-              <button className="button">历史记录</button>
             </div>
 
-            <div>
-             <OrderCard />
-            </div>
-
-         </div>
-       
-
-
-
-          <div className="right">
+            <div className="right">
 
               <div className="selectCard">
 
-                  <div className="mobileHide" >订单数: {filteredOrders.length}
-                  </div>
+                <div className="mobileHide" >订单数: {filteredOrders.length}
+                </div>
 
-                   <div className="title">
-                     <span className="mobileHide">订单号</span>
-                     <span>客户姓名</span>
-                   </div>
+                <div className="title">
+                  <span className="mobileHide">订单号</span>
+                  <span>客户姓名</span>
+                </div>
 
-              <div>
-                {
-                  filteredOrders && filteredOrders.length > 0 &&
-                  <OrderList orders={filteredOrders} />
-                }
+                <div>
+                  {
+                    filteredOrders && filteredOrders.length > 0 &&
+                    <OrderList orders={filteredOrders} />
+                  }
+                </div>
+
               </div>
 
-         </div>
-
+            </div>
           </div>
-        </div>
         </div>
         <div className="footer">
           <Footer selected={Menu.Order} />
         </div>
- </div>
+      </div>
 
 
 

@@ -14,6 +14,12 @@ export const loadFilterOrders = payload => {
   }
 }
 
+// payload --- deliverDate string
+export const setDeliverDate = payload => ({
+  type: 'SET_DELIVER_DATE',
+  payload
+})
+
 // payload --- order object
 export const selectOrder = payload => ({
   type: 'SELECT_ORDER',

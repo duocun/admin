@@ -65,7 +65,7 @@ class OrderSummary extends React.Component {
 
     return (
       <div>
-      <div className="naviBar">
+      <div className="nav-menu-bar">
       <NavBar selected={Menu.Order} />
       </div>
 
