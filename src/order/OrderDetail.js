@@ -68,24 +68,30 @@ class Order extends React.Component {
     );
     // const Menu = Menu;
     return (
-      <div>
+ <div>
 
         <div className="naviBar">
           <NavBar selected={Menu.Order} />
         </div>
 
-        <div className="orderPage">
-          <div className="detailAll">
-            <div>
+        <div>     
+
+          <div className="topFunctionArea">
+            <div className="selectDateArea">
               选择日期： <DatePicker className="datePick" selected={this.state.deliverDate}
                 onChange={this.handelDeliverDateChange}
               />
             </div>
+            <OrderNav />
+          </div>
+
+      <div className="orderPage">
+
+          <div className="left">
 
             <div className="searchBar">
-              <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机" />
-            </div>
-
+                <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机" />
+               </div>
 
 
             <div className="operationButtons">
@@ -95,26 +101,27 @@ class Order extends React.Component {
               <button className="button">历史记录</button>
             </div>
 
+            <div>
+             <OrderCard />
+            </div>
 
-            <OrderCard />
-          </div>
-
-
-
-          <div className="detailAll">
-
-
-        <OrderNav />
+         </div>
+       
 
 
-            <div className="selectCard">
-              <div >订单数: {filteredOrders.length}
-              </div>
-              <div className="title">
-                <span>订单号</span>
-                <span>客户姓名</span>
 
-              </div>
+          <div className="right">
+
+              <div className="selectCard">
+
+                  <div className="mobileHide" >订单数: {filteredOrders.length}
+                  </div>
+
+                   <div className="title">
+                     <span className="mobileHide">订单号</span>
+                     <span>客户姓名</span>
+                   </div>
+
               <div>
                 {
                   filteredOrders && filteredOrders.length > 0 &&
@@ -122,13 +129,16 @@ class Order extends React.Component {
                 }
               </div>
 
-            </div>
+         </div>
+
           </div>
+        </div>
         </div>
         <div className="footer">
           <Footer selected={Menu.Order} />
         </div>
-      </div>
+ </div>
+
 
 
 

@@ -17,7 +17,7 @@
     margin-top:20px;
     width:30vw;
     margin-left: 20px;
-    height: 40vh;
+    height: 54.2vh;
     overflow-y: scroll;
   
   }
@@ -27,3 +27,36 @@
     justify-content: space-evenly;
     float: left;
   }
+  @media #{$mobile} {
+    .detailCard{
+      box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
+      margin-top:20px;
+      width:65vw;
+      margin-left: 20px;
+      height: 56vh;
+      overflow-y: scroll;
+  }
+  .detailRow {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    font-size: x-small;
+}
+}
+  @media #{$cellphone} {   
+    .detailCard{
+      box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
+      margin-top:20px;
+      width:65vw;
+      margin-left: 20px;
+      height: 56vh;
+      overflow-y: scroll;
+  }
+  .detailRow {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    font-size: x-small;
+}
+  }
+  

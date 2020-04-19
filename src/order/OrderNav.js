@@ -9,28 +9,28 @@ function OrderNav() {
 <div className="navButtons">
 <span className="summaryButton">
   <Link to="/order/summary">
-    <button className="button" type="button">
+    <button className="navButton" type="button">
       详情
 </button>
   </Link></span>
 
 <span className="summaryButton">
   <Link to="/order/summary">
-    <button className="button" type="button">
+    <button className="navButton" type="button">
       汇总
 </button>
   </Link></span>
 
 <span className="summaryButton">
   <Link to="/order/summary">
-    <button className="button" type="button">
+    <button className="navButton" type="button">
       分类
 </button>
   </Link></span>
 
 <span className="summaryButton">
   <Link to="/order/summary">
-    <button className="button" type="button">
+    <button className="navButton" type="button">
       地图
 </button>
   </Link></span>
