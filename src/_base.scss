@@ -48,10 +48,22 @@ a:hover, a:visited, a:link, a:active
 }
 
 .page{
-  // position: fixed;
-  // top: 0px;
   height: 100%;
   width: 100%;
+  display: flex;
+}
+
+.nav-menu-bar{
+  width: $nav-w;
+  height: 100%;
+}
+
+.footer, .bottom-bar{
+  display: none;
+}
+
+.page-content{
+  width: calc(100% - #{$nav-w});
 }
 
 .title-row{
@@ -66,32 +78,6 @@ a:hover, a:visited, a:link, a:active
 //   height: calc(100% - #{$head-h} - #{$bottom-bar-h});
 // }
 
-.footer{
-  z-index: 9900;
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  border-top: 1px solid $border-color;
-}
-
-.bottom-bar{
-  width: 100%;
-  height: $bottom-bar-h;
-  background: $bg-color;
-  margin: 0px;
-  padding: 0px;
-  border-top: solid 1px $border-color;
-  border-right: solid 1px $border-color;
-  border-left: solid 1px $border-color;
-
-  .bottom-btn{
-    text-align: center;
-    color: $inverse-font-color;
-    background: $primary-color;
-    width: $bottom-btn-w;
-    padding-top: 15px;
-  }
-}
 
 ul.pagination{
   padding-top: 8px;
@@ -154,6 +140,7 @@ textarea:focus, input:focus{
 }
 
 @media #{$tablet}{
+  
   .bottom-bar{
     border-right: none;
     border-left: none;
@@ -173,16 +160,86 @@ textarea:focus, input:focus{
 }
 
 @media #{$mobile}{
-  
+
   .nav-menu-bar{
     display: none;
   }
 
-  .bottom-bar{
-    border-right: none;
-    border-left: none;
+  .footer{
+    display: block;
+    z-index: 9900;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid $border-color;
   }
 
+  .bottom-bar{
+    width: 100%;
+    height: $bottom-bar-h;
+    background: $bg-color;
+    margin: 0px;
+    padding: 0px;
+    border-top: solid 1px $border-color;
+    border-right: none;
+    border-left: none;
+
+    .bottom-btn{
+      text-align: center;
+      color: $inverse-font-color;
+      background: $primary-color;
+      width: $bottom-btn-w;
+      padding-top: 15px;
+    }
+  }
+
+  .page-content{
+    width: 100%;
+  }
+  // .page-body{
+  //   padding: 10px;
+  //   margin: 0px;
+  // }
+}
+
+@media #{$cellphone}{
+
+  .nav-menu-bar{
+    display: none;
+  }
+
+
+  .footer{
+    display: block;
+    z-index: 9900;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid $border-color;
+  }
+
+  .bottom-bar{
+    width: 100%;
+    height: $bottom-bar-h;
+    background: $bg-color;
+    margin: 0px;
+    padding: 0px;
+    border-top: solid 1px $border-color;
+    border-right: none;
+    border-left: none;
+
+    .bottom-btn{
+      text-align: center;
+      color: $inverse-font-color;
+      background: $primary-color;
+      width: $bottom-btn-w;
+      padding-top: 15px;
+    }
+  }
+
+  .page-content{
+    width: 100%;
+  }
   // .page-body{
   //   padding: 10px;
   //   margin: 0px;
