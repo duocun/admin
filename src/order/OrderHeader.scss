@@ -2,14 +2,17 @@
 
 $label-w: 84px;
 $date-area-h: 32px;
+$date-area-w: 240px;
 
 .header-area{
   width: 100%;
+  display: flex;
 }
+
 .select-date-area {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: $date-area-w;
 
   .label-bg{
     width: $label-w;
@@ -34,13 +37,8 @@ $date-area-h: 32px;
 //   width: 63vw;
 // }
 
-// .date-picker{
-//   margin:5px;
-//   width: 60vw;
-// }
-
 .nav-btn-area{
-  width: 100%;
+  width: calc(100% - #{$date-area-w});
   margin-top: 10px;
   display: flex;
 
@@ -65,3 +63,21 @@ $date-area-h: 32px;
 //  font-size: 8px;
 //   cursor: pointer;
 // }
+
+@media #{$mobile}{
+  .header-area{
+    display: block;
+  }
+  .select-date-area, .nav-btn-area{
+    width: 100%;
+  }
+}
+
+@media #{$cellphone}{
+  .header-area{
+    display: block;
+  }
+  .select-date-area, .nav-btn-area{
+    width: 100%;
+  }
+}
