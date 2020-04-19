@@ -1,0 +1,67 @@
+@import '../base';
+
+$label-w: 84px;
+$date-area-h: 32px;
+
+.header-area{
+  width: 100%;
+}
+.select-date-area {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .label-bg{
+    width: $label-w;
+    float: left;
+  }
+
+  .react-datepicker-wrapper{
+    width: calc(100% - #{$label-w});
+    float: left;
+  }
+}
+
+.date-picker{
+  height: $date-area-h;
+  width: 100%;
+  // width: 18vw;
+  // margin: 5px;
+}
+
+// .date-picker{
+//   margin:5px;
+//   width: 63vw;
+// }
+
+// .date-picker{
+//   margin:5px;
+//   width: 60vw;
+// }
+
+.nav-btn-area{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+
+  .btn{
+    width: 56px;
+    margin-right: 5px;
+    font-size: 14px;
+    height: 34px;
+  }
+}
+
+// .nav-btn{
+//   width: 80px;
+//   margin: 5px;
+//  background-color: #007bff;
+//  border: none;
+//  color: white;
+//  padding: 5px 15px;
+//  text-align: center;
+//  text-decoration: none;
+//  display: inline-block;
+//  font-size: 8px;
+//   cursor: pointer;
+// }
