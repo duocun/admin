@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { orders, order,driver, accounts, account, accountKeyword, transactions, deliverDate } from './reducers'
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const appReducers = combineReducers({
   deliverDate,
@@ -24,8 +25,10 @@ const store = createStore(
     account:{}, 
     accountKeyword:'', 
     transactions:[],
-},
-  applyMiddleware(thunk)
-);
+},composeWithDevTools(
+  applyMiddleware(thunk),
+  // other store enhancers if any
+));
+  
 
 export default store; 
