@@ -19,18 +19,14 @@ class Order extends React.Component {
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined,filteredOrders:[] };
+    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined };
     // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-    this.updateFilterArray = this.updateFilterArray.bind(this);
+
 
   }
 
   updateSearch(e) {
     this.setState({ search: e.target.value })
-  }
-  updateFilterArray(filteredOrders){
-    
-
   }
 
   render() {
@@ -49,8 +45,7 @@ class Order extends React.Component {
       }
     );
     // console.log("FilterOrder:" + filteredOrders.length);
-      console.log(this.props.orders);
-      console.log("state:" + this.props.deliverDateState);
+
     // const Menu = Menu;
     return (
       <div className="page">

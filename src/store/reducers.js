@@ -19,6 +19,13 @@ export const order = (state={}, action) => {
   return state;
 }
 
+export const product = (state={}, action) => {
+  if(action && action.type === 'SELECT_PRODUCT'){
+    return action.payload;
+  }
+  return state;
+}
+
 export const driver = (state={}, action) => {
   if(action && action.type === 'SELECT_DRIVER'){
     return action.payload;
