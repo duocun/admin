@@ -41,7 +41,7 @@ function OrderDriverList({orders}) {
 
 
     return (
-      <div className="summaryCard">
+      <div className="driver-card">
       <div className="title">
       <span>司机名称</span>
       <span>花费总额</span>

@@ -25,7 +25,7 @@ function OrderMerchantList({ orders }) {
     }
 
   return (
-    <div className="summaryCard">
+    <div className="merchant-card">
     <div className="title">
     <span>厂家名称</span>
     <span>花费总额</span>

@@ -9,10 +9,10 @@ function OrderDriverCard({ driver }) {
   for(var mid in driver.pickList){
     pickUpList.push({id:driver.pickList[mid][2],merchant:driver.pickList[mid][0],amount:driver.pickList[mid][1]})
   }
-  console.log(pickUpList)
+
 
   return (
-    <div className="summaryCard">
+    <div className="driver-info-card">
       <div>司机取货查询助手</div>
     <div className="title">
     <span>商家名称</span>

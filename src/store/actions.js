@@ -26,7 +26,7 @@ export const selectOrder = payload => ({
   payload
 })
 
-// payload --- order object
+// payload --- driver object
 export const selectDriver = payload => ({
   type: 'SELECT_DRIVER',
   payload

@@ -1,4 +1,4 @@
-.orderRowSelected{
+.order-row-selected{
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -9,7 +9,7 @@
   }
 
 
-  .orderRow{
+  .order-row{
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -38,23 +38,23 @@
         font-size: small;
       }
 
-    .orderRow{
-      width: 100px;
+    .order-row{
+      width: 100%;
       height: auto;
       font-size: xx-small;
       position: relative;
-      right: 10px;
+
       cursor: pointer;
     }
-    .orderRowSelected{
-        width: 100px;
+    .order-row-selected{
+        width: 100%;
         height: auto;
         margin-top:10px;
         cursor: pointer;
         background-color: lightgrey;
         font-size: xx-small;
         position: relative;
-        right: 10px;
+
       }
   }
   @media #{$mobile} {
@@ -68,22 +68,22 @@
         font-size: small;
       }
 
-    .orderRow{
-      width: 100px;
+    .order-row{
+      width: 100%;
       height: auto;
       font-size: xx-small;
       position: relative;
-      right: 10px;
+      
       cursor: pointer;
     }
-    .orderRowSelected{
-        width: 100px;
+    .order-row-selected{
+        width: 100%;
         height: auto;
         margin-top:10px;
         cursor: pointer;
         background-color: lightgrey;
         font-size: xx-small;
         position: relative;
-        right: 10px;
+
       }
   }

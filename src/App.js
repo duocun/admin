@@ -7,6 +7,7 @@ import OrderDetail from './order/OrderDetail';
 import { Login } from './account/Login';
 import { Area } from './area/Area';
 import OrderSummary from './order/OrderSummary';
+import OrderSearch from './order/OrderSearch';
 import { FinanceDetail } from './finance/FinanceDetail';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/merchant/" component={Merchant} />
         <Route exact path="/order/" component={OrderDetail} />
         <Route exact path="/order/summary" component={OrderSummary} />
+        <Route exact path="/order/search" component={OrderSearch} />
         <Route exact path="/area/" component={Area} />
         <Route exact path="/finance/" component={FinanceDetail} />
         {/* <Route path="/merchant/:id" component={Merchant} />

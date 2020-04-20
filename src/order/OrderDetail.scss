@@ -164,6 +164,10 @@ $search-bar-h: 40px;
 
   }
   
+  .order-card{
+    height: calc(100% - #{$bottom-bar-h} - 100px);
+  }
+  
 
 
 
@@ -182,7 +186,7 @@ $search-bar-h: 40px;
 
     height: 72vh;
     overflow-y: scroll;
-    width: 20vw;
+    width: 26vw;
 
 }
 
@@ -223,6 +227,11 @@ $search-bar-h: 40px;
     align-self: center;
     margin-bottom: 15px;;
   }
+  .order-card{
+    height: calc(100% - #{$bottom-bar-h} - 100px);
+  }
+  
+
 
 
 // .orderPage{
@@ -240,7 +249,7 @@ $search-bar-h: 40px;
 
   height: 72vh;
   overflow-y: scroll;
-  width: 20vw;
+  width: 26vw;
 
 }
 // .button{
