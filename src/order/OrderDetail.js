@@ -8,50 +8,34 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
+// import {OrderStatus } from  './OrderModel';
 
 import OrderHeader from './OrderHeader';
 import OrderList from './OrderList';
 import OrderCard from './OrderCard';
-
-export const MerchantType = {
-  GROCERY: 'G'
-}
-
-export const OrderType = {
-  FOOD_DELIVERY: 'F',
-  MOBILE_PLAN_SETUP: 'MS',
-  MOBILE_PLAN_MONTHLY: 'MM',
-  GROCERY: 'G'
-};
-
-export const OrderStatus = {
-  BAD: 'B',          // client return, compansate
-  DELETED: 'D',          // cancellation
-  TEMP: 'T',             // generate a temp order for electronic order
-  NEW: 'N',
-  LOADED: 'L',           // The driver took the food from Merchant
-  DONE: 'F',             // Finish delivery
-  MERCHANT_CHECKED: 'MC'  // VIEWED BY MERCHANT
-};
 
 class Order extends React.Component {
   accountSvc = new AccountAPI();
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined };
-    this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined,filteredOrders:[] };
+    // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+    this.updateFilterArray = this.updateFilterArray.bind(this);
 
   }
 
   updateSearch(e) {
     this.setState({ search: e.target.value })
   }
+  updateFilterArray(filteredOrders){
+    
 
+  }
 
   render() {
 
-    const filteredOrders = this.state.orders.filter(
+    const filteredOrders = this.props.orders.filter(
       (od) => {
 
         return od.clientName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
@@ -64,6 +48,9 @@ class Order extends React.Component {
 
       }
     );
+    // console.log("FilterOrder:" + filteredOrders.length);
+      console.log(this.props.orders);
+      console.log("state:" + this.props.deliverDateState);
     // const Menu = Menu;
     return (
       <div className="page">
@@ -154,26 +141,31 @@ class Order extends React.Component {
     })
   }
 
-  handelDeliverDateChange(d) {
-    const mm = d.getMonth() + 1;
-    const dd = d.getDate();
-    const yy = d.getFullYear();
-    const deliverDate = yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd);
-    this.setState({ deliverDate: new Date(deliverDate) });
-    // const start = date + 'T00:00:00.000Z';
-    // const end = date + 'T23:59:59.000Z';
-    // const time = d.toLocaleTimeString('en-US', { hour12: false });
+  // handelDeliverDateChange() {
+    // const mm = d.getMonth() + 1;
+    // const dd = d.getDate();
+    // const yy = d.getFullYear();
+    // const FormatDeliverDate = yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd);
+  //   const deliverDate = this.props.deliverDateState;
+    
+  //   this.setState({ deliverDate: new Date(deliverDate) });
+  //   // const start = date + 'T00:00:00.000Z';
+  //   // const end = date + 'T23:59:59.000Z';
+  //   // const time = d.toLocaleTimeString('en-US', { hour12: false });
 
-    const q = { deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] } };
-    const fields = ['_id', 'code', 'clientName']; // 'items'
-    this.orderSvc.find(q, fields).then(orders => {
-      this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
-    });
-  }
+  //   const q = { deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] } };
+  //   const fields = ['_id', 'code', 'clientName']; // 'items'
+  //   this.orderSvc.find(q, fields).then(orders => {
+  //     this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
+  //     this.props.loadOrders(orders);
+
+      
+  //   });
+  // }
 }
 
 
-const mapStateToProps = (state) => ({ orders: state.orders });
+const mapStateToProps = (state) => ({ orders: state.orders,deliverDateState: state.deliverDate});
 
 export default connect(
   mapStateToProps,

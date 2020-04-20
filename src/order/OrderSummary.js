@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import * as moment from 'moment';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { OrderAPI } from './API';
 import { AccountAPI } from '../account/API';
@@ -13,7 +12,6 @@ import { selectDriver } from '../store/actions';
 import OrderMerchantList from './OrderMerchantList';
 import OrderDriverList from './OrderDriverList';
 import OrderDriverCard from './OrderDriverCard';
-import OrderNav from './OrderNav';
 import OrderHeader from './OrderHeader';
 export const MerchantType = {
   GROCERY: 'G'
@@ -43,7 +41,7 @@ class OrderSummary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { orders: [], deliverDate: new Date() };
-    this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+    // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
    
   }
 
@@ -137,24 +135,24 @@ class OrderSummary extends React.Component {
     })
   }
 
-  handelDeliverDateChange(d){
-    const mm = d.getMonth() + 1;
-    const dd = d.getDate();
-    const yy = d.getFullYear();
-    const deliverDate = yy + '-' + (mm>9? mm : '0'+mm) + '-' + (dd>9? dd : '0'+dd);
-    this.setState({ deliverDate: new Date(deliverDate) });
-    // const start = date + 'T00:00:00.000Z';
-    // const end = date + 'T23:59:59.000Z';
-    // const time = d.toLocaleTimeString('en-US', { hour12: false });
+  // handelDeliverDateChange(d){
+  //   const mm = d.getMonth() + 1;
+  //   const dd = d.getDate();
+  //   const yy = d.getFullYear();
+  //   const deliverDate = yy + '-' + (mm>9? mm : '0'+mm) + '-' + (dd>9? dd : '0'+dd);
+  //   this.setState({ deliverDate: new Date(deliverDate) });
+  //   // const start = date + 'T00:00:00.000Z';
+  //   // const end = date + 'T23:59:59.000Z';
+  //   // const time = d.toLocaleTimeString('en-US', { hour12: false });
 
-    const q = {deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }};
-    const fields = ['_id', 'code', 'clientName']; // 'items'
-    this.orderSvc.find(q, fields).then(orders => {
-      this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
-      this.props.loadOrders(this.state.orders);
-      this.props.selectDriver({});
-    }); 
-  }
+  //   const q = {deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }};
+  //   const fields = ['_id', 'code', 'clientName']; // 'items'
+  //   this.orderSvc.find(q, fields).then(orders => {
+  //     this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
+  //     this.props.loadOrders(this.state.orders);
+  //     this.props.selectDriver({});
+  //   }); 
+  // }
 }
 
 const mapStateToProps = (state) => {

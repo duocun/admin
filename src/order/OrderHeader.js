@@ -1,19 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setDeliverDate} from '../store/actions';
+// import {OrderStatus } from  './OrderModel';
+
+import {setDeliverDate, getOrdersAsync} from '../store/actions';
 import OrderNav from './OrderNav';
 
 import './OrderHeader.scss';
 // import * as moment from 'moment';
 import DatePicker from 'react-datepicker';
 
-function OrderHeader({deliverDate, setDeliverDate}) {
+function OrderHeader({deliverDate, onSelectDeliverDate}) {
+
   return (
   <div className="header-area">
     <div className="select-date-area">
       <div className="label-bg">送货日期:</div>
       <DatePicker className="date-picker" selected={deliverDate}
-        onChange={setDeliverDate}
+        onChange={onSelectDeliverDate}
       />
     </div>
     <OrderNav />
@@ -22,12 +25,14 @@ function OrderHeader({deliverDate, setDeliverDate}) {
 }
 
 const mapStateToProps = (state) => ({deliverDate: state.deliverDate});
-// const mapDispatchToProps = dispatch => ({
-//   onSelectDeliverDate: date => {
-//     dispatch(setDeliverDate(date));
-//   }
-// });
+const mapDispatchToProps = dispatch => ({
+  onSelectDeliverDate: date => {
+    dispatch(setDeliverDate(date));
+    dispatch(getOrdersAsync(date));
+  }
+});
 export default connect(
   mapStateToProps,
-  {setDeliverDate}
+  // {setDeliverDate}
+  mapDispatchToProps
 )(OrderHeader);
