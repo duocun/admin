@@ -6,8 +6,10 @@ import { selectDriver } from '../store/actions';
 function OrderDriverListItem({data,selectedDriver,selectDriver}) {
 
   return(
+   
+    
     <div onClick={ () => selectDriver(data) } 
-    className={selectedDriver.driverId === data.driverId ? "orderRowSelected" : "orderRow"} 
+    className={selectedDriver.driverId === data.driverId ? "order-row-selected" : "order-row"} 
     >
     <div className="col">{data.details[3]}</div>
     <div className="col">{data.details[2].reduce(function(a, b){

@@ -13,7 +13,8 @@ import { selectDriver } from '../store/actions';
 import OrderMerchantList from './OrderMerchantList';
 import OrderDriverList from './OrderDriverList';
 import OrderDriverCard from './OrderDriverCard';
-
+import OrderNav from './OrderNav';
+import OrderHeader from './OrderHeader';
 export const MerchantType = {
   GROCERY: 'G'
 }
@@ -64,36 +65,41 @@ class OrderSummary extends React.Component {
     }
 
     return (
-      <div>
-      <div className="nav-menu-bar">
-      <NavBar selected={Menu.Order} />
-      </div>
+      <div className="page">
+           <div className="nav-menu-bar">
+              <NavBar selected={Menu.Order} />
+           </div>
 
-      <div className="summaryPage">
+      <div className="page-content">
         
-        <h3>送货日期 <DatePicker selected={this.state.deliverDate}
-        onChange={this.handelDeliverDateChange}
-        /></h3>
+         <OrderHeader/>
         
+      <div className="page-body">
+        <div className="summary-page">
+        <div className="summary-upper">
+             <div className="summary-card" >
+               <h3>统计</h3>
+               <div>商品总数: {totalItems}</div>
+               <div>订单总数: {orders.length}</div>
       
+            </div>
 
-        <div className="summaryCard" >
-            <h3>统计</h3>
-            <div>商品总数: {totalItems}</div>
-            <div>订单总数: {orders.length}</div>
-      
+             <OrderMerchantList  />
         </div>
 
-        <OrderMerchantList  />
-        <OrderDriverList />
-        <OrderDriverCard />
+        <div className="summary-lower">
+           <OrderDriverList />
+           <OrderDriverCard />
+        </div>
+        </div>
+        
       </div>
      
 
-     
-       <div>
-      <Footer selected={Menu.Order}/>
-      </div>
+     </div>
+            <div className="footer">
+                <Footer selected={Menu.Order}/>
+            </div>
       </div>
      
     );

@@ -35,6 +35,13 @@ function OrderNav() {
           </div>
         </Link></span>
 
+        <span className="btn-wrapper">
+        <Link to="/order/search">
+          <div className="btn" type="button">
+            查询
+          </div>
+        </Link></span>
+
     </div>)
 }
 
