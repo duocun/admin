@@ -74,7 +74,7 @@ class OrderSearch extends React.Component {
 
             <div className="right">
 
-              <div className="selectCard">
+              <div className="order-list">
 
                 <div className="mobileHide" >产品数: {filteredOrders.length}
                 </div>

@@ -1,6 +1,7 @@
 @import '../base';
 
 $search-bar-h: 50px;
+$btn-area-h: 32px;
 
 .order-card{
   // box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
@@ -8,10 +9,12 @@ $search-bar-h: 50px;
   height: 100%;
   border: 1px solid $border-color;
   border-radius: 4px;
-  padding: 10px 4px;
+  padding: 3px 4px;
 }
 
 .btn-area{
+  width: 100%;
+  padding: 3px;
   display: flex;
   .btn{
     font-size: 12px;
@@ -20,15 +23,16 @@ $search-bar-h: 50px;
   }
 }
 
+
+
 .order-detail-content{
   width: 100%;
-  height: 100%;
+  height: calc(100% - #{$btn-area-h});
+  padding: 5px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  // justify-content: space-evenly;
   float: left;
-  padding: 15px 6px;
 
   .detail-row{
     display: flex;
@@ -48,41 +52,41 @@ $search-bar-h: 50px;
   
 
   @media #{$mobile} {
-    .order-detail-content{
-      width: 100%;
-      height: 100%;
-      overflow-y: scroll;
-      display: flex;
-      flex-direction: column;
-      // justify-content: space-evenly;
-      float: left;
-      padding: 15px 6px;
+    // .order-detail-content{
+    //   width: 100%;
+    //   height: 100%;
+    //   overflow-y: scroll;
+    //   display: flex;
+    //   flex-direction: column;
+    //   // justify-content: space-evenly;
+    //   float: left;
+    //   padding: 15px 6px;
     
-      .detail-row{
-        display: flex;
-        flex-direction: row;
-        height: 22px;
-        font-size: 12px;
-      }
-    }
+    //   .detail-row{
+    //     display: flex;
+    //     flex-direction: row;
+    //     height: 22px;
+    //     font-size: 12px;
+    //   }
+    // }
 }
   @media #{$cellphone} {   
-    .order-detail-content{
-      width: 100%;
-      height: 100%;
-      overflow-y: scroll;
-      display: flex;
-      flex-direction: column;
-      // justify-content: space-evenly;
-      float: left;
-      padding: 15px 6px;
+    // .order-detail-content{
+    //   width: 100%;
+    //   height: 100%;
+    //   overflow-y: scroll;
+    //   display: flex;
+    //   flex-direction: column;
+    //   // justify-content: space-evenly;
+    //   float: left;
+    //   padding: 15px 6px;
     
-      .detail-row{
-        display: flex;
-        flex-direction: row;
-        height: 22px;
-        font-size: 12px;
-      }
-    }
+    //   .detail-row{
+    //     display: flex;
+    //     flex-direction: row;
+    //     height: 22px;
+    //     font-size: 12px;
+    //   }
+    // }
   }
   

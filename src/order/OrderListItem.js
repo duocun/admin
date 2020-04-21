@@ -8,8 +8,8 @@ function OrderListItem({ order, selectedOrder, selectOrder }) {
     <div onClick={ () => selectOrder(order) } 
     className={selectedOrder === order ? "order-row-selected" : "order-row"} 
     >
-      <div className="col mobileHide">{order.code}</div>
-      <div className="col">{order.note.length > 0 ? (" * " + order.clientName) : order.clientName}</div>
+      <div className="col-code">{order.code}</div>
+      <div className="col-name">{order.note.length > 0 ? (" * " + order.clientName) : order.clientName}</div>
     </div >
   )
 }

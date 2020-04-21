@@ -25,12 +25,12 @@ export const OrderType = {
 };
 
 export const OrderStatus = {
-  BAD:     'B',          // client return, compansate
+  BAD: 'B',          // client return, compansate
   DELETED: 'D',          // cancellation
-  TEMP:    'T',             // generate a temp order for electronic order
-  NEW:     'N',
-  LOADED:  'L',           // The driver took the food from Merchant
-  DONE:    'F',             // Finish delivery
+  TEMP: 'T',             // generate a temp order for electronic order
+  NEW: 'N',
+  LOADED: 'L',           // The driver took the food from Merchant
+  DONE: 'F',             // Finish delivery
   MERCHANT_CHECKED: 'MC'  // VIEWED BY MERCHANT
 };
 
@@ -42,76 +42,65 @@ class OrderSummary extends React.Component {
     super(props);
     this.state = { orders: [], deliverDate: new Date() };
     // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-   
+
   }
 
 
 
 
   render() {
-   
+
     const orders = this.state.orders;
 
-  
-    const productArray = orders.map(function(od){ return od.items });
+
+    const productArray = orders.map(function (od) { return od.items });
     //get total item
     var totalItems = 0;
-    for(var i =0;i<productArray.length;i++){
-        for(var j=0;j<productArray[i].length;j++){
-            totalItems++;
-        }
+    for (var i = 0; i < productArray.length; i++) {
+      for (var j = 0; j < productArray[i].length; j++) {
+        totalItems++;
+      }
     }
 
     return (
       <div className="page">
-           <div className="nav-menu-bar">
-              <NavBar selected={Menu.Order} />
-           </div>
+        <div className="nav-menu-bar">
+          <NavBar selected={Menu.Order} />
+        </div>
 
-      <div className="page-content">
-        
-         <OrderHeader/>
-        
-      <div className="page-body">
-        <div className="summary-page">
-        <div className="summary-upper">
-             <div className="summary-card" >
-               <h3>统计</h3>
-               <div>商品总数: {totalItems}</div>
-               <div>订单总数: {orders.length}</div>
+        <div className="page-content">
+          <OrderHeader />
+
+          <div className="page-body">
+            {/* <div className="summary-card" >
+              <div>统计</div>
+              <div>商品总数: {totalItems}</div>
+              <div>订单总数: {orders.length}</div>
+
+              <OrderMerchantList />
+            </div> */}
+
+            {/* <div className="summary-lower"> */}
+              <OrderDriverList />
+              <OrderDriverCard />
+            {/* </div> */}
+          </div>
+        </div>
       
-            </div>
-
-             <OrderMerchantList  />
-        </div>
-
-        <div className="summary-lower">
-           <OrderDriverList />
-           <OrderDriverCard />
-        </div>
-        </div>
-        
+        <Footer selected={Menu.Order} />
       </div>
-     
-
-     </div>
-            <div className="footer">
-                <Footer selected={Menu.Order}/>
-            </div>
-      </div>
-     
-    );
+    )
   }
 
   componentDidMount() {
     this.accountSvc.getCurrentAccount().then(account => {
       if (account) {
-        const q = {deliverDate: '2020-04-10'};
+        const q = { deliverDate: '2020-04-10' };
         // const fields = ['id', 'code', 'clientName']; // 'items'
         this.orderSvc.find(q).then(orders => {
           this.setState({ orders, selectOrder: orders[0] });
           this.props.loadOrders(orders);
-        
+
         });
         // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
@@ -135,6 +124,8 @@ class OrderSummary extends React.Component {
     })
   }
 
+
+
   // handelDeliverDateChange(d){
   //   const mm = d.getMonth() + 1;
   //   const dd = d.getDate();
@@ -155,6 +146,9 @@ class OrderSummary extends React.Component {
   // }
 }
 
+
+
+
 const mapStateToProps = (state) => {
   return {
     orders: state.orders
@@ -162,5 +156,5 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps,
-  {loadOrders,selectDriver}
+  { loadOrders, selectDriver }
 )(OrderSummary);
