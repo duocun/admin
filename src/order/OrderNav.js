@@ -8,7 +8,7 @@ function OrderNav() {
   return (
     <div className="nav-btn-area">
       <span className="btn-wrapper">
-        <Link to="/order/summary">
+        <Link to="/order/detail">
           <div className="btn" type="button">
             详情
           </div>

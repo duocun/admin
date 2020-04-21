@@ -5,12 +5,12 @@ function OrderCard({ order }) {
   return (
     <div className="order-card">
 
-      <div className="btn-area">
+      {/* <div className="btn-area">
         <div className="btn">删除</div>
         <div className="btn">改地址</div>
         <div className="btn">改日期</div>
         <div className="btn">历史</div>
-      </div>
+      </div> */}
 
       <div className="order-detail-content">
         <div className="detail-row">

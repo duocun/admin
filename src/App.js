@@ -24,6 +24,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route exact path="/merchant/" component={Merchant} />
         <Route exact path="/order/" component={OrderDetail} />
+        <Route exact path="/order/detail" component={OrderDetail} />
         <Route exact path="/order/summary" component={OrderSummary} />
         <Route exact path="/order/search" component={OrderSearch} />
         <Route exact path="/area/" component={Area} />

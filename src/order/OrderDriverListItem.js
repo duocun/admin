@@ -10,7 +10,7 @@ console.log("data driver  " + data.driverName)
 
 
     <div onClick={() => onSelectDriver(data, orders)}
-      className={selectedDriver.driverId === data.driverId ? "order-row-selected" : "order-row"}
+      className={selectedDriver.driverId === data.driverId ? "list-item order-row-selected" : "order-row"}
     >
       <div className="col">{data.driverName}</div>
       <div className="col">{data.totalCost}</div>
