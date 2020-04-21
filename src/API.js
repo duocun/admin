@@ -4,8 +4,8 @@ import Cookies from 'js-cookie';
 export const HttpStatus = {
   OK: { code: 200, text: 'OK' }
 };
-const API_URL = 'http://localhost:8000/api/';
-// const API_URL = 'https://duocun.com.cn/api/';
+// const API_URL = 'http://localhost:8000/api/';
+const API_URL = 'https://duocun.com.cn/api/';
 export class Http {
   authPrefix = '';
   Status = {
