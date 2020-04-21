@@ -69,6 +69,11 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+export const setTransactionDate = payload => ({
+  type: 'SET_TRANSACTION_DATE',
+  payload
+})
+
 // async actions
 export const getAccountsAsync = keyword => {
   const accountSvc = new AccountAPI();
@@ -114,4 +119,35 @@ export const getTransactionsAsync = account => {
       (accounts) => dispatch(loadTransactions(accounts))
     );
   }
+}
+
+export const getTransactionsByDateRangeAsync = (transactionDate) => {
+  const transactionSvc = new TransactionAPI();
+  let {startDate,endDate} = transactionDate;
+  startDate = transferDateToQueryForm(startDate);
+  endDate = transferDateToQueryForm(endDate)
+  return (dispatch) => {
+    const q = {
+        created: {$gte: startDate, $lte: endDate}
+    };
+    return transactionSvc.find(q).then(
+      (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+/**
+ * @param {Date} date The date, which is a new Date() UTC format
+ */
+
+//this function transfer date to the format that works for query
+//this should be put somewhere else
+const transferDateToQueryForm = (date) =>{
+  const mm = date.getMonth() + 1;
+  const dd = date.getDate();
+  const yy = date.getFullYear();
+  const hour = date.getHours();
+  const min = date.getMinutes();
+  const sec = date.getSeconds();
+  return yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd) + 'T' + hour + ":" + min + ":" + sec;
 }
