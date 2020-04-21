@@ -45,7 +45,22 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### CSS Naming Convention
+
+1. should use all lowercase and hypen seperated class name and id, only when use react referece, you can use camelcase.
+2. The css hirachey will be:
+`.page{
+  .nav-menu-bar{
+  
+  }
+  .page-content{
+  
+  }
+  .footer{
+  
+  }
+}
+`
 
 ### Analyzing the Bundle Size
 
