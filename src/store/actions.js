@@ -69,10 +69,11 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+//finance exception
 export const setTransactionDate = payload => ({
   type: 'SET_TRANSACTION_DATE',
   payload
-})
+});
 
 // async actions
 export const getAccountsAsync = keyword => {

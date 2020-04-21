@@ -11,14 +11,8 @@ function FinanceHeader({
   transactionDate,
   setTransactionDateDispatch,
 }) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-
-  useEffect(() => {
-    let {startDate, endDate} = transactionDate;
-    setStartDate(startDate);
-    setEndDate(endDate);
-  }, [])
+  const [startDate, setStartDate] = useState(transactionDate.startDate);
+  const [endDate, setEndDate] = useState(transactionDate.endDate);
 
   useEffect(() => {
     let transactionDate = {
@@ -31,7 +25,7 @@ function FinanceHeader({
   return (
     <div className="header-area">
       <div className="select-date-area">
-        <div className="label-bg">选择日期:</div>
+        <div className="label-bg">送货日期:</div>
         <DatePicker
           className="date-picker"
           name="transactionStartDate"
