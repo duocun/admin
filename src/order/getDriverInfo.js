@@ -18,7 +18,7 @@ export const  getDriverInfo = (orders)=>{
           driverMap[did][4][mid][0]=orders[i].merchantName;
           driverMap[did][4][mid][1]+=orders[i].items.length;
   
-  
+          console.log(driverMap);
           
          
   

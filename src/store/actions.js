@@ -6,7 +6,7 @@ import {
 } from '../transaction/API';
 import {OrderAPI} from '../order/API';
 import {OrderStatus} from '../order/OrderModel';
-import { order } from './reducers';
+
 
 export const loadOrders = payload => {
   return {
@@ -30,6 +30,12 @@ export const setDeliverDate = payload => ({
 // payload --- order object
 export const selectOrder = payload => ({
   type: 'SELECT_ORDER',
+  payload
+})
+
+// payload --- product object
+export const selectProduct= payload => ({
+  type: 'SELECT_PRODUCT',
   payload
 })
 
