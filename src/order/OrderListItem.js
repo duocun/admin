@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectOrder } from '../store/actions';
-
+import './OrderListItem.scss';
 function OrderListItem({ order, selectedOrder, selectOrder }) { 
   //order from props, selectedOrder from redux state, selecOrder dispatch to redux
   return (

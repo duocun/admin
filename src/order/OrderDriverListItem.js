@@ -9,7 +9,7 @@ function OrderDriverListItem({ data, orders, selectedDriver, onSelectDriver }) {
 
 
     <div onClick={() => onSelectDriver(data, orders)}
-      className={selectedDriver.driverId === data.driverId ? "order-row-selected" : "order-row"}
+      className={selectedDriver.driverId === data.driverId ? "list-item order-row-selected" : "order-row"}
     >
       <div className="col">{data.details[3]}</div>
       <div className="col">{data.details[2].reduce(function (a, b) {
