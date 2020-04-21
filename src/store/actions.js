@@ -1,5 +1,12 @@
-import {AccountAPI} from '../account/API';
-import {TransactionAPI} from '../transaction/API';
+import {
+  AccountAPI
+} from '../account/API';
+import {
+  TransactionAPI
+} from '../transaction/API';
+import {OrderAPI} from '../order/API';
+import {OrderStatus} from '../order/OrderModel';
+
 
 export const loadOrders = payload => {
   return {
@@ -14,13 +21,25 @@ export const loadFilterOrders = payload => {
   }
 }
 
+// payload --- deliverDate string
+export const setDeliverDate = payload => ({
+  type: 'SET_DELIVER_DATE',
+  payload
+})
+
 // payload --- order object
 export const selectOrder = payload => ({
   type: 'SELECT_ORDER',
   payload
 })
 
-// payload --- order object
+// payload --- product object
+export const selectProduct= payload => ({
+  type: 'SELECT_PRODUCT',
+  payload
+})
+
+// payload --- driver object
 export const selectDriver = payload => ({
   type: 'SELECT_DRIVER',
   payload
@@ -58,17 +77,41 @@ export const getAccountsAsync = keyword => {
       (accounts) => dispatch(loadAccounts(accounts))
     );
   }
-} 
+}
+
+export const getOrdersAsync = d => {
+  const orderSvc = new OrderAPI();
+  const mm = d.getMonth() + 1;
+  const dd = d.getDate();
+  const yy = d.getFullYear();
+  const deliverDate = yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd);
+  return (dispatch) => {
+    const q = {
+      deliverDate, // 'YYYY-MM-DD'
+      status: {
+        $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP]
+      }
+    };
+    return orderSvc.find(q).then(
+       orders => dispatch(loadOrders(orders)),
+    );
+  }
+}
 
 export const getTransactionsAsync = account => {
   const transactionSvc = new TransactionAPI();
   return (dispatch) => {
-    const q = {$or: [
-      { fromId: account._id },
-      { toId: account._id }
-    ]};
+    const q = {
+      $or: [{
+          fromId: account._id
+        },
+        {
+          toId: account._id
+        }
+      ]
+    };
     return transactionSvc.find(q).then(
       (accounts) => dispatch(loadTransactions(accounts))
     );
   }
-} 
+}

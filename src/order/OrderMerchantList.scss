@@ -1,0 +1,63 @@
+.merchant-card{
+    position: relative;
+    margin-top: 5vh;
+    height: 35vh;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px 4px;
+    width: 35vw;
+    overflow-y: scroll;
+    margin-left: 2vw;
+
+
+
+}
+
+@media #{$mobile}{
+.merchant-card{
+    
+    position: relative;
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 15vh;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px 4px;
+    width: 80vw;
+    overflow-y: scroll;
+}
+.order-row{
+    width: 100%;
+    height: auto;
+    font-size: xx-small;
+    position: relative;
+    left: 2px;
+    cursor: pointer;
+    justify-content: space-around;
+}
+
+
+}
+
+@media #{$cellphone}{
+    .merchant-card{
+        position: relative;
+        margin-left: 20px;
+        margin-top: 10px;
+        height: 15vh;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 10px 4px;
+        width: 80vw;
+        overflow-y: scroll;
+    }
+    .order-row{
+        width: 100%;
+        height: auto;
+        font-size: xx-small;
+        position: relative;
+        left: 2px;
+        cursor: pointer;
+        justify-content: space-around;
+    }
+}

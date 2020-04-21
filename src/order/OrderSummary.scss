@@ -1,5 +1,7 @@
 @import "./OrderDriverCard.scss";
-
+@import "./OrderDriverList.scss";
+@import "./OrderMerchantList.scss";
+@import '../base';
 
 .driverRowSelected{
     display: flex;
@@ -21,3 +23,67 @@
     cursor: pointer;
    
   } 
+  .summary-card{
+    position: relative;
+    margin-top: 5vh;
+    height: 35vh;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px 4px;
+    width: 35vw;
+    overflow-y: scroll;
+  }
+  .sumamary-page{
+   display: flex;
+  }
+
+  .summary-upper{
+    display: flex;
+
+  }
+  .summary-lower{
+    display: flex;
+  }
+
+  @media #{$mobile}{
+    .summary-upper{
+      display: flex;
+      flex-direction: column;
+    }
+    .summary-lower{
+       display: flex;
+    }
+    .summary-card{
+      position: relative;
+      margin-left: 20px;
+      margin-top: 10px;
+      height: 15vh;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 10px 4px;
+      width: 80vw;
+      overflow-y: scroll;
+    }
+  }
+
+  @media #{$cellphone}{
+    .summary-upper{
+      display: flex;
+      flex-direction: column;
+    }
+    .summary-lower{
+      display: flex;
+    }
+    .summary-card{
+      position: relative;
+      margin-left: 20px;
+      margin-top: 10px;
+      height: 15vh;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 10px 4px;
+      width: 80vw;
+      overflow-y: scroll;
+    }
+
+  }

@@ -18,3 +18,47 @@
     cursor: pointer;
    
   } 
+.driver-card{
+  position: relative;
+  margin-top: 5vh;
+  height: 35vh;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 10px 4px;
+  width: 35vw;
+  overflow-y: scroll;
+  
+}
+
+
+@media #{$mobile}{
+  .driver-card{
+    position: relative;
+    margin-top: 2vh;
+    height: 35vh;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px 4px;
+    width: 45vw;
+    overflow-y: scroll;
+  
+  }
+
+
+}
+
+@media #{$cellphone}{
+  .driver-card{
+  
+    position: relative;
+    margin-top: 2vh;
+    height: 35vh;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px 4px;
+    width: 45vw;
+    overflow-y: scroll;
+  }
+    
+
+}

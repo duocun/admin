@@ -6,9 +6,9 @@ function OrderListItem({ order, selectedOrder, selectOrder }) {
   //order from props, selectedOrder from redux state, selecOrder dispatch to redux
   return (
     <div onClick={ () => selectOrder(order) } 
-    className={selectedOrder === order ? "orderRowSelected" : "orderRow"} 
+    className={selectedOrder === order ? "order-row-selected" : "order-row"} 
     >
-      <div className="col">{order.code}</div>
+      <div className="col mobileHide">{order.code}</div>
       <div className="col">{order.note.length > 0 ? (" * " + order.clientName) : order.clientName}</div>
     </div >
   )

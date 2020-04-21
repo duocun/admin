@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import * as moment from 'moment';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { OrderAPI } from './API';
 import { AccountAPI } from '../account/API';
@@ -9,10 +8,11 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders } from '../store/actions';
+import { selectDriver } from '../store/actions';
 import OrderMerchantList from './OrderMerchantList';
 import OrderDriverList from './OrderDriverList';
 import OrderDriverCard from './OrderDriverCard';
-
+import OrderHeader from './OrderHeader';
 export const MerchantType = {
   GROCERY: 'G'
 }
@@ -41,7 +41,7 @@ class OrderSummary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { orders: [], deliverDate: new Date() };
-    this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+    // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
    
   }
 
@@ -63,36 +63,41 @@ class OrderSummary extends React.Component {
     }
 
     return (
-      <div>
-      <div className="naviBar">
-      <NavBar selected={Menu.Order} />
-      </div>
+      <div className="page">
+           <div className="nav-menu-bar">
+              <NavBar selected={Menu.Order} />
+           </div>
 
-      <div className="summaryPage">
+      <div className="page-content">
         
-        <h3>送货日期 <DatePicker selected={this.state.deliverDate}
-        onChange={this.handelDeliverDateChange}
-        /></h3>
+         <OrderHeader/>
         
+      <div className="page-body">
+        <div className="summary-page">
+        <div className="summary-upper">
+             <div className="summary-card" >
+               <h3>统计</h3>
+               <div>商品总数: {totalItems}</div>
+               <div>订单总数: {orders.length}</div>
       
+            </div>
 
-        <div className="summaryCard" >
-            <h3>统计</h3>
-            <div>商品总数: {totalItems}</div>
-            <div>订单总数: {orders.length}</div>
-      
+             <OrderMerchantList  />
         </div>
 
-        <OrderMerchantList  />
-        <OrderDriverList />
-        <OrderDriverCard />
+        <div className="summary-lower">
+           <OrderDriverList />
+           <OrderDriverCard />
+        </div>
+        </div>
+        
       </div>
      
 
-     
-       <div>
-      <Footer selected={Menu.Order}/>
-      </div>
+     </div>
+            <div className="footer">
+                <Footer selected={Menu.Order}/>
+            </div>
       </div>
      
     );
@@ -106,6 +111,7 @@ class OrderSummary extends React.Component {
         this.orderSvc.find(q).then(orders => {
           this.setState({ orders, selectOrder: orders[0] });
           this.props.loadOrders(orders);
+        
         });
         // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
@@ -129,23 +135,24 @@ class OrderSummary extends React.Component {
     })
   }
 
-  handelDeliverDateChange(d){
-    const mm = d.getMonth() + 1;
-    const dd = d.getDate();
-    const yy = d.getFullYear();
-    const deliverDate = yy + '-' + (mm>9? mm : '0'+mm) + '-' + (dd>9? dd : '0'+dd);
-    this.setState({ deliverDate: new Date(deliverDate) });
-    // const start = date + 'T00:00:00.000Z';
-    // const end = date + 'T23:59:59.000Z';
-    // const time = d.toLocaleTimeString('en-US', { hour12: false });
+  // handelDeliverDateChange(d){
+  //   const mm = d.getMonth() + 1;
+  //   const dd = d.getDate();
+  //   const yy = d.getFullYear();
+  //   const deliverDate = yy + '-' + (mm>9? mm : '0'+mm) + '-' + (dd>9? dd : '0'+dd);
+  //   this.setState({ deliverDate: new Date(deliverDate) });
+  //   // const start = date + 'T00:00:00.000Z';
+  //   // const end = date + 'T23:59:59.000Z';
+  //   // const time = d.toLocaleTimeString('en-US', { hour12: false });
 
-    const q = {deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }};
-    const fields = ['_id', 'code', 'clientName']; // 'items'
-    this.orderSvc.find(q, fields).then(orders => {
-      this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
-      this.props.loadOrders(this.state.orders);
-    }); 
-  }
+  //   const q = {deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }};
+  //   const fields = ['_id', 'code', 'clientName']; // 'items'
+  //   this.orderSvc.find(q, fields).then(orders => {
+  //     this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
+  //     this.props.loadOrders(this.state.orders);
+  //     this.props.selectDriver({});
+  //   }); 
+  // }
 }
 
 const mapStateToProps = (state) => {
@@ -155,5 +162,5 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps,
-  {loadOrders}
+  {loadOrders,selectDriver}
 )(OrderSummary);

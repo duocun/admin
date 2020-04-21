@@ -11,33 +11,35 @@ import { loadOrders } from '../store/actions';
 // import {OrderStatus } from  './OrderModel';
 
 import OrderHeader from './OrderHeader';
-import OrderList from './OrderList';
-import OrderCard from './OrderCard';
+import OrderProductList from './OrderProductList';
+import OrderProductDetail from './OrderProductDetail';
+import {getProductInfo} from './getProductInfo';
 
-class Order extends React.Component {
+class OrderSearch extends React.Component {
   accountSvc = new AccountAPI();
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined };
-    // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-
+    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined,filteredOrders:[] };
 
   }
 
   updateSearch(e) {
     this.setState({ search: e.target.value })
   }
+  
+
 
   render() {
+    let prodcutArray = [];
+    prodcutArray = getProductInfo(this.props.orders);
 
-    const filteredOrders = this.props.orders.filter(
+    
+
+    const filteredOrders = prodcutArray.filter(
       (od) => {
-
-        return od.clientName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || od.merchantName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || od.code.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || (od.driverName !== undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+        
+        return od.productName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
         ;
 
 
@@ -63,10 +65,10 @@ class Order extends React.Component {
             <div className="left">
 
               <div className="search-bar">
-                <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机" />
+                <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="请输入商品信息以查询" />
               </div>
 
-                <OrderCard />
+                <OrderProductDetail />
 
             </div>
 
@@ -74,18 +76,21 @@ class Order extends React.Component {
 
               <div className="selectCard">
 
-                <div className="mobileHide" >订单数: {filteredOrders.length}
+                <div className="mobileHide" >产品数: {filteredOrders.length}
                 </div>
 
                 <div className="title">
-                  <span className="mobileHide">订单号</span>
-                  <span>客户姓名</span>
+                  
+                  <span>产品名称</span>
                 </div>
 
                 <div>
                   {
                     filteredOrders && filteredOrders.length > 0 &&
-                    <OrderList orders={filteredOrders} />
+                    filteredOrders.map(m =>
+                      <OrderProductList orders={filteredOrders} />
+                
+                    )
                   }
                 </div>
 
@@ -165,4 +170,4 @@ const mapStateToProps = (state) => ({ orders: state.orders,deliverDateState: sta
 export default connect(
   mapStateToProps,
   { loadOrders }
-)(Order);
+)(OrderSearch);

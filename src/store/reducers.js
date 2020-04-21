@@ -1,3 +1,9 @@
+export const deliverDate = (state={}, action) => {
+  if(action && action.type === 'SET_DELIVER_DATE'){
+    return action.payload;
+  }
+  return state;
+}
 
 export const orders = (state=[], action) => {
   if(action && action.type === 'LOAD_ORDERS'){
@@ -8,6 +14,13 @@ export const orders = (state=[], action) => {
 
 export const order = (state={}, action) => {
   if(action && action.type === 'SELECT_ORDER'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const product = (state={}, action) => {
+  if(action && action.type === 'SELECT_PRODUCT'){
     return action.payload;
   }
   return state;

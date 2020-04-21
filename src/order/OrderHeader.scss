@@ -1,0 +1,156 @@
+@import '../base';
+
+$label-w: 84px;
+$date-area-h: 32px;
+$date-area-w: 240px;
+
+.header-area{
+  width: 100%;
+  display: flex;
+}
+
+.select-date-area {
+  display: flex;
+  align-items: center;
+  width: $date-area-w;
+
+  .label-bg{
+    width: $label-w;
+    float: left;
+  }
+
+  .react-datepicker-wrapper{
+    width: calc(100% - #{$label-w});
+    float: left;
+  }
+}
+
+.date-picker{
+  height: $date-area-h;
+  width: 350px;
+  // width: 18vw;
+  // margin: 5px;
+}
+
+// .date-picker{
+//   margin:5px;
+//   width: 63vw;
+// }
+
+.nav-btn-area{
+  width: calc(100% - #{$date-area-w});
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+  margin-left: 20vw;
+
+  .btn{
+    width: 56px;
+    margin-right: 5px;
+    font-size: 14px;
+    height: 34px;
+  }
+}
+
+// .nav-btn{
+//   width: 80px;
+//   margin: 5px;
+//  background-color: #007bff;
+//  border: none;
+//  color: white;
+//  padding: 5px 15px;
+//  text-align: center;
+//  text-decoration: none;
+//  display: inline-block;
+//  font-size: 8px;
+//   cursor: pointer;
+// }
+
+@media #{$mobile}{
+  .header-area{
+    display: block;
+  }
+  .select-date-area, .nav-btn-area{
+    width: 100%;
+  }
+  .date-picker{
+    height: $date-area-h;
+    width: 70vw;
+    // width: 18vw;
+    // margin: 5px;
+  }
+  .select-date-area {
+    display: flex;
+    align-items: center;
+    width: $date-area-w;
+    left: 0px;
+  
+    .label-bg{
+      width: $label-w;
+      float: left;
+    }
+  
+    .react-datepicker-wrapper{
+      width: calc(100% - #{$label-w});
+      float: left;
+    }
+  }
+  .nav-btn-area{
+    width: calc(100% - #{$date-area-w});
+    margin-top: 10px;
+    display: flex;
+    position: relative;
+    margin-left: 5vw;
+  
+    .btn{
+      width: 56px;
+      margin-right: 5px;
+      font-size: 14px;
+      height: 34px;
+    }
+  }
+}
+
+@media #{$cellphone}{
+  .header-area{
+    display: block;
+  }
+  .select-date-area, .nav-btn-area{
+    width: 100%;
+  }
+  .date-picker{
+    height: $date-area-h;
+    width: 70vw;
+    // width: 18vw;
+    // margin: 5px;
+  }
+  .select-date-area {
+    display: flex;
+    align-items: center;
+    width: $date-area-w;
+    left: 0px;
+    .label-bg{
+      width: $label-w;
+      float: left;
+    }
+  
+    .react-datepicker-wrapper{
+      width: calc(100% - #{$label-w});
+      float: left;
+    }
+  }
+  .nav-btn-area{
+    width: calc(100% - #{$date-area-w});
+    margin-top: 10px;
+    display: flex;
+    position: relative;
+    margin-left: 5vw;
+  
+    .btn{
+      width: 56px;
+      margin-right: 5px;
+      font-size: 14px;
+      height: 34px;
+    }
+  }
+}
