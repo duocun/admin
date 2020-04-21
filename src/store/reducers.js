@@ -1,3 +1,4 @@
+import {OrderType} from '../order/OrderModel';
 export const deliverDate = (state={}, action) => {
   if(action && action.type === 'SET_DELIVER_DATE'){
     return action.payload;
@@ -67,6 +68,36 @@ export const transactions = (state=[], action) => {
   return state;
 }
 
+
+// orders --- orders belong to a driver
+// return --- [{productName, quantity} ...]
+const groupByProduct = (orders) => {
+  const productMap = {};
+  const rs = orders.filter(order => order.type === OrderType.GROCERY);
+  rs.map(r => {
+    r.items.map(it => {
+      productMap[it.productId] = { productName: it.product.name, quantity: 0 };
+    });
+  });
+  rs.map(r => {
+    r.items.map(it => {
+      productMap[it.productId].quantity += it.quantity;
+    });
+  });
+
+  return Object.keys(productMap).map(pId => productMap[pId]);
+}
+
+export const productCountList = (state=[], action) => {
+  if(action && action.type === 'GET_PRODUCT_COUNT_BY_DRIVER'){
+    const {driverId, orders} = action.payload;
+    const filteredOrders = orders.filter(order => order.driverId === driverId);
+    return groupByProduct(filteredOrders);
+  }
+  return state;
+}
+
+
 export function counter(state = 0, action) {
   switch (action.type) {
     case 'INCREMENT':
@@ -77,3 +108,4 @@ export function counter(state = 0, action) {
       return state
   }
 }
+

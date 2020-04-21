@@ -69,6 +69,12 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+// payload {driverId, orders}
+export const getProductCountByDriver = (payload) => ({
+  type: 'GET_PRODUCT_COUNT_BY_DRIVER',
+  payload
+});
+
 // async actions
 export const getAccountsAsync = keyword => {
   const accountSvc = new AccountAPI();

@@ -1,5 +1,5 @@
 
-
+// desktop default
   .order-row, .order-row-selected{
     width: 100%;
     height: auto;
@@ -32,11 +32,6 @@
 
 @media #{$cellphone} {
   .title{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    font-weight: bold;
     font-size: small;
   }
 
@@ -51,11 +46,6 @@
 
 @media #{$mobile} {
   .title{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    font-weight: bold;
     font-size: small;
   }
 
