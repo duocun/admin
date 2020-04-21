@@ -1,23 +1,24 @@
-.order-row-selected{
-    display: flex;
-    justify-content: space-around;
+
+
+  .order-row, .order-row-selected{
     width: 100%;
     height: auto;
     margin-top:10px;
     cursor: pointer;
+    float: left;
+    padding-left: 8px;
+  } 
+
+  .order-row-selected{
     background-color: lightgrey;
   }
 
-
-  .order-row{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    height: auto;
-    margin-top:10px;
-    cursor: pointer;
-   
-  } 
+  .col-code, .col-name{
+    width: 50%;
+    float: left;
+    text-align: left;
+    font-size: 12px;
+  }
 
   .title{
     display: flex;
@@ -27,63 +28,42 @@
     font-weight: bold;
     font-size: larger;
   }
+
+
 @media #{$cellphone} {
-
-    .title{
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 20px;
-        margin-top: 10px;
-        font-weight: bold;
-        font-size: small;
-      }
-
-    .order-row{
-      width: 100%;
-      height: auto;
-      font-size: xx-small;
-      position: relative;
-
-      cursor: pointer;
-    }
-    .order-row-selected{
-        width: 100%;
-        height: auto;
-        margin-top:10px;
-        cursor: pointer;
-        background-color: lightgrey;
-        font-size: xx-small;
-        position: relative;
-
-      }
+  .title{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: small;
   }
-  @media #{$mobile} {
 
-    .title{
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 20px;
-        margin-top: 10px;
-        font-weight: bold;
-        font-size: small;
-      }
-
-    .order-row{
-      width: 100%;
-      height: auto;
-      font-size: xx-small;
-      position: relative;
-      
-      cursor: pointer;
-    }
-    .order-row-selected{
-        width: 100%;
-        height: auto;
-        margin-top:10px;
-        cursor: pointer;
-        background-color: lightgrey;
-        font-size: xx-small;
-        position: relative;
-
-      }
+  .col-code{
+    display: none;
   }
+  
+  .col-name{
+    width: 100%;
+  }
+}
+
+@media #{$mobile} {
+  .title{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: small;
+  }
+
+  .col-code{
+    display: none;
+  }
+  
+  .col-name{
+    width: 100%;
+  }
+}

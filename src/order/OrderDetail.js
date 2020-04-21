@@ -72,10 +72,10 @@ class Order extends React.Component {
 
             <div className="right">
 
-              <div className="selectCard">
+              <div className="list order-list">
 
-                <div className="mobileHide" >订单数: {filteredOrders.length}
-                </div>
+                {/* <div className="mobileHide" >订单数: {filteredOrders.length}
+                </div> */}
 
                 <div className="title">
                   <span className="mobileHide">订单号</span>
