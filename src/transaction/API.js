@@ -7,7 +7,7 @@ export class TransactionAPI {
 
   find(query = null) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + '/', query, fields).then(rsp => {
+      this.http.get(this.url + '/', query).then(rsp => {
         if (rsp.status === HttpStatus.OK.code) {
           resolve(rsp.data);
         } else {

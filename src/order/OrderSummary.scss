@@ -46,7 +46,7 @@ $order-head-h: 92px;
     // padding: 10px 4px;
     // width: 35vw;
     width: 100%;
-    text-align: left;
+    // text-align: left;
     border: 1px solid $border-color;
     border-radius: 4px;
     overflow-y: scroll;
@@ -64,9 +64,28 @@ $order-head-h: 92px;
 
   @media #{$mobile}{
     $driver-list-w: 120px;
+    $summary-h: 180px;
+    $merchants-h: 180px; 
+
     .page-body{
       height: calc(100% - #{$order-head-h});
     }
+
+    .summary-area{
+      height: $summary-h;
+      width: 100%;
+    }
+
+    .merchants-area{
+      height: $merchants-h;
+      width: 100%;
+    }
+
+    .drivers-area{
+      height: calc(100% - #{$summary-h} - #{$merchants-h});
+      width: 100%;
+    }
+
     .driver-list{
       height: 100%;
     }
@@ -89,9 +108,29 @@ $order-head-h: 92px;
 
   @media #{$cellphone}{
     $driver-list-w: 120px;
+
+    $summary-h: 180px;
+    $merchants-h: 180px; 
+
     .page-body{
       height: calc(100% - #{$order-head-h});
     }
+
+    .summary-area{
+      height: $summary-h;
+      width: 100%;
+    }
+
+    .merchants-area{
+      height: $merchants-h;
+      width: 100%;
+    }
+
+    .drivers-area{
+      height: calc(100% - #{$summary-h} - #{$merchants-h});
+      width: 100%;
+    }
+
     .driver-list{
       height: 100%;
     }
