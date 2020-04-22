@@ -1,27 +1,47 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getAccountsAsync, setAccountKeyword } from '../store/actions';
-import './AccountSearchBox.scss';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import {
+  getAccountsAsync,
+  setAccountKeyword,
+  selectAccount,
+} from "../store/actions";
+import "./AccountSearchBox.scss";
 
-const AccountSearchBox = ({onChangeKeyword}) => {
+const AccountSearchBox = ({
+  account,
+  onChangeKeyword,
+  selectAccountDispatch,
+}) => {
+  const handleOnchange = (e) => {
+    selectAccountDispatch(e.target.value);
+    onChangeKeyword(e.target.value);
+  };
+
   return (
     <div className="search-box">
-      <input placeholder="查找用户名" onChange={(e) => onChangeKeyword(e.target.value)}/>
+      <input
+        placeholder="查找用户名"
+        onChange={handleOnchange}
+        value={account}
+      />
       {/* <div onChange={getAccountsByKeyword}/> */}
     </div>
-  )
-}
+  );
+};
 
-// const stateMap = (state) = { accounts };
-const mapDispatchToProps = dispatch => ({
-  onChangeKeyword: property => {
+const mapStateToProps = (state) => ({
+  account: state.account,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeKeyword: (property) => {
     dispatch(setAccountKeyword(property));
     setTimeout(() => {
       dispatch(getAccountsAsync(property));
     }, 500);
-  }
+  },
+  selectAccountDispatch: (value) => {
+    dispatch(selectAccount(value));
+  },
 });
-export default connect(
-  null,
-  mapDispatchToProps
-)(AccountSearchBox);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountSearchBox);

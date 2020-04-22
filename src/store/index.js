@@ -24,7 +24,7 @@ const store = createStore(
     driver:{},
     product:{},
     accounts: [], 
-    account:{}, 
+    account:'', 
     accountKeyword:'', 
     transactions:[],
 },composeWithDevTools(

@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 
 import AccountListItem from './AccountListItem';
 
-export const AccountList = ({accounts}) => {
+import "./AccountList.scss";
+
+export const AccountList = ({accounts, account}) => {
   return (
-    <div className="list account-list">
+    <div className={(accounts&& accounts.length >=5) ? "list account-list account-list-scroll" : "list account-list"}>
     {
-      accounts && accounts.length > 0 &&
+      accounts && accounts.length > 0 && !account &&
       accounts.map(a => <AccountListItem key={a._id} item={a}/>)
     }
     </div>
@@ -15,6 +17,7 @@ export const AccountList = ({accounts}) => {
 }
 
 const mapStateToProps = (state) => ({
-  accounts: state.accounts
+  accounts: state.accounts,
+  account: state.account
 });
 export default connect(mapStateToProps)(AccountList);
