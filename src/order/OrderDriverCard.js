@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { selectDriver } from '../store/actions';
 import ProductCountList from './ProductCountList';
-
+import './OrderDriverCard.scss';
 function OrderDriverCard({ driver }) {
 
   const pickUpList = [];
@@ -11,7 +11,7 @@ function OrderDriverCard({ driver }) {
   }
 
   return (
-    <div className="order-driver-card">
+    <div className="list order-driver-card">
       <div>司机取货查询助手</div>
       <div className="title">
         <span>商家名称</span>

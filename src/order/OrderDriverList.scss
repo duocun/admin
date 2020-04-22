@@ -1,44 +1,19 @@
 @import '../variable';
 
 $list-w: 120px;
-// .driverRowSelected{
-//     display: flex;
-//     justify-content: space-around;
-//     width: 100%;
-//     height: auto;
-//     margin-top:10px;
-//     cursor: pointer;
-//     background-color: lightgrey;
-//   }
 
-
-  // .driverRow{
-  //   display: flex;
-  //   justify-content: space-around;
-  //   width: 100%;
-  //   height: auto;
-  //   margin-top:10px;
-  //   cursor: pointer;
-   
-  // } 
 .driver-list{
   float: left;
-  // position: relative;
-  // margin-top: 5vh;
-  // height: 35vh;
-  // border: 1px solid #aaa;
-  // border-radius: 4px;
-  // padding: 10px 4px;
-  // width: 35vw;
-  
   width: 100%;
   height: 100%;
-  // height: 50px;
-  // text-align: left;
   border: 1px solid $border-color;
   border-radius: 4px;
   overflow-y: scroll;
   
+}
+.driver-list{
+  width: 50%;
+  height: 100%;
 }
 
 
@@ -48,15 +23,10 @@ $list-w: 120px;
   }
   .driver-list{
     width: $list-w;
-    // position: relative;
-    // margin-top: 2vh;
-    // height: 35vh;
-    // border: 1px solid #aaa;
-    // border-radius: 4px;
-    // padding: 10px 4px;
-    // width: 45vw;
-    // overflow-y: scroll;
-  
+  }
+  .driver-list{
+    width: 50%;
+    height: 100%;
   }
 
 
@@ -68,14 +38,10 @@ $list-w: 120px;
   }
   .driver-list{
     width: $list-w;
-    // position: relative;
-    // margin-top: 2vh;
-    // height: 35vh;
-    // border: 1px solid #aaa;
-    // border-radius: 4px;
-    // padding: 10px 4px;
-    // width: 45vw;
-    // overflow-y: scroll;
+  }
+  .driver-list{
+    width: 50%;
+    height: 100%;
   }
     
 
