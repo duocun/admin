@@ -8,19 +8,28 @@ export const  getProductInfo = (orders)=>{
         if(!productMap[pid]){
           productMap[pid]={prdouctName:'',merchantName:'',price:0,cost:0,amount:0,totalIncome:0,totalCost:0};
         }
-        productMap[pid].prdouctName = orders[i].items[j].productId;
-        productMap[pid].merchantName = orders[i].merchantName;
+        productMap[pid].prdouctName = orders[i].items[j].product.name;
+        productMap[pid].merchantName = orders[i].merchant.name;
         productMap[pid].price = orders[i].items[j].price;
         productMap[pid].cost = orders[i].items[j].cost;
-        productMap[pid].amount += orders[i].items[j].quantity;
-        productMap[pid].totalIncome += orders[i].items[j].quantity*orders[i].items[j].price;
-        productMap[pid].totalCost += orders[i].items[j].quantity*orders[i].items[j].cost;
+        productMap[pid].quantity += orders[i].items[j].quantity;
+        productMap[pid].totalPrice += orders[i].price;
+        productMap[pid].totalCost += orders[i].price;
       }
     }
   }
   var productArray = [];
   for (pid in productMap) {
-    productArray.push({productId: pid,productName:productMap[pid].prdouctName, details: productMap[pid]});
+    productArray.push({
+      productId: pid,
+      productName:productMap[pid].prdouctName,
+      merchantName:productMap[pid].merchantName,
+      price:productMap[pid].price,
+      cost:productMap[pid].cost,
+      quantity:productMap[pid].quantity,
+      totalPrice:parseFloat(productMap[pid].totalIncome.toFixed(2)),
+      totalCost:parseFloat(productMap[pid].totalCost.toFixed(2))
+     });
     }
   
 return productArray;  

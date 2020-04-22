@@ -1,7 +1,7 @@
 import { Http, HttpStatus } from '../API';
 
 export class OrderAPI {
-  url = 'Orders';
+  url = 'Orders/v2';
   http = new Http();
 
 

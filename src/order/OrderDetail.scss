@@ -9,9 +9,9 @@ $header-area-h: 88px;
 $search-bar-h: 40px;
 // $order-head-h: 85px;
 
-// .page-body{
-//   height: calc(100% - #{$order-head-h});
-// }
+.page-body{
+  height: calc(100% - #{$bottom-bar-h});
+}
 .nav-menu-bar{
   height: 100%;
 }
@@ -62,9 +62,10 @@ $search-bar-h: 40px;
   font-size: 14px;
   line-height: 18px;
   display: block;
-  margin: 5px 0px;
+  padding: 0px;
+
   input{
-    height: $search-bar-h;
+    height: 100%;
   }
 }
 
@@ -149,15 +150,16 @@ $search-bar-h: 40px;
 
 @media #{$mobile} {
 
+  .page-body{
+    display: flex;
+  }
   .nav-menu-bar{
     height: 100%;
   }
 
-  // .footer{
-  //   position:absolute;
-  //   width:100%;
-  //   bottom:0px;
-  // }
+  .order-card{
+    height: calc(100% - #{$search-bar-h});
+  }
 
   .summaryPage{
     margin-left: 0px;
@@ -206,12 +208,20 @@ $search-bar-h: 40px;
 
 @media #{$cellphone} {
 
+  .page-body {
+    display: flex;
 
-  // .footer{
-  //   position:absolute;
-  //   width:100%;
-  //   bottom:0px;
-  // }
+    .left{
+      width: 60%; // vw
+    }
+    .right{
+      width: 40%;
+    }
+  }
+
+  .order-card{
+    height: calc(100% - #{$search-bar-h});
+  }
 
   .summaryPage{
     margin-left: 0px;
@@ -234,9 +244,6 @@ $search-bar-h: 40px;
 //   flex-direction: row;
 //   padding-left: 0px;
 // }
-.mobileHide{
-  display: none !important;
-}
 
 // .button{
 // margin-left: 10px;

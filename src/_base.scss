@@ -13,6 +13,7 @@ $inverse-font-color: white;
 $bg-color: white;
 $border-color: #aaa;
 
+$selected-bg: lightgray;
 $info-bg: rgb(69,69,69);
 $info-fg: white;
 
@@ -51,6 +52,7 @@ a:hover, a:visited, a:link, a:active
   height: 100%;
   width: 100%;
   display: flex;
+  overflow: hidden;
 }
 
 .nav-menu-bar{
@@ -92,7 +94,7 @@ ul.pagination{
   float: left;
   font-size: $font-s;
   width: 100%;
-  text-align: left;
+  // text-align: left;
 }
 
 input {
@@ -132,7 +134,7 @@ textarea:focus, input:focus{
 
   .list-item{
     width: 100%;
-    text-align: left;
+    // text-align: left;
     font-size: 14px;
     float: left;
     border-bottom: 1px solid $border-color;
@@ -172,6 +174,7 @@ textarea:focus, input:focus{
     position: fixed;
     bottom: 0px;
     width: 100%;
+    height: $bottom-bar-h;
     border-top: 1px solid $border-color;
   }
 
@@ -219,6 +222,7 @@ textarea:focus, input:focus{
     position: fixed;
     bottom: 0px;
     width: 100%;
+    height: $bottom-bar-h;
     border-top: 1px solid $border-color;
   }
 

@@ -10,9 +10,8 @@ function OrderDriverCard({ driver }) {
     pickUpList.push({ id: driver.pickList[mid][2], merchant: driver.pickList[mid][0], amount: driver.pickList[mid][1] })
   }
 
-
   return (
-    <div className="driver-info-card">
+    <div className="order-driver-card">
       <div>司机取货查询助手</div>
       <div className="title">
         <span>商家名称</span>
@@ -28,7 +27,7 @@ function OrderDriverCard({ driver }) {
         )}
       </div>
 
-      <ProductCountList />
+      {/* <ProductCountList /> */}
     </div>
   )
 

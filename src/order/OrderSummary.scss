@@ -3,10 +3,10 @@
 // @import "./OrderMerchantList.scss";
 @import '../base';
 
-$order-head-h: 85px;
+$order-head-h: 92px;
 
 .page-body{
-  height: calc(100% - #{$order-head-h} - #{$bottom-bar-h});
+  height: calc(100% - #{$order-head-h});
   overflow-y: scroll;
 }
 
@@ -46,7 +46,7 @@ $order-head-h: 85px;
     // padding: 10px 4px;
     // width: 35vw;
     width: 100%;
-    text-align: left;
+    // text-align: left;
     border: 1px solid $border-color;
     border-radius: 4px;
     overflow-y: scroll;
@@ -63,6 +63,38 @@ $order-head-h: 85px;
 
 
   @media #{$mobile}{
+    $driver-list-w: 120px;
+    $summary-h: 180px;
+    $merchants-h: 180px; 
+
+    .page-body{
+      height: calc(100% - #{$order-head-h});
+    }
+
+    .summary-area{
+      height: $summary-h;
+      width: 100%;
+    }
+
+    .merchants-area{
+      height: $merchants-h;
+      width: 100%;
+    }
+
+    .drivers-area{
+      height: calc(100% - #{$summary-h} - #{$merchants-h});
+      width: 100%;
+    }
+
+    .driver-list{
+      height: 100%;
+    }
+
+    .order-driver-card{
+      width: calc(100% - #{$driver-list-w});
+    }
+
+
     .summary-upper{
       display: flex;
       flex-direction: column;
@@ -75,6 +107,38 @@ $order-head-h: 85px;
   }
 
   @media #{$cellphone}{
+    $driver-list-w: 120px;
+
+    $summary-h: 180px;
+    $merchants-h: 180px; 
+
+    .page-body{
+      height: calc(100% - #{$order-head-h});
+    }
+
+    .summary-area{
+      height: $summary-h;
+      width: 100%;
+    }
+
+    .merchants-area{
+      height: $merchants-h;
+      width: 100%;
+    }
+
+    .drivers-area{
+      height: calc(100% - #{$summary-h} - #{$merchants-h});
+      width: 100%;
+    }
+
+    .driver-list{
+      height: 100%;
+    }
+
+    .order-driver-card{
+      width: calc(100% - #{$driver-list-w});
+    }
+
     .summary-upper{
       display: flex;
       flex-direction: column;

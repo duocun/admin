@@ -7,8 +7,8 @@ import { AccountAPI } from '../account/API';
 import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
-import { loadOrders } from '../store/actions';
-// import {OrderStatus } from  './OrderModel';
+import { loadOrders, selectOrder } from '../store/actions';
+import {OrderStatus } from  './OrderModel';
 
 import OrderHeader from './OrderHeader';
 import OrderList from './OrderList';
@@ -19,10 +19,8 @@ class Order extends React.Component {
   orderSvc = new OrderAPI();
   constructor(props) {
     super(props);
-    this.state = { orders: [], deliverDate: new Date(), search: '', selectOrder: undefined };
+    this.state = { orders: props.orders, deliverDate: new Date(), search: '', selectedOrder: undefined };
     // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-
-
   }
 
   updateSearch(e) {
@@ -34,14 +32,11 @@ class Order extends React.Component {
     const filteredOrders = this.props.orders.filter(
       (od) => {
 
-        return od.clientName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || od.merchantName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+        return od.client.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+          || od.merchant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || od.code.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || (od.driverName !== undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
         ;
-
-
-
       }
     );
     // console.log("FilterOrder:" + filteredOrders.length);
@@ -67,7 +62,6 @@ class Order extends React.Component {
               </div>
 
                 <OrderCard />
-
             </div>
 
             <div className="right">
@@ -98,21 +92,20 @@ class Order extends React.Component {
           <Footer selected={Menu.Order} />
         </div>
       </div>
-
-
-
-
     );
   }
 
   componentDidMount() {
     this.accountSvc.getCurrentAccount().then(account => {
       if (account) {
-        const q = { deliverDate: '2020-04-10' };
-        // const fields = ['id', 'code', 'clientName']; // 'items'
+        const deliverDate = this.state.deliverDate.toISOString().split('T')[0];
+        const q = { deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }  };
         this.orderSvc.find(q).then(orders => {
-          this.setState({ orders, selectOrder: orders[0] });
           this.props.loadOrders(orders);
+          if(orders && orders.length>0){
+            this.props.selectOrder(orders[0]);
+          }
+          this.setState({ orders, selectedOrder: orders[0] });
         });
         // this.orderSvc.reqMissingWechatPayments().then((payments) => {
         // this.orderSvc.checkStripePay().then((payments) => {
@@ -136,33 +129,17 @@ class Order extends React.Component {
     })
   }
 
-  // handelDeliverDateChange() {
-    // const mm = d.getMonth() + 1;
-    // const dd = d.getDate();
-    // const yy = d.getFullYear();
-    // const FormatDeliverDate = yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd);
-  //   const deliverDate = this.props.deliverDateState;
-    
-  //   this.setState({ deliverDate: new Date(deliverDate) });
-  //   // const start = date + 'T00:00:00.000Z';
-  //   // const end = date + 'T23:59:59.000Z';
-  //   // const time = d.toLocaleTimeString('en-US', { hour12: false });
-
-  //   const q = { deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] } };
-  //   const fields = ['_id', 'code', 'clientName']; // 'items'
-  //   this.orderSvc.find(q, fields).then(orders => {
-  //     this.setState({ orders, deliverDate: new Date(deliverDate + 'T00:00:00.000') });
-  //     this.props.loadOrders(orders);
-
-      
-  //   });
-  // }
 }
 
 
 const mapStateToProps = (state) => ({ orders: state.orders,deliverDateState: state.deliverDate});
-
+// const mapDispatchToProps = dispatch => ({
+//   onLoadOrders: property => {
+//     dispatch(loadOrders(property));
+//     dispatch(getOrdersAsync(property));
+//   }
+// });
 export default connect(
   mapStateToProps,
-  { loadOrders }
+  { loadOrders, selectOrder }
 )(Order);
