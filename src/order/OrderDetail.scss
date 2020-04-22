@@ -154,6 +154,7 @@ $search-bar-h: 40px;
 
   .page-body{
     display: flex;
+    flex-direction: row !important;
   }
   .nav-menu-bar{
     height: 100%;
@@ -212,6 +213,7 @@ $search-bar-h: 40px;
 
   .page-body {
     display: flex;
+    flex-direction: row !important;
 
     .left{
       width: 60%; // vw
