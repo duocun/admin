@@ -2,7 +2,8 @@
 export const  getDriverInfo = (orders)=>{
   let driverMap = {};
   for(var i=0;i<orders.length;i++){
-      var did = orders[i].driverId;
+      const driver = orders[i].driver;
+      var did = driver ? driver._id : 'N/A';
       if(did!==undefined){
           if(!driverMap[did]){
               driverMap[did]=[0,0,[],[],{}]; 
@@ -10,18 +11,15 @@ export const  getDriverInfo = (orders)=>{
           driverMap[did][0]++;
           driverMap[did][1]+= orders[i].items.length;
           driverMap[did][2].push(orders[i].cost);
-          driverMap[did][3] = orders[i].driverName;
+          driverMap[did][3] = driver ? driver.userame : 'N/A';
           var mid = orders[i].merchantId;
           if(!driverMap[did][4][mid]){
             driverMap[did][4][mid]=["",0];
           }
-          driverMap[did][4][mid][0]=orders[i].merchantName;
+          driverMap[did][4][mid][0]=orders[i].merchant.name;
           driverMap[did][4][mid][1]+=orders[i].items.length;
   
           console.log(driverMap);
-          
-         
-  
   }
   }
   var driverArray = [];

@@ -6,8 +6,6 @@ import { selectDriver, getProductCountByDriver } from '../store/actions';
 function OrderDriverListItem({ data, orders, selectedDriver, onSelectDriver }) {
 
   return (
-
-
     <div onClick={() => onSelectDriver(data, orders)}
       className={selectedDriver.driverId === data.driverId ? "list-item order-row-selected" : "order-row"}
     >
@@ -30,7 +28,7 @@ const mapStateToProps = (state) => ({ selectedDriver: state.driver, orders: stat
 const mapDispatchToProps = dispatch => ({
   onSelectDriver: (property, orders) => {
     dispatch(selectDriver(property));
-    dispatch(getProductCountByDriver({driverId: property.driverId, orders}));
+    dispatch(getProductCountByDriver({ driverId: property.driverId, orders }));
   }
 });
 export default connect(

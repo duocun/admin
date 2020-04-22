@@ -12,7 +12,7 @@ function OrderDriverCard({ driver }) {
 
 
   return (
-    <div className="driver-info-card">
+    <div className="order-driver-card">
       <div>司机取货查询助手</div>
       <div className="title">
         <span>商家名称</span>

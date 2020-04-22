@@ -62,9 +62,10 @@ $search-bar-h: 40px;
   font-size: 14px;
   line-height: 18px;
   display: block;
-  margin: 5px 0px;
+  padding: 0px;
+
   input{
-    height: $search-bar-h;
+    height: 100%;
   }
 }
 
@@ -156,11 +157,9 @@ $search-bar-h: 40px;
     height: 100%;
   }
 
-  // .footer{
-  //   position:absolute;
-  //   width:100%;
-  //   bottom:0px;
-  // }
+  .order-card{
+    height: calc(100% - #{$search-bar-h});
+  }
 
   .summaryPage{
     margin-left: 0px;
@@ -220,6 +219,10 @@ $search-bar-h: 40px;
     }
   }
 
+  .order-card{
+    height: calc(100% - #{$search-bar-h});
+  }
+
   .summaryPage{
     margin-left: 0px;
   }
@@ -241,9 +244,6 @@ $search-bar-h: 40px;
 //   flex-direction: row;
 //   padding-left: 0px;
 // }
-.mobileHide{
-  display: none !important;
-}
 
 // .button{
 // margin-left: 10px;
