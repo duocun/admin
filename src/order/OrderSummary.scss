@@ -3,10 +3,10 @@
 // @import "./OrderMerchantList.scss";
 @import '../base';
 
-$order-head-h: 85px;
+$order-head-h: 92px;
 
 .page-body{
-  height: calc(100% - #{$order-head-h} - #{$bottom-bar-h});
+  height: calc(100% - #{$order-head-h});
   overflow-y: scroll;
 }
 
@@ -63,6 +63,19 @@ $order-head-h: 85px;
 
 
   @media #{$mobile}{
+    $driver-list-w: 120px;
+    .page-body{
+      height: calc(100% - #{$order-head-h});
+    }
+    .driver-list{
+      height: 100%;
+    }
+
+    .order-driver-card{
+      width: calc(100% - #{$driver-list-w});
+    }
+
+
     .summary-upper{
       display: flex;
       flex-direction: column;
@@ -75,6 +88,18 @@ $order-head-h: 85px;
   }
 
   @media #{$cellphone}{
+    $driver-list-w: 120px;
+    .page-body{
+      height: calc(100% - #{$order-head-h});
+    }
+    .driver-list{
+      height: 100%;
+    }
+
+    .order-driver-card{
+      width: calc(100% - #{$driver-list-w});
+    }
+
     .summary-upper{
       display: flex;
       flex-direction: column;

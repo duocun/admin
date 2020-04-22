@@ -1,17 +1,17 @@
 @import '../base';
 
 // desktop default
-.order-row, .order-row-selected{
-  width: 100%;
-  height: auto;
-  margin-top:10px;
-  cursor: pointer;
-  float: left;
-  padding-left: 8px;
-} 
+// .order-row, .order-row-selected{
+//   width: 100%;
+//   height: auto;
+//   margin-top:10px;
+//   cursor: pointer;
+//   float: left;
+//   padding-left: 8px;
+// } 
 
-.order-row-selected{
-  background-color: lightgrey;
+.selected{
+  background-color: $selected-bg;
 }
 
 .col-code, .col-name{

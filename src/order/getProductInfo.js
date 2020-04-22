@@ -8,8 +8,8 @@ export const  getProductInfo = (orders)=>{
         if(!productMap[pid]){
           productMap[pid]={prdouctName:'',merchantName:'',price:0,cost:0,amount:0,totalIncome:0,totalCost:0};
         }
-        productMap[pid].prdouctName = orders[i].items[j].productId;
-        productMap[pid].merchantName = orders[i].merchantName;
+        productMap[pid].prdouctName = orders[i].items[j].product.name;
+        productMap[pid].merchantName = orders[i].merchant.name;
         productMap[pid].price = orders[i].items[j].price;
         productMap[pid].cost = orders[i].items[j].cost;
         productMap[pid].quantity += orders[i].items[j].quantity;

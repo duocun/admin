@@ -7,8 +7,6 @@ function OrderDriverListItem({ data, orders, selectedDriver, onSelectDriver }) {
 console.log("redux driver  " + selectedDriver.driverName);
 console.log("data driver  " + data.driverName)
   return (
-
-
     <div onClick={() => onSelectDriver(data, orders)}
       className={selectedDriver.driverId === data.driverId ? "list-item order-row-selected" : "order-row"}
     >
@@ -27,7 +25,7 @@ const mapStateToProps = (state) => ({ selectedDriver: state.driver, orders: stat
 const mapDispatchToProps = dispatch => ({
   onSelectDriver: (property, orders) => {
     dispatch(selectDriver(property));
-    dispatch(getProductCountByDriver({driverId: property.driverId, orders}));
+    dispatch(getProductCountByDriver({ driverId: property.driverId, orders }));
   }
 });
 export default connect(
