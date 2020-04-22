@@ -3,6 +3,11 @@
 $number-of-account-limit: 6;
 $font-offset: 4.4px;
 
+.account-list{
+  position: absolute;
+  background-color: white;
+}
+
 .account-list-scroll {
   max-height: ($font-m + $font-offset + $list-item-padding-v * 2 + $list-item-border-size) * $number-of-account-limit;
 }

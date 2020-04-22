@@ -3,17 +3,22 @@ import { connect } from "react-redux";
 import {
   getAccountsAsync,
   setAccountKeyword,
-  selectAccount,
+  setAccountListDisplay,
 } from "../store/actions";
 import "./AccountSearchBox.scss";
 
 const AccountSearchBox = ({
-  account,
+  accountKeyword,
   onChangeKeyword,
-  selectAccountDispatch,
+  accountListDisplay,
+  setAccountListDisplayDispatch,
 }) => {
   const handleOnchange = (e) => {
-    selectAccountDispatch(e.target.value);
+    onChangeKeyword(e.target.value);
+  };
+
+  const handleOnFocus = (e) => {
+    setAccountListDisplayDispatch(true);
     onChangeKeyword(e.target.value);
   };
 
@@ -22,7 +27,9 @@ const AccountSearchBox = ({
       <input
         placeholder="查找用户名"
         onChange={handleOnchange}
-        value={account}
+        value={accountKeyword}
+        onFocus={handleOnFocus}
+        onBlur={() => setAccountListDisplayDispatch(false)}
       />
       {/* <div onChange={getAccountsByKeyword}/> */}
     </div>
@@ -31,6 +38,8 @@ const AccountSearchBox = ({
 
 const mapStateToProps = (state) => ({
   account: state.account,
+  accountKeyword: state.accountKeyword,
+  accountListDisplay: state.accountListDisplay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,8 +49,10 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(getAccountsAsync(property));
     }, 500);
   },
-  selectAccountDispatch: (value) => {
-    dispatch(selectAccount(value));
+  setAccountListDisplayDispatch: (boolean) => {
+    setTimeout(() => {
+      dispatch(setAccountListDisplay(boolean));
+    }, 500);
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AccountSearchBox);

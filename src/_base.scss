@@ -144,6 +144,12 @@ textarea:focus, input:focus{
   }
 }
 
+// hide display
+
+.hide{
+  display: none;
+}
+
 @media #{$tablet}{
   
   .bottom-bar{

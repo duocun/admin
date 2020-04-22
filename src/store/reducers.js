@@ -67,6 +67,13 @@ export const transactions = (state=[], action) => {
   return state;
 }
 
+export const accountListDisplay = (state=[], action) => {
+  if(action && action.type === 'SET_ACCOUNT_LIST_DISPLAY'){
+    return action.payload;
+  }
+  return state;
+}
+
 export function counter(state = 0, action) {
   switch (action.type) {
     case 'INCREMENT':
