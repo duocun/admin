@@ -1,2 +1,16 @@
-@import '../base';
+.finance-exception-body {
+  width: 100%;
+}
 
+.finance-exception-body-left{
+  width: 70%;
+}
+
+.finance-exception-body-right{
+  width: 30%;
+
+  .account-list{
+    height: 90%;
+    overflow: scroll;
+  }
+}

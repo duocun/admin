@@ -9,6 +9,8 @@ import {
   loadAccounts,
 } from "../store/actions";
 
+import './FinanceException.scss';
+
 const FinanceException = ({
   transactionDate,
   transactions,
@@ -34,6 +36,7 @@ const FinanceException = ({
    *
    * @param {Array<object>} transactions
    *
+   * filter out the accounts for all the user appear in the transactions
    * **/
 
   const filterAccountsFromTransactions = (transactions) => {
@@ -63,9 +66,9 @@ const FinanceException = ({
       </div>
       <div className="page-content">
         <FinanceHeader />
-        <div className="page-body">
-          <div className="left"></div>
-          <div className="right">
+        <div className="page-body finance-exception-body">
+          <div className="finance-exception-body-left"></div>
+          <div className="finance-exception-body-right">
             <AccountList accounts = {accountsList}/>
           </div>
         </div>

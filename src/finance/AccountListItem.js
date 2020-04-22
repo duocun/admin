@@ -1,9 +1,22 @@
-import React from 'react';
+import React from "react";
 
-export const AccountListItem = ({account}) => {
+import "./AccountListItem.scss";
+
+export const AccountListItem = ({
+  account,
+  selectedAccount,
+  setSelectedAccount,
+}) => {
   return (
-    <div className="list-item account-item" >
+    <div
+      className={
+        selectedAccount === account
+          ? "list-item account-item-selected"
+          : "list-item account-item"
+      }
+      onClick={()=>setSelectedAccount(account)}
+    >
       {account}
     </div>
-  )
-}
+  );
+};
