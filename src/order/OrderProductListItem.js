@@ -10,7 +10,7 @@ function OrderProductListItem({ product, selectedProduct, selectProduct }) {
     >
         
       <div className="col mobileHide">{product.productName}</div>
-      <div className="col">{product.details.merchantName}</div>
+      <div className="col">{product.details.merchant.name}</div>
     </div >
   )
 }

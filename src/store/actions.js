@@ -68,10 +68,18 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+
 export const setAccountListDisplay = (payload) => ({
   type: 'SET_ACCOUNT_LIST_DISPLAY',
   payload
 })
+
+// payload {driverId, orders}
+export const getProductCountByDriver = (payload) => ({
+  type: 'GET_PRODUCT_COUNT_BY_DRIVER',
+  payload
+});
+
 
 // async actions
 export const getAccountsAsync = keyword => {
@@ -91,7 +99,7 @@ export const getOrdersAsync = d => {
   const deliverDate = yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd);
   return (dispatch) => {
     const q = {
-      deliverDate, // 'YYYY-MM-DD'
+      deliverDate, // 'YYYY-MM-DD' {deliverDate: {$gte: 'YYYY-MM-DD', $lte: '<Today>YYYY-MM-DD' }}
       status: {
         $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP]
       }
