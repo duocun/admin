@@ -1,7 +1,7 @@
 import React from "react";
 import AccountSearchBox from "../account/AccountSearchBox";
 import AccountList from "../account/AccountList";
-import TransactionList from "./TransactionList";
+// import TransactionList from "./TransactionList";
 import FinanceHeader from "./FinanceHeader";
 import { NavBar, Menu } from "../ui/NavBar";
 
