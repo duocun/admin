@@ -13,7 +13,7 @@ export const TransactionListItem = ({transaction}) => {
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let weekday = date.getDay();
-    return month + "月" + day + "日" + " " + weekdays[weekday];
+    return month + "月" + day + "日" + "\n" + weekdays[weekday];
   }
 
   return (
@@ -21,8 +21,8 @@ export const TransactionListItem = ({transaction}) => {
       <span>{mapDateToDisplay(transaction.created)}</span>
       <span>{mapDateToDisplay(transaction.delivered)}</span>
       <span className="transaction-item-hide-mobile">描述</span>
-      <span className="transaction-item-hide-mobile">消费</span>
-      <span className="transaction-item-hide-mobile">付款</span>
+      {/* <span className="transaction-item-hide-mobile">消费</span>
+      <span className="transaction-item-hide-mobile">付款</span> */}
       <span>{transaction.amount}</span>
       <span>{transaction.toBalance}</span>
     </div>
