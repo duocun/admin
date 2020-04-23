@@ -23,6 +23,10 @@ a:hover, a:visited, a:link, a:active
   display: flex;
   overflow: hidden;
 }
+.page-body{
+  display: flex;
+  flex-direction: row;
+}
 
 .nav-menu-bar{
   width: $nav-w;
