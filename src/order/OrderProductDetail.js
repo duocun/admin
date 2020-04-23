@@ -15,7 +15,7 @@ function OrderCard({ product }) {
 
         <div className="detail-row">
         <div className="label-md">商家:</div>
-        {/* <div>{product.details.merchantName}</div> */}
+        {/* <div>{product.details.merchant.name}</div> */}
         </div>
 
         <div className="detail-row">

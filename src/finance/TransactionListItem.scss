@@ -1,0 +1,28 @@
+@import '../base';
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+
+  span{
+    min-width: 100px;
+  }
+}
+
+@media #{$mobile}{
+  .transaction-item-hide-mobile{
+    display: none;
+  }
+
+}
+
+@media #{$cellphone}{
+  .transaction-item {
+    span{
+      min-width: 50px;
+      max-width: 70px;
+    }
+  }
+
+}

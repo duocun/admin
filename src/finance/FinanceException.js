@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import FinanceHeader from "./FinanceHeader";
 import { NavBar, Menu } from "../ui/NavBar";
-import AccountList from "./AccountList";
+import ExceptionAccountList from "./ExceptionAccountList";
 import ExceptionTransactionList from "./ExceptionTransactionList";
 
 import {
@@ -83,7 +83,7 @@ const FinanceException = ({
             <ExceptionTransactionList />
           </div>
           <div className="finance-exception-body-right">
-            <AccountList accounts = {accountsList}/>
+            <ExceptionAccountList accounts = {accountsList}/>
           </div>
         </div>
       </div>

@@ -1,51 +1,67 @@
-.pickUpList{
+@import './bass';
+
+.pick-up-list{
   display: flex;
   justify-content: space-around;
   width: 100%;
   height: auto;
   margin-top: 10px;
-
 }
-.driver-info-card{
-  position: relative;
-  margin-top: 5vh;
-  height: 35vh;
-  border: 1px solid #aaa;
+
+.col-merchant{
+  width: 85%;
+}
+
+.col-quantity{
+  width: 15%;
+}
+
+.order-driver-card{
+  // position: relative;
+  // margin-top: 5vh;
+  // height: 35vh;
+  // border: 1px solid #aaa;
+  // border-radius: 4px;
+  // padding: 10px 4px;
+  // width: 35vw;
+  
+  width: 100%;
+  // text-align: left;
+  border: 1px solid $border-color;
   border-radius: 4px;
-  padding: 10px 4px;
-  width: 35vw;
   overflow-y: scroll;
-  margin-left: 2vw;
+
+  // margin-left: 2vw;
 
 }
 
 
 @media #{$mobile}{
-  .driver-info-card{
-    position: relative;
-    margin-top: 2vh;
-    height: 35vh;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: 10px 4px;
-    width: 40vw;
-    overflow-y: scroll;
+  // .driver-info-card{
+  //   position: relative;
+  //   margin-top: 2vh;
+  //   height: 35vh;
+  //   border: 1px solid #aaa;
+  //   border-radius: 4px;
+  //   padding: 10px 4px;
+  //   width: 40vw;
+  //   overflow-y: scroll;
   
-  }
+  // }
 
 }
 
 @media #{$cellphone}{
-  .driver-info-card{
-    position: relative;
-    margin-top: 2vh;
-    height: 35vh;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: 10px 4px;
-    width: 40vw;
-    overflow-y: scroll;
+  // .driver-info-card{
+  //   position: relative;
+  //   margin-top: 2vh;
+  //   height: 35vh;
+  //   border: 1px solid #aaa;
+  //   border-radius: 4px;
+  //   padding: 10px 4px;
+  //   width: 40vw;
+  //   overflow-y: scroll;
   
-  }
+  // }
     
 }

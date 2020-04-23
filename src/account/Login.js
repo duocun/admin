@@ -36,7 +36,7 @@ export class Login extends React.Component {
   componentDidMount() {
     this.accountSvc.getCurrentAccount().then((account) => {
       if (account) {
-        this.props.history.push('/order');
+        this.props.history.push('/order/detail');
       }
     });
   }
@@ -52,7 +52,7 @@ export class Login extends React.Component {
     this.accountSvc.login(this.state.username, this.state.password).then(tokenId => {
       this.accountSvc.setAccessTokenId(tokenId);
       // this.setState({bSubmitted: false});
-      this.props.history.push('/order');
+      this.props.history.push('/order/detail');
     });
     // setTimeout(()=>{
     // },1000);
