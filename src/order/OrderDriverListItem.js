@@ -1,32 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectDriver } from '../store/actions';
+import { selectDriver, getProductCountByDriver } from '../store/actions';
 
 
-function OrderDriverListItem({data,selectedDriver,selectDriver}) {
-
-  return(
-   
-    
-    <div onClick={ () => selectDriver(data) } 
-    className={selectedDriver.driverId === data.driverId ? "order-row-selected" : "order-row"} 
+function OrderDriverListItem({ data, orders, selectedDriver, onSelectDriver }) {
+console.log("redux driver  " + selectedDriver.driverName);
+console.log("data driver  " + data.driverName)
+  return (
+    <div onClick={() => onSelectDriver(data, orders)}
+      className={selectedDriver.driverId === data.driverId ? "list-item order-row-selected" : "order-row"}
     >
-    <div className="col">{data.details[3]}</div>
-    <div className="col">{data.details[2].reduce(function(a, b){
-        var num =a+b;  
-        return parseFloat(num.toFixed(2)) }, 0)}
+      <div className="col">{data.driverName}</div>
+      <div className="col">{data.totalCost}</div>
+      <div className="col">{data.totalQuantity}</div>
+      <div className="col">{data.totalCost}</div>
+
     </div>
-    <div className="col">{data.details[0]}</div>
-    <div className="col">{data.details[1]}</div>
-
-</div>
-  )}
-  
+  )
+}
 
 
-const mapStateToProps = (state) => ({ selectedDriver: state.driver });
 
+const mapStateToProps = (state) => ({ selectedDriver: state.driver, orders: state.orders });
+const mapDispatchToProps = dispatch => ({
+  onSelectDriver: (property, orders) => {
+    dispatch(selectDriver(property));
+    dispatch(getProductCountByDriver({ driverId: property.driverId, orders }));
+  }
+});
 export default connect(
   mapStateToProps,
-  { selectDriver }
+  mapDispatchToProps
+  // { selectDriver }
 )(OrderDriverListItem);

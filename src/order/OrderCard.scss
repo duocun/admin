@@ -23,6 +23,8 @@ $btn-area-h: 32px;
   }
 }
 
+
+
 .order-detail-content{
   width: 100%;
   height: calc(100% - #{$btn-area-h});
@@ -46,8 +48,6 @@ $btn-area-h: 32px;
   font-weight: bold;
   width: 56px;
 }
-
-  
 
   @media #{$mobile} {
     // .order-detail-content{

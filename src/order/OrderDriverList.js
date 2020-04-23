@@ -1,45 +1,67 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { loadOrders } from '../store/actions';
+import { loadOrders,selectDriver } from '../store/actions';
 import OrderDriverListItem from './OrderDriverListItem';
-import {getDriverInfo} from './getDriverInfo';
 
+// calculate quantities and group by merchants
+export const getDriverInfo = (orders) => {
+  let driverMap = {};
+  for (let i = 0; i < orders.length; i++) {
+    const driver = orders[i].driver;
+    const did = driver ? driver._id : null;
+    if (did !== undefined) {
+      if (!driverMap[did]) {
+        driverMap[did] = {
+          driverId: '',
+          totalOrderQuantity: 0,
+          totalProductQuantity: 0,
+          totalCost: 0,
+          driverName: 0,
+          pickUpList: {}
+        };
+      }
+      driverMap[did].driverId = did;
+      driverMap[did].totalOrderQuantity++;
+      driverMap[did].totalProductQuantity += orders[i].items.length;
+      driverMap[did].totalCost += orders[i].cost;
+      driverMap[did].driverName = driver ? driver.username : 'N/A'; 
+      const merchant = orders[i];
+      const mid = merchant ? merchant._id : null;
+      if (!driverMap[did].pickUpList[mid]) {
+        driverMap[did].pickUpList[mid] = {
+          merchantId: '',
+          merchantName: '',
+          merchantProductQuantity: 0
+        };
+      }
+      driverMap[did].pickUpList[mid].merchantId = mid;
+      driverMap[did].pickUpList[mid].merchantName = merchant ? merchant.name : 'N/A';
+      driverMap[did].pickUpList[mid].merchantProductQuantity += orders[i].items.length;
+    }
+  }
 
-function OrderDriverList({orders}) {
+  const driverArray = [];
+  for (let did in driverMap) {
+    driverArray.push({
+      driverId: driverMap[did].driverId,
+      totalOrderQuantity: driverMap[did].totalOrderQuantity,
+      totalProductQuantity: driverMap[did].totalProductQuantity,
+      totalCost: parseFloat(driverMap[did].totalCost.toFixed(2)),
+      driverName: driverMap[did].driverName,
+      pickUpList: driverMap[did].pickUpList
+    });
+  }
+  
+  return driverArray;
+}
+
+function OrderDriverList({orders,selectDriver}) {
   var driverArray = [];
   driverArray = getDriverInfo(orders);
+  if(driverArray.length>0){
+    selectDriver(driverArray[0])
+  }
   
-//   //reformating driver detail array 
-// let driverMap = {};
-// for(var i=0;i<orders.length;i++){
-//     var did = orders[i].driverId;
-//     if(did!==undefined){
-//         if(!driverMap[did]){
-//             driverMap[did]=[0,0,[],[],{}]; 
-//         }
-//         driverMap[did][0]++;
-//         driverMap[did][1]+= orders[i].items.length;
-//         driverMap[did][2].push(orders[i].cost);
-//         driverMap[did][3] = orders[i].driverName;
-//         var mid = orders[i].merchantId;
-//         if(!driverMap[did][4][mid]){
-//           driverMap[did][4][mid]=["",0];
-//         }
-//         driverMap[did][4][mid][0]=orders[i].merchantName;
-//         driverMap[did][4][mid][1]+=orders[i].items.length;
-
-
-        
-       
-
-// }
-// }
-// var driverArray = [];
-// for (did in driverMap) {
-//     driverArray.push({driverId: did, details: driverMap[did],driverName:driverMap[did][3],pickList:driverMap[did][4]});
-//   }
-
-
     return (
       <div className="driver-card">
       <div className="title">
@@ -67,5 +89,5 @@ const mapStateToProps = (state) => ({ orders: state.orders });
 
 export default connect(
   mapStateToProps,
-  { loadOrders }
+  { loadOrders,selectDriver }
 )(OrderDriverList);
