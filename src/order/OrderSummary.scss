@@ -1,151 +1,164 @@
-// @import "./OrderDriverCard.scss";
-// @import "./OrderDriverList.scss";
-// @import "./OrderMerchantList.scss";
-@import '../base';
+@import '../variable';
 
 $order-head-h: 92px;
+$card-padding: 20px;
+$mobile-card-padding: 10px;
 
-.page-body{
+.page-body {
   height: calc(100% - #{$order-head-h});
-  overflow-y: scroll;
 }
 
-.summary-lower{
+.summary-upper-area, .drivers-area{
+  display: flex;
+  width: 80%;
+  height: 45%;
+}
+.summary-upper-area{
+  padding-top:$card-padding;
+}
+
+.drivers-area {
+  padding-top:$card-padding; 
+}
+.summary-area, .merchants-area{
+  width: 50%;
+}
+
+
+.summary-lower {
   border: 1px solid #eee;
   overflow: scroll;
   width: 100%;
   height: 200px;
 }
 
-// .driverRowSelected{
-//     display: flex;
-//     justify-content: space-around;
-//     width: 100%;
-//     height: auto;
-//     margin-top:10px;
-//     cursor: pointer;
-//     background-color: lightgrey;
-//   }
+
+.summary-card {
+  width: 100%;
+  overflow-y: scroll;
+}
+.merchant-list,.driver-list{
+  position: relative;
+  left: $card-padding;
+}
 
 
-  // .driverRow{
-  //   display: flex;
-  //   justify-content: space-around;
-  //   width: 100%;
-  //   height: auto;
-  //   margin-top:10px;
-  //   cursor: pointer;
-   
-  // } 
-  .summary-card{
-    // position: relative;
-    // margin-top: 5vh;
-    // height: 35vh;
-    // border: 1px solid #aaa;
-    // border-radius: 4px;
-    // padding: 10px 4px;
-    // width: 35vw;
-    width: 100%;
-    // text-align: left;
-    border: 1px solid $border-color;
-    border-radius: 4px;
-    overflow-y: scroll;
-  }
 
-  .sumamary-page{
-   display: flex;
-  }
+@media #{$mobile} {
+  $driver-list-w: 120px;
 
-  .summary-upper{
+  $summary-h: 100px;
+  $merchants-h: 180px;
+
+  .page-body {
     display: flex;
+    flex-direction: column;
+    height: calc(100% - #{$order-head-h});
+  }
 
+  .summary-area {
+    height: $summary-h;
+    width: 100%;
+  }
+
+  .merchants-area {
+    height: $merchants-h;
+    width: 100%;
+  }
+
+  .drivers-area {
+    height: calc(100% - #{$summary-h} - #{$merchants-h} - 5 * #{$mobile-card-padding});
+    width:calc(100% - #{$mobile-card-padding} - #{$mobile-card-padding} );
+    position: relative;
+    left: $mobile-card-padding;
+  }
+
+  .summary-upper-area {
+    display: flex;
+    flex-direction: column;
+    height: calc(#{$summary-h} + #{$merchants-h});
+    width:calc(100% - #{$mobile-card-padding} - #{$mobile-card-padding} );
+    position: relative;
+    left: $mobile-card-padding;
+  }
+  .summary-card {
+    width: 100%;
+  }
+  .merchant-list{
+    left:0px;
+    top:$mobile-card-padding;
+  }
+  .driver-list{
+    left:$mobile-card-padding;
+    margin-right:$mobile-card-padding;
   }
 
 
-  @media #{$mobile}{
-    $driver-list-w: 120px;
-    $summary-h: 180px;
-    $merchants-h: 180px; 
+}
 
-    .page-body{
-      height: calc(100% - #{$order-head-h});
-    }
+@media #{$cellphone} {
+  $driver-list-w: 120px;
 
-    .summary-area{
-      height: $summary-h;
-      width: 100%;
-    }
+  $summary-h: 100px;
+  $merchants-h: 180px;
 
-    .merchants-area{
-      height: $merchants-h;
-      width: 100%;
-    }
-
-    .drivers-area{
-      height: calc(100% - #{$summary-h} - #{$merchants-h});
-      width: 100%;
-    }
-
-    .driver-list{
-      height: 100%;
-    }
-
-    .order-driver-card{
-      width: calc(100% - #{$driver-list-w});
-    }
-
-
-    .summary-upper{
-      display: flex;
-      flex-direction: column;
-    }
-
-    .summary-card{
-      width: 100%;
-    }
-
+  .page-body {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - #{$order-head-h});
   }
 
-  @media #{$cellphone}{
-    $driver-list-w: 120px;
-
-    $summary-h: 180px;
-    $merchants-h: 180px; 
-
-    .page-body{
-      height: calc(100% - #{$order-head-h});
-    }
-
-    .summary-area{
-      height: $summary-h;
-      width: 100%;
-    }
-
-    .merchants-area{
-      height: $merchants-h;
-      width: 100%;
-    }
-
-    .drivers-area{
-      height: calc(100% - #{$summary-h} - #{$merchants-h});
-      width: 100%;
-    }
-
-    .driver-list{
-      height: 100%;
-    }
-
-    .order-driver-card{
-      width: calc(100% - #{$driver-list-w});
-    }
-
-    .summary-upper{
-      display: flex;
-      flex-direction: column;
-    }
-
-    .summary-card{
-      width: 100%;
-    }
-
+  .summary-area {
+    height: $summary-h;
+    width: 100%;
   }
+
+  .merchants-area {
+    height: $merchants-h;
+    width: 100%;
+  }
+
+  .drivers-area {
+    height: calc(100% - #{$summary-h} - #{$merchants-h} - 5 * #{$mobile-card-padding});
+    width:calc(100% - #{$mobile-card-padding} - #{$mobile-card-padding} );
+    position: relative;
+    left: $mobile-card-padding;
+  }
+
+  .summary-upper-area {
+    display: flex;
+    flex-direction: column;
+    height: calc(#{$summary-h} + #{$merchants-h});
+    width:calc(100% - #{$mobile-card-padding} - #{$mobile-card-padding} );
+    position: relative;
+    left: $mobile-card-padding;
+  }
+  .summary-card {
+    width: 100%;
+  }
+  .merchant-list{
+    left:0px;
+    top:$mobile-card-padding;
+  }
+  .driver-list{
+    left:$mobile-card-padding;
+    margin-right:$mobile-card-padding;
+  }
+
+
+}
+@media #{$tablet}{
+.header-area{
+  display: flex;
+  flex-direction: column;
+}
+.nav-btn-area {
+  width: calc(100% - 240px);
+  margin-top: 10px;
+  display: flex;
+  position: relative;
+  margin-left: 0px;
+}
+
+
+}

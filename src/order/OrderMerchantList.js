@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { loadOrders } from '../store/actions';
-
+import './OrderMerchantList.scss';
 import OrderMerchantListItem from './OrderMerchantListItem';
 
 //
@@ -31,7 +31,7 @@ const getMerchantInfoList = (orders) => {
 function OrderMerchantList({ orders }) {
   const merchantArray = getMerchantInfoList(orders);
   return (
-    <div className="merchant-card">
+    <div className="list merchant-list">
       <div className="title">
         <span>厂家名称</span>
         <span>花费总额</span>
