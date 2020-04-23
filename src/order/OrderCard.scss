@@ -37,8 +37,9 @@ $btn-area-h: 32px;
   .detail-row{
     display: flex;
     flex-direction: row;
-    height: 22px;
+    height: auto;
     font-size: 12px;
+    margin-top:10px;
   }
 }
 

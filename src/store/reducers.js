@@ -73,15 +73,20 @@ export const transactions = (state=[], action) => {
 // return --- [{productName, quantity} ...]
 const groupByProduct = (orders) => {
   const productMap = {};
-  const rs = orders.filter(order => order.type === OrderType.GROCERY);
+  const rs = orders;
   rs.map(r => {
     r.items.map(it => {
-      productMap[it.productId] = { productName: it.product.name, quantity: 0 };
+      productMap[it.productId] = { productName: it.productName, quantity: 0, pid:'' };
     });
   });
   rs.map(r => {
     r.items.map(it => {
       productMap[it.productId].quantity += it.quantity;
+    });
+  });
+  rs.map(r => {
+    r.items.map(it => {
+      productMap[it.productId].pid = it.productId;
     });
   });
 
@@ -91,7 +96,7 @@ const groupByProduct = (orders) => {
 export const productCountList = (state=[], action) => {
   if(action && action.type === 'GET_PRODUCT_COUNT_BY_DRIVER'){
     const {driverId, orders} = action.payload;
-    const filteredOrders = orders.filter(order => order.driverId === driverId);
+    const filteredOrders = orders.filter(order => order.driver._id === driverId);
     return groupByProduct(filteredOrders);
   }
   return state;

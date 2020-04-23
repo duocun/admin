@@ -105,6 +105,9 @@ $search-bar-h: 40px;
   margin-left: 50px;
 }
 
+.left{
+  width: 20%; // vw
+}
 
 
 
@@ -161,6 +164,12 @@ $search-bar-h: 40px;
 //     font-variant: all-petite-caps;
 //     font-size: small;
 // }
+.left{
+  width: 60%; // vw
+}
+.right{
+  width: 40%;
+}
 
 
 

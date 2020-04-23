@@ -6,6 +6,8 @@ $driver-list-w: 120px;
   width: 100%;
   height: auto;
   margin-top: 10px;
+  position: relative;
+  right: 80px;
 }
 
 .col-merchant{
@@ -26,14 +28,36 @@ $driver-list-w: 120px;
 
 @media #{$mobile}{
   .order-driver-card {
-    width: calc(100% - #{$driver-list-w});
+    // width: calc(100% - #{$driver-list-w});
+    width: 70%;
+  }
+  .col-merchant{
+    width: 50%;
+  }
+  
+  .col-quantity{
+    width: 40%;
+  }
+  .pick-up-list{
+    right: 0px;
   }
  
 }
 
 @media #{$cellphone}{
   .order-driver-card {
-    width: calc(100% - #{$driver-list-w});
+    // width: calc(100% - #{$driver-list-w});
+    width: 70%;
+  }
+  .col-merchant{
+    width: 50%;
+  }
+  
+  .col-quantity{
+    width: 40%;
+  }
+  .pick-up-list{
+    right: 0px;
   }
 
     
