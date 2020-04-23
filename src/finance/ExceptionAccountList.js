@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 
 import { getTransactionsByNameAsync } from "../store/actions";
 
-import { AccountListItem } from "./AccountListItem";
+import { ExceptionAccountListItem } from "./ExceptionAccountListItem";
 
-const AccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
+//for finance exception use
+
+const ExceptionAccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
   //initialize with first account
   const firstAccount = accounts[0];
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -26,7 +28,7 @@ const AccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
       {accounts &&
         accounts.length > 0 &&
         accounts.map((account, index) => (
-          <AccountListItem
+          <ExceptionAccountListItem
             key={index}
             account={account}
             selectedAccount={selectedAccount}
@@ -44,4 +46,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getTransactionsByNameAsync(account)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountList);
+export default connect(mapStateToProps, mapDispatchToProps)(ExceptionAccountList);

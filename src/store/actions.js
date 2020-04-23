@@ -111,7 +111,10 @@ export const getAccountsAsync = keyword => {
   const accountSvc = new AccountAPI();
   return (dispatch) => {
     return accountSvc.find(null, keyword).then(
-      (accounts) => dispatch(loadAccounts(accounts))
+      (accounts) => {
+        console.log(accounts)
+        dispatch(loadAccounts(accounts))
+      }
     );
   }
 }
@@ -148,7 +151,9 @@ export const getTransactionsAsync = account => {
       ]
     };
     return transactionSvc.find(q).then(
-      (accounts) => dispatch(loadTransactions(accounts))
+      (transactions) => {
+        dispatch(loadTransactions(transactions))
+      }
     );
   }
 }
@@ -228,7 +233,6 @@ export const getTransactionsByDateRangeAsync = (transactionDate) => {
 const transferDateToQueryForm = (date) =>{
   let utcTime = Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
  date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
- console.log(utcTime)
   // const mm = utcTime.getMonth() + 1;
   // const dd = utcTime.getDate();
   // const yy = utcTime.getFullYear();

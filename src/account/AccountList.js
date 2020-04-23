@@ -5,7 +5,9 @@ import AccountListItem from "./AccountListItem";
 
 import "./AccountList.scss";
 
-export const AccountList = ({ accounts, account, accountListDisplay }) => {
+//for finance page use
+
+export const AccountList = ({ accounts, accountListDisplay }) => {
   return (
     <div
       className={
@@ -20,7 +22,6 @@ export const AccountList = ({ accounts, account, accountListDisplay }) => {
     >
       {accounts &&
         accounts.length > 0 &&
-        !account &&
         accounts.map((a) => <AccountListItem key={a._id} item={a} />)}
     </div>
   );
@@ -28,7 +29,6 @@ export const AccountList = ({ accounts, account, accountListDisplay }) => {
 
 const mapStateToProps = (state) => ({
   accounts: state.accounts,
-  account: state.account,
   accountListDisplay: state.accountListDisplay,
 });
 export default connect(mapStateToProps)(AccountList);
