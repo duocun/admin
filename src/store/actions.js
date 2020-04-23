@@ -68,6 +68,11 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+//finance exception
+export const setTransactionDate = payload => ({
+  type: 'SET_TRANSACTION_DATE',
+  payload
+});
 
 export const setAccountListDisplay = (payload) => ({
   type: 'SET_ACCOUNT_LIST_DISPLAY',
@@ -79,7 +84,6 @@ export const getProductCountByDriver = (payload) => ({
   type: 'GET_PRODUCT_COUNT_BY_DRIVER',
   payload
 });
-
 
 // async actions
 export const getAccountsAsync = keyword => {
@@ -126,4 +130,57 @@ export const getTransactionsAsync = account => {
       (accounts) => dispatch(loadTransactions(accounts))
     );
   }
+}
+
+export const getTransactionsByNameAsync = accountName => {
+  const transactionSvc = new TransactionAPI();
+  return (dispatch) => {
+  //get fromName or toName equals to accountName
+  const q = {
+      $or: [{
+          fromName: accountName
+        },
+        {
+          toName: accountName
+        }
+      ]
+    };
+  return transactionSvc.find(q).then(
+      (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+export const getTransactionsByDateRangeAsync = (transactionDate) => {
+  const transactionSvc = new TransactionAPI();
+  let {startDate,endDate} = transactionDate;
+  startDate = transferDateToQueryForm(startDate);
+  endDate = transferDateToQueryForm(endDate);
+  return (dispatch) => {
+    const q = {
+        created: {$gte: startDate, $lte: endDate}
+    };
+    return transactionSvc.find(q).then(
+      (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+/**
+ * @param {Date} date The date, which is a new Date() UTC format
+ */
+
+//this function transfer date to the format that works for query
+//this should be put somewhere else
+const transferDateToQueryForm = (date) =>{
+  let utcTime = Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
+ date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+ console.log(utcTime)
+  // const mm = utcTime.getMonth() + 1;
+  // const dd = utcTime.getDate();
+  // const yy = utcTime.getFullYear();
+  // const hour = utcTime.getHours();
+  // const min = utcTime.getMinutes();
+  // const sec = utcTime.getSeconds();
+  // return yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd) + 'T' + hour + ":" + min + ":" + sec;
 }
