@@ -197,7 +197,7 @@ export const updateMerchantSchedulesAsync = (d) => {
   
   return (dispatch) => {
     return scheduleSvc.createOrUpdateMechantSchedules(d).then(
-      schedules => dispatch(loadMerchantSchedules(schedules))
+      (schedules) => dispatch(loadMerchantSchedules(schedules))
     );
   }
 }

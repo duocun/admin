@@ -107,24 +107,8 @@ export const merchantScheduleGroup = (state={}, action) => {
 export const accountListDisplay = (state=[], action) => {
   if(action && action.type === 'SET_ACCOUNT_LIST_DISPLAY'){
     return action.payload;
-
-// orders --- orders belong to a driver
-// return --- [{productName, quantity} ...]
-const groupByProduct = (orders) => {
-  const productMap = {};
-  const rs = orders.filter(order => order.type === OrderType.GROCERY);
-  rs.map(r => {
-    r.items.map(it => {
-      productMap[it.productId] = { productName: it.product.name, quantity: 0 };
-    });
-  });
-  rs.map(r => {
-    r.items.map(it => {
-      productMap[it.productId].quantity += it.quantity;
-    });
-  });
-
-  return Object.keys(productMap).map(pId => productMap[pId]);
+  }
+  return state;
 }
 
 export const productCountList = (state=[], action) => {
@@ -136,4 +120,22 @@ export const productCountList = (state=[], action) => {
   return state;
 }
 
+// orders --- orders belong to a driver
+// return --- [{productName, quantity} ...]
+const groupByProduct = (orders) => {
+  const productMap = {};
+  const rs = orders.filter(order => order.type === OrderType.GROCERY);
+  rs.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId] = { productName: it.product.name, quantity: 0 };
+    });
+  });
+  rs.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId].quantity += it.quantity;
+    });
+  });
+
+  return Object.keys(productMap).map(pId => productMap[pId]);
+}
 

@@ -133,7 +133,7 @@ const mapDispatchToProps = dispatch => ({
   onSelectGroup: property => {
     setTimeout(() => {
       dispatch(updateMerchantSchedulesAsync(property));
-    }, 500);
+    }, 1500);
   }
 });
 export default connect(
