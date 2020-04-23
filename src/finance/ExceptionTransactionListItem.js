@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TransactionListItem = ({item}) => {
+export const ExceptionTransactionListItem = ({item}) => {
   return (
     <div className="list-item transaction-item" >
       {item.created}

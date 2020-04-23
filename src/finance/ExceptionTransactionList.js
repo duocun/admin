@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {TransactionListItem} from './TransactionListItem';
+import {ExceptionTransactionListItem} from './ExceptionTransactionListItem';
 
-const TransactionList = ({transactionsByAccount}) => {
+const ExceptionTransactionList = ({transactionsByAccount}) => {
   return (
     <div className="list transaction-list">
       <div className="list-item transaction-item" >
@@ -14,7 +14,7 @@ const TransactionList = ({transactionsByAccount}) => {
     </div>
     {
       transactionsByAccount && transactionsByAccount.length > 0 &&
-      transactionsByAccount.map(a => <TransactionListItem key={a._id} item={a}/>)
+      transactionsByAccount.map(a => <ExceptionTransactionListItem key={a._id} item={a}/>)
     }
     </div>
   )
@@ -23,4 +23,4 @@ const TransactionList = ({transactionsByAccount}) => {
 const mapStateToProps = (state) => ({
   transactionsByAccount: state.transactionsByAccount
 });
-export default connect(mapStateToProps)(TransactionList);
+export default connect(mapStateToProps)(ExceptionTransactionList);
