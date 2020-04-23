@@ -65,11 +65,21 @@ export const selectAccount = payload => ({
   payload
 })
 
-
 export const loadTransactions = (payload) => ({
   type: 'LOAD_TRANSACTIONS',
   payload
 });
+
+//finance exception
+export const setTransactionDate = payload => ({
+  type: 'SET_TRANSACTION_DATE',
+  payload
+});
+
+export const setAccountListDisplay = (payload) => ({
+  type: 'SET_ACCOUNT_LIST_DISPLAY',
+  payload
+})
 
 // payload {driverId, orders}
 export const getProductCountByDriver = (payload) => ({
@@ -143,12 +153,31 @@ export const getTransactionsAsync = account => {
   }
 }
 
-export const getMerchantsAsync = d => {
+export const getTransactionsByNameAsync = accountName => {
+  const transactionSvc = new TransactionAPI();
+  return (dispatch) => {
+  //get fromName or toName equals to accountName
+  const q = {
+      $or: [{
+          fromName: accountName
+        },
+        {
+          toName: accountName
+        }
+      ]
+    };
+  return transactionSvc.find(q).then(
+      (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+export const getMerchantsAsync = () => {
   const merchantSvc = new MerchantAPI();
   return (dispatch) => {
     const q = {type: OrderType.GROCERY};
     return merchantSvc.find(q).then(
-       merchants => dispatch(loadMerchants(merchants)),
+       merchants => dispatch(loadMerchants(merchants))
     );
   }
 }
@@ -158,7 +187,7 @@ export const getMerchantSchedulesAsync = () => {
   return (dispatch) => {
     const q = {};
     return scheduleSvc.find(q).then(
-       schedules => dispatch(loadMerchantSchedules(schedules)),
+       schedules => dispatch(loadMerchantSchedules(schedules))
     );
   }
 }
@@ -171,4 +200,40 @@ export const updateMerchantSchedulesAsync = (d) => {
       schedules => dispatch(loadMerchantSchedules(schedules))
     );
   }
+}
+
+
+export const getTransactionsByDateRangeAsync = (transactionDate) => {
+  const transactionSvc = new TransactionAPI();
+  let {startDate,endDate} = transactionDate;
+  startDate = transferDateToQueryForm(startDate);
+  endDate = transferDateToQueryForm(endDate);
+  return (dispatch) => {
+    const q = {
+        created: {$gte: startDate, $lte: endDate}
+    };
+    return transactionSvc.find(q).then(
+      (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+
+/**
+ * @param {Date} date The date, which is a new Date() UTC format
+ */
+
+//this function transfer date to the format that works for query
+//this should be put somewhere else
+const transferDateToQueryForm = (date) =>{
+  let utcTime = Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
+ date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+ console.log(utcTime)
+  // const mm = utcTime.getMonth() + 1;
+  // const dd = utcTime.getDate();
+  // const yy = utcTime.getFullYear();
+  // const hour = utcTime.getHours();
+  // const min = utcTime.getMinutes();
+  // const sec = utcTime.getSeconds();
+  // return yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd) + 'T' + hour + ":" + min + ":" + sec;
 }

@@ -6,6 +6,13 @@ export const deliverDate = (state={}, action) => {
   return state;
 }
 
+export const transactionDate = (state={}, action) => {
+  if(action && action.type === 'SET_TRANSACTION_DATE'){
+    return action.payload;
+  }
+  return state;
+}
+
 export const orders = (state=[], action) => {
   if(action && action.type === 'LOAD_ORDERS'){
     return action.payload;
@@ -97,6 +104,10 @@ export const merchantScheduleGroup = (state={}, action) => {
   return state;
 }
 
+export const accountListDisplay = (state=[], action) => {
+  if(action && action.type === 'SET_ACCOUNT_LIST_DISPLAY'){
+    return action.payload;
+
 // orders --- orders belong to a driver
 // return --- [{productName, quantity} ...]
 const groupByProduct = (orders) => {
@@ -125,15 +136,4 @@ export const productCountList = (state=[], action) => {
   return state;
 }
 
-
-export function counter(state = 0, action) {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
 

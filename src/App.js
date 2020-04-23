@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import { Merchant } from './merchant/Merchant';
 import MerchantSchedule from './merchant/MerchantSchedule';
 // import { Transaction } from './transaction/Transaction';
@@ -9,7 +9,8 @@ import { Login } from './account/Login';
 import { Area } from './area/Area';
 import OrderSummary from './order/OrderSummary';
 import OrderSearch from './order/OrderSearch';
-import { FinanceDetail } from './finance/FinanceDetail';
+import FinanceDetail from './finance/FinanceDetail';
+import FinanceException from './finance/FinanceException';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/order/search" component={OrderSearch} />
         <Route exact path="/area/" component={Area} />
         <Route exact path="/finance/" component={FinanceDetail} />
+        <Route exact path="/finance/exception" component={FinanceException} />
         {/* <Route path="/merchant/:id" component={Merchant} />
             <Route path="/order" component={Order} />
             <Route path="/delivery/:id" component={Delivery} />

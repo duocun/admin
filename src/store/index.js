@@ -1,22 +1,37 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { orders, order,driver,product, accounts, account, accountKeyword, 
-  transactions, deliverDate, productCountList,
-  merchants, merchant, merchantSchedules, merchantScheduleGroup
- } from './reducers';
-
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import {
+  orders,
+  order,
+  driver,
+  product,
+  accounts,
+  account,
+  accountKeyword,
+  transactions,
+  deliverDate,
+  transactionDate,
+  accountListDisplay,
+  productCountList,
+  merchants,
+  merchant,
+  merchantSchedules,
+  merchantScheduleGroup
+} from "./reducers";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const appReducers = combineReducers({
   deliverDate,
-  orders, 
-  order, 
+  orders,
+  order,
   driver,
   product,
-  accounts, 
-  account, 
-  accountKeyword, 
+  accounts,
+  account,
+  accountKeyword,
   transactions,
+  transactionDate,
+  accountListDisplay,
   productCountList,
   merchants,
   merchant,
@@ -28,23 +43,37 @@ const store = createStore(
   appReducers,
   {
     deliverDate: new Date(),
-    orders: [],  
-    order: {}, 
-    driver:{},
-    product:{},
-    accounts: [], 
-    account:{}, 
-    accountKeyword:'', 
-    transactions:[],
+    //transaction start time needs to be set to midnight of today, and end time is the time now
+    transactionDate: {
+      startDate: new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate(),
+        0,
+        0,
+        0
+      ),
+      endDate: new Date(),
+    },
+    orders: [],
+    order: {},
+    driver: {},
+    product: {},
+    accounts: [],
+    account: {},
+    accountKeyword: "",
+    transactions: [],
+    accountListDisplay:false,
     productCountList:[],
     merchants:[],
     merchant:{},
     merchantSchedules:[],
     merchantScheduleGroup: {}
-},composeWithDevTools(
-  applyMiddleware(thunk),
-  // other store enhancers if any
-));
-  
+  },
+  composeWithDevTools(
+    applyMiddleware(thunk)
+    // other store enhancers if any
+  )
+);
 
-export default store; 
+export default store;
