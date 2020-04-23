@@ -6,6 +6,13 @@ export const deliverDate = (state={}, action) => {
   return state;
 }
 
+export const transactionDate = (state={}, action) => {
+  if(action && action.type === 'SET_TRANSACTION_DATE'){
+    return action.payload;
+  }
+  return state;
+}
+
 export const orders = (state=[], action) => {
   if(action && action.type === 'LOAD_ORDERS'){
     return action.payload;
@@ -68,29 +75,41 @@ export const transactions = (state=[], action) => {
   return state;
 }
 
+export const merchants = (state=[], action) => {
+  if(action && action.type === 'LOAD_MERCHANTS'){
+    return action.payload;
+  }
+  return state;
+}
 
-// orders --- orders belong to a driver
-// return --- [{productName, quantity} ...]
-const groupByProduct = (orders) => {
-  const productMap = {};
-  const rs = orders;
-  rs.map(r => {
-    r.items.map(it => {
-      productMap[it.productId] = { productName: it.productName, quantity: 0, pid:'' };
-    });
-  });
-  rs.map(r => {
-    r.items.map(it => {
-      productMap[it.productId].quantity += it.quantity;
-    });
-  });
-  rs.map(r => {
-    r.items.map(it => {
-      productMap[it.productId].pid = it.productId;
-    });
-  });
+export const merchant = (state={}, action) => {
+  if(action && action.type === 'SELECT_MERCHANT'){
+    return action.payload;
+  }
+  return state;
+}
 
-  return Object.keys(productMap).map(pId => productMap[pId]);
+
+export const merchantSchedules = (state=[], action) => {
+  if(action && action.type === 'LOAD_MERCHANT_SCHEDULES'){
+    return action.payload;
+  }
+  return state;
+}
+
+// payload --- object {areaCode, schedules}
+export const merchantScheduleGroup = (state={}, action) => {
+  if(action && action.type === 'SELECT_MERCHANT_SCHEDULE_GROUP'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const accountListDisplay = (state=[], action) => {
+  if(action && action.type === 'SET_ACCOUNT_LIST_DISPLAY'){
+    return action.payload;
+  }
+  return state;
 }
 
 export const productCountList = (state=[], action) => {
@@ -103,14 +122,26 @@ export const productCountList = (state=[], action) => {
 }
 
 
-export function counter(state = 0, action) {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
+// orders --- orders belong to a driver
+// return --- [{productName, quantity} ...]
+const groupByProduct = (orders) => {
+  const productMap = {};
+  const rs = orders.filter(order => order.type === OrderType.GROCERY);
+  rs.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId] = { productName: it.product.name, quantity: 0, pid:'' };
+    });
+  });
+  rs.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId].quantity += it.quantity;
+    });
+  });
+  rs.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId].pid = it.productId;
+    });
+  });
+  return Object.keys(productMap).map(pId => productMap[pId]);
 }
 

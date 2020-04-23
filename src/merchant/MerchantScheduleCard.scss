@@ -1,0 +1,29 @@
+@import '../variable';
+
+$area-list-w: 60px;
+input{
+  width: 280px;
+}
+.btn{
+  width: 100%;
+}
+.area-list{
+  width: 60px;
+  float: left;
+}
+.schedule-card{
+  width: calc(100% - #{$area-list-w});
+  float: left;
+}
+
+
+@media #{$cellphone}{
+  input{
+    width: 280px;
+  }
+}
+@media #{$mobile}{
+  input{
+    width: 280px;
+  }
+}

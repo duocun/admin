@@ -14,7 +14,7 @@ function OrderHeader({deliverDate, onSelectDeliverDate}) {
   return (
   <div className="header-area">
     <div className="select-date-area">
-      <div className="label-bg">选择日期:</div>
+      <div className="label-bg">送货日期:</div>
       <DatePicker className="date-picker" selected={deliverDate}
         onChange={onSelectDeliverDate}
       />

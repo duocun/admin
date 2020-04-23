@@ -11,9 +11,11 @@ export class TransactionAPI {
         if (rsp.status === HttpStatus.OK.code) {
           resolve(rsp.data);
         } else {
-          resolve();
+          reject();
         }
-      });
+      }).catch(err=>{
+        reject(err);
+      })
     });
   }
 }
