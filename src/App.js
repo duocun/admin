@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import { Merchant } from './merchant/Merchant';
 // import { Transaction } from './transaction/Transaction';
 import OrderDetail from './order/OrderDetail';
