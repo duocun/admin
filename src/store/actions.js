@@ -63,17 +63,23 @@ export const selectAccount = payload => ({
   payload
 })
 
-
 export const loadTransactions = (payload) => ({
   type: 'LOAD_TRANSACTIONS',
   payload
 });
+
+
+export const setAccountListDisplay = (payload) => ({
+  type: 'SET_ACCOUNT_LIST_DISPLAY',
+  payload
+})
 
 // payload {driverId, orders}
 export const getProductCountByDriver = (payload) => ({
   type: 'GET_PRODUCT_COUNT_BY_DRIVER',
   payload
 });
+
 
 // async actions
 export const getAccountsAsync = keyword => {

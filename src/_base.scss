@@ -35,6 +35,10 @@ $font-b: 16px;
 
 $nav-w: 160px;
 
+$list-item-padding-v: 8px;
+$list-item-padding-h: 15px;
+$list-item-border-size: 1px;
+
 a:hover, a:visited, a:link, a:active
 {
   text-decoration: none;
@@ -134,12 +138,18 @@ textarea:focus, input:focus{
 
   .list-item{
     width: 100%;
-    // text-align: left;
-    font-size: 14px;
+    text-align: left;
+    font-size: $font-m;
     float: left;
-    border-bottom: 1px solid $border-color;
-    padding: 8px 15px;
+    border-bottom: $list-item-border-size solid $border-color;
+    padding: $list-item-padding-v $list-item-padding-h;
   }
+}
+
+// hide display
+
+.hide{
+  display: none;
 }
 
 @media #{$tablet}{

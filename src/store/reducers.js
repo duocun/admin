@@ -69,6 +69,10 @@ export const transactions = (state=[], action) => {
 }
 
 
+export const accountListDisplay = (state=[], action) => {
+  if(action && action.type === 'SET_ACCOUNT_LIST_DISPLAY'){
+    return action.payload;
+
 // orders --- orders belong to a driver
 // return --- [{productName, quantity} ...]
 const groupByProduct = (orders) => {
@@ -97,15 +101,4 @@ export const productCountList = (state=[], action) => {
   return state;
 }
 
-
-export function counter(state = 0, action) {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
 
