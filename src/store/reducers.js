@@ -75,6 +75,34 @@ export const transactions = (state=[], action) => {
   return state;
 }
 
+export const merchants = (state=[], action) => {
+  if(action && action.type === 'LOAD_MERCHANTS'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const merchant = (state={}, action) => {
+  if(action && action.type === 'SELECT_MERCHANT'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const merchantSchedules = (state=[], action) => {
+  if(action && action.type === 'LOAD_MERCHANT_SCHEDULES'){
+    return action.payload;
+  }
+  return state;
+}
+
+// payload --- object {areaCode, schedules}
+export const merchantScheduleGroup = (state={}, action) => {
+  if(action && action.type === 'SELECT_MERCHANT_SCHEDULE_GROUP'){
+    return action.payload;
+  }
+  return state;
+}
 
 export const accountListDisplay = (state=[], action) => {
   if(action && action.type === 'SET_ACCOUNT_LIST_DISPLAY'){

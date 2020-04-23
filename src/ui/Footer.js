@@ -35,7 +35,7 @@ export class Footer extends React.Component {
           </div>
 
           <div className={selected === Menu.Area ? 'menu active' : 'menu'} >
-            <Link style={{ textDecoration: 'none' }} to={{ pathname: "/area" }}>
+            <Link style={{ textDecoration: 'none' }} to={{ pathname: "/merchant" }}>
               <div className="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
                   <path fill='none' d="M0 0h24v24H0V0z" />
@@ -57,6 +57,18 @@ export class Footer extends React.Component {
               <div className="icon-text">财务</div>
             </Link>
           </div>
+
+          {/* <div className={selected === Menu.Merchant ? 'menu active' : 'menu'}>
+            <Link style={{ textDecoration: 'none' }} to={{ pathname: "/merchant" }}>
+              <div className="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                  <path fill="none" d="M0 0h24v24H0V0z" />
+                  <path fill={selected === Menu.Merchant ? '#4285F3' : '#333'} d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+              </div>
+              <div className="icon-text">商家</div>
+            </Link>
+          </div> */}
 
           <div className={selected === Menu.Account ? 'menu active' : 'menu'}>
             <Link style={{ textDecoration: 'none' }} to={{ pathname: "/account" }}>
