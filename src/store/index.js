@@ -1,6 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { orders, order,driver,product, accounts, account, accountKeyword, 
-  transactions, deliverDate, productCountList } from './reducers';
+  transactions, deliverDate, productCountList,
+  merchants, merchant, merchantSchedules, merchantScheduleGroup
+ } from './reducers';
 
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -15,7 +17,11 @@ const appReducers = combineReducers({
   account, 
   accountKeyword, 
   transactions,
-  productCountList
+  productCountList,
+  merchants,
+  merchant,
+  merchantSchedules,
+  merchantScheduleGroup
 });
 
 const store = createStore(
@@ -30,7 +36,11 @@ const store = createStore(
     account:{}, 
     accountKeyword:'', 
     transactions:[],
-    productCountList:[]
+    productCountList:[],
+    merchants:[],
+    merchant:{},
+    merchantSchedules:[],
+    merchantScheduleGroup: {}
 },composeWithDevTools(
   applyMiddleware(thunk),
   // other store enhancers if any

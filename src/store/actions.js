@@ -1,12 +1,14 @@
 import {
   AccountAPI
 } from '../account/API';
+import {OrderType} from '../order/OrderModel';
+
 import {
   TransactionAPI
 } from '../transaction/API';
 import {OrderAPI} from '../order/API';
+import {MerchantAPI, ScheduleAPI} from '../merchant/API';
 import {OrderStatus} from '../order/OrderModel';
-
 
 export const loadOrders = payload => {
   return {
@@ -75,6 +77,25 @@ export const getProductCountByDriver = (payload) => ({
   payload
 });
 
+
+export const loadMerchants = (payload) => ({
+  type: 'LOAD_MERCHANTS',
+  payload
+});
+
+export const loadMerchantSchedules = payload => {
+  return {
+    type: 'LOAD_MERCHANT_SCHEDULES',
+    payload
+  }
+}
+
+// payload --- merchantSchedule object
+export const selectMerchantScheduleGroup = payload => ({
+  type: 'SELECT_MERCHANT_SCHEDULE_GROUP',
+  payload
+})
+
 // async actions
 export const getAccountsAsync = keyword => {
   const accountSvc = new AccountAPI();
@@ -118,6 +139,36 @@ export const getTransactionsAsync = account => {
     };
     return transactionSvc.find(q).then(
       (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+export const getMerchantsAsync = d => {
+  const merchantSvc = new MerchantAPI();
+  return (dispatch) => {
+    const q = {type: OrderType.GROCERY};
+    return merchantSvc.find(q).then(
+       merchants => dispatch(loadMerchants(merchants)),
+    );
+  }
+}
+
+export const getMerchantSchedulesAsync = () => {
+  const scheduleSvc = new ScheduleAPI();
+  return (dispatch) => {
+    const q = {};
+    return scheduleSvc.find(q).then(
+       schedules => dispatch(loadMerchantSchedules(schedules)),
+    );
+  }
+}
+
+export const updateMerchantSchedulesAsync = (d) => {
+  const scheduleSvc = new ScheduleAPI();
+  
+  return (dispatch) => {
+    return scheduleSvc.createOrUpdateMechantSchedules(d).then(
+      schedules => dispatch(loadMerchantSchedules(schedules))
     );
   }
 }
