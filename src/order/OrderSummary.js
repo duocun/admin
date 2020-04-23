@@ -60,10 +60,9 @@ class OrderSummary extends React.Component {
             <div className="info-area">
             <div className="summary-upper-area">
                <div className="list summary-area" >
-              <div>统计</div>
+              <div className="title">统计</div>
               <div>商品总数: {totalItems}</div>
               <div>订单总数: {orders.length}</div>
-
 
             </div>
             

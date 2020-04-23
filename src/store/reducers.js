@@ -89,6 +89,7 @@ export const merchant = (state={}, action) => {
   return state;
 }
 
+
 export const merchantSchedules = (state=[], action) => {
   if(action && action.type === 'LOAD_MERCHANT_SCHEDULES'){
     return action.payload;
@@ -114,11 +115,12 @@ export const accountListDisplay = (state=[], action) => {
 export const productCountList = (state=[], action) => {
   if(action && action.type === 'GET_PRODUCT_COUNT_BY_DRIVER'){
     const {driverId, orders} = action.payload;
-    const filteredOrders = orders.filter(order => order.driverId === driverId);
+    const filteredOrders = orders.filter(order => order.driver._id === driverId);
     return groupByProduct(filteredOrders);
   }
   return state;
 }
+
 
 // orders --- orders belong to a driver
 // return --- [{productName, quantity} ...]
@@ -127,7 +129,7 @@ const groupByProduct = (orders) => {
   const rs = orders.filter(order => order.type === OrderType.GROCERY);
   rs.forEach(r => {
     r.items.forEach(it => {
-      productMap[it.productId] = { productName: it.product.name, quantity: 0 };
+      productMap[it.productId] = { productName: it.product.name, quantity: 0, pid:'' };
     });
   });
   rs.forEach(r => {
@@ -135,7 +137,11 @@ const groupByProduct = (orders) => {
       productMap[it.productId].quantity += it.quantity;
     });
   });
-
+  rs.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId].pid = it.productId;
+    });
+  });
   return Object.keys(productMap).map(pId => productMap[pId]);
 }
 
