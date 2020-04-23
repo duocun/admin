@@ -57,6 +57,7 @@ class OrderSummary extends React.Component {
           <OrderHeader />
 
           <div className="page-body">
+            <div className="info-area">
             <div className="summary-upper-area">
                <div className="list summary-area" >
               <div>统计</div>
@@ -67,8 +68,11 @@ class OrderSummary extends React.Component {
             </div>
             
                <div className="merchants-area">
+
                <OrderMerchantList />
-            </div>
+               </div>
+
+             
             </div>
 
           
@@ -76,7 +80,7 @@ class OrderSummary extends React.Component {
               <OrderDriverCard />
               <OrderDriverList />
             </div>
-            
+            </div> 
           </div>
         </div>
       
