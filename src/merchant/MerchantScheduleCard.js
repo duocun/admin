@@ -40,7 +40,7 @@ const loadDatas = (merchants, group) => {
   }
 }
 
-function MerchantScheduleCard({ merchants, group }) {
+function MerchantScheduleCard({ merchants, group, onSelectGroup }) {
   const areaId = group.areaId;
   const areaCode = group.areaCode;
   const datas = loadDatas(merchants, group);
@@ -51,8 +51,7 @@ function MerchantScheduleCard({ merchants, group }) {
     <div className="schedule-card">
       <div className="label">星期</div>
       <input onChange={(e) => setWeeks(e.target.value)}/>
-      <div>{weeks}</div>
-      <div onClick={() => updateMerchantSchedulesAsync({areaId, areaCode, merchantIds, weeks})}>保存</div>
+      <div className="btn btn-primary" onClick={() => onSelectGroup({areaId, areaCode, merchantIds, weeks})}>保存</div>
       <div className="merchant-list">
         {
           datas && datas.length > 0 &&
@@ -63,7 +62,6 @@ function MerchantScheduleCard({ merchants, group }) {
           </div>)
         }
       </div>
-      <div className="area-code">{group.areaCode}</div>
       {/* {
         group.schedules && group.schedules.length > 0 &&
         group.schedules.map(s => <div key={s._id}>
