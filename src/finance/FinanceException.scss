@@ -4,6 +4,11 @@
 
 .finance-exception-body-left{
   width: 70%;
+
+  .transaction-list{
+    height: 90%;
+    overflow: scroll;
+  }
 }
 
 .finance-exception-body-right{

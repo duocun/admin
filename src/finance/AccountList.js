@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getTransactionsByNameAsync } from "../store/actions";
+import { getTransactionsAsync } from "../store/actions";
 
 import { AccountListItem } from "./AccountListItem";
 
-const AccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
+const AccountList = ({ accounts,transactionDate, getTransactionsAsyncDispatch }) => {
   //initialize with first account
   const firstAccount = accounts[0];
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -16,13 +16,18 @@ const AccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
 
   useEffect(() => {
     //avoiding "" or undefined send out a request
-    if (selectedAccount !== "" && selectedAccount !== undefined) {
-      getTransactionsByNameAsyncDispatch(selectedAccount);
+    if (selectedAccount && selectedAccount.name !== "" && selectedAccount.name !== undefined) {
+      getTransactionsAsyncDispatch(selectedAccount, transactionDate);
     }
   }, [selectedAccount]);
 
   return (
     <div className="list account-list">
+      <div
+      className="list-item account-item"
+    >
+      用户名
+    </div>
       {accounts &&
         accounts.length > 0 &&
         accounts.map((account, index) => (
@@ -37,11 +42,13 @@ const AccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  transactionDate: state.transactionDate,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  getTransactionsByNameAsyncDispatch: (account) =>
-    dispatch(getTransactionsByNameAsync(account)),
+  getTransactionsAsyncDispatch: (account, transactionDate) =>
+    dispatch(getTransactionsAsync(account, transactionDate)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountList);

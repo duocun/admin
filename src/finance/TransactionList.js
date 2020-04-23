@@ -3,18 +3,24 @@ import {connect} from 'react-redux';
 
 import {TransactionListItem} from './TransactionListItem';
 
-const TransactionList = ({transactions}) => {
+const TransactionList = ({transactionsByAccount}) => {
   return (
     <div className="list transaction-list">
+      <div className="list-item transaction-item" >
+      日期
+      来自
+      去往
+      金额
+    </div>
     {
-      transactions && transactions.length > 0 &&
-      transactions.map(a => <TransactionListItem key={a._id} item={a}/>)
+      transactionsByAccount && transactionsByAccount.length > 0 &&
+      transactionsByAccount.map(a => <TransactionListItem key={a._id} item={a}/>)
     }
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
-  transactions: state.transactions
+  transactionsByAccount: state.transactionsByAccount
 });
 export default connect(mapStateToProps)(TransactionList);

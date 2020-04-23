@@ -9,7 +9,8 @@ import {
   accountKeyword,
   transactions,
   deliverDate,
-  transactionDate
+  transactionDate,
+  transactionsByAccount
 } from "./reducers";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -24,7 +25,8 @@ const appReducers = combineReducers({
   account,
   accountKeyword,
   transactions,
-  transactionDate
+  transactionDate,
+  transactionsByAccount
 });
 
 const store = createStore(
@@ -51,6 +53,7 @@ const store = createStore(
     account: {},
     accountKeyword: "",
     transactions: [],
+    transactionsByAccount:[]
   },
   composeWithDevTools(
     applyMiddleware(thunk)

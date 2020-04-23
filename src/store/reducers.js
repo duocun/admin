@@ -74,6 +74,13 @@ export const transactions = (state=[], action) => {
   return state;
 }
 
+export const transactionsByAccount = (state=[], action) =>{
+  if(action && action.type === 'LOAD_TRANSACTIONS_BY_ACCOUNT'){
+    return action.payload;
+  }
+  return state;
+}
+
 export function counter(state = 0, action) {
   switch (action.type) {
     case 'INCREMENT':

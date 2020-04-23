@@ -69,6 +69,11 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+export const loadTransactionsByAccount = (payload) => ({
+  type: 'LOAD_TRANSACTIONS_BY_ACCOUNT',
+  payload
+});
+
 //finance exception
 export const setTransactionDate = payload => ({
   type: 'SET_TRANSACTION_DATE',
@@ -104,8 +109,9 @@ export const getOrdersAsync = d => {
   }
 }
 
-export const getTransactionsAsync = account => {
+export const getTransactionsAsync = (account, transactionDate) => {
   const transactionSvc = new TransactionAPI();
+  let {startDate,endDate} = transactionDate;
   return (dispatch) => {
     const q = {
       $or: [{
@@ -114,29 +120,11 @@ export const getTransactionsAsync = account => {
         {
           toId: account._id
         }
-      ]
+      ],
+      created: {$gte: startDate, $lte: endDate}
     };
     return transactionSvc.find(q).then(
-      (accounts) => dispatch(loadTransactions(accounts))
-    );
-  }
-}
-
-export const getTransactionsByNameAsync = accountName => {
-  const transactionSvc = new TransactionAPI();
-  return (dispatch) => {
-  //get fromName or toName equals to accountName
-  const q = {
-      $or: [{
-          fromName: accountName
-        },
-        {
-          toName: accountName
-        }
-      ]
-    };
-  return transactionSvc.find(q).then(
-      (accounts) => dispatch(loadTransactions(accounts))
+      (accounts) => dispatch(loadTransactionsByAccount(accounts))
     );
   }
 }
@@ -163,9 +151,6 @@ export const getTransactionsByDateRangeAsync = (transactionDate) => {
 //this function transfer date to the format that works for query
 //this should be put somewhere else
 const transferDateToQueryForm = (date) =>{
-  let utcTime = Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
- date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
- console.log(utcTime)
   // const mm = utcTime.getMonth() + 1;
   // const dd = utcTime.getDate();
   // const yy = utcTime.getFullYear();
@@ -173,4 +158,5 @@ const transferDateToQueryForm = (date) =>{
   // const min = utcTime.getMinutes();
   // const sec = utcTime.getSeconds();
   // return yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd) + 'T' + hour + ":" + min + ":" + sec;
+  return date.toISOString();
 }

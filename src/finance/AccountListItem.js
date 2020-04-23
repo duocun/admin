@@ -16,7 +16,7 @@ export const AccountListItem = ({
       }
       onClick={()=>setSelectedAccount(account)}
     >
-      {account}
+      {account.name}
     </div>
   );
 };

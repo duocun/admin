@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import FinanceHeader from "./FinanceHeader";
 import { NavBar, Menu } from "../ui/NavBar";
 import AccountList from "./AccountList";
+import TransactionList from "./TransactionList";
 
 import {
   getTransactionsByDateRangeAsync,
-  loadAccounts,
 } from "../store/actions";
 
 import './FinanceException.scss';
@@ -42,19 +42,31 @@ const FinanceException = ({
   const filterAccountsFromTransactions = (transactions) => {
     //make a hash table for account name
     let accountHash = {},
+    tem = [],
     accounts = [];
     //loop through transactions array to look for account name which is new
     for (let transaction of transactions) {
-      let accountName = transaction.fromName;
-      //if account hash does not have the account name yet
-      if (accountHash[accountName] == undefined) {
+      let fromName = transaction.fromName;
+      let toName = transaction.toName;
+      let fromId = transaction.fromId;
+      let toId = transaction.toId;
+      //if account hash does not have the from name yet
+      if (accountHash[fromName] == undefined) {
         //put the new name into accountHash
-        //give it value 1 indicating it has the account name now
-        accountHash[accountName] = 1;
+        //give it the object contains the all the value indicating it has the account name now
+        accountHash[fromName] = {name: fromName, _id: fromId};
+      }
+      //if account hash does not have the to name yet
+      if(accountHash[toName] == undefined){
+        accountHash[toName] = {name: toName, _id: toId};
       }
     }
     //sort the accountHash into an array which is the account array
-    accounts = Object.keys(accountHash).sort();
+    tem = Object.keys(accountHash).sort();
+    //make new array from the object in account hash
+    tem.map(name=>{
+      accounts.push(accountHash[name])
+    })
     //return the account array
     return accounts;
   };
@@ -67,7 +79,9 @@ const FinanceException = ({
       <div className="page-content">
         <FinanceHeader />
         <div className="page-body finance-exception-body">
-          <div className="finance-exception-body-left"></div>
+          <div className="finance-exception-body-left">
+            <TransactionList />
+          </div>
           <div className="finance-exception-body-right">
             <AccountList accounts = {accountsList}/>
           </div>
