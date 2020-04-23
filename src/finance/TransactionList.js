@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import {TransactionListItem} from './TransactionListItem';
 
+import "./TransactionList.scss";
+
 const TransactionList = ({transactions}) => {
   return (
     <div className="list transaction-list">
@@ -17,7 +19,7 @@ const TransactionList = ({transactions}) => {
     </div>
     {
       transactions && transactions.length > 0 &&
-      transactions.map(a => <TransactionListItem key={a._id} item={a}/>)
+      transactions.map(transaction => <TransactionListItem key={transaction._id} transaction={transaction}/>)
     }
     </div>
   )

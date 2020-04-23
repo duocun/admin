@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import FinanceHeader from "./FinanceHeader";
 import { NavBar, Menu } from "../ui/NavBar";
-import AccountList from "./AccountList";
+import ExceptionAccountList from "./ExceptionAccountList";
 
 import {
   getTransactionsByDateRangeAsync,
@@ -69,7 +69,7 @@ const FinanceException = ({
         <div className="page-body finance-exception-body">
           <div className="finance-exception-body-left"></div>
           <div className="finance-exception-body-right">
-            <AccountList accounts = {accountsList}/>
+            <ExceptionAccountList accounts = {accountsList}/>
           </div>
         </div>
       </div>

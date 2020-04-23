@@ -1,0 +1,6 @@
+@import '../_variable.scss';
+
+.transaction-list{
+    overflow: scroll;
+    max-height: calc(75vh);
+}
