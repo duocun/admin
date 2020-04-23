@@ -14,7 +14,7 @@ import OrderList from './OrderList';
 import OrderCard from './OrderCard';
 
 
-class Order extends React.Component {
+class OrderDetail extends React.Component {
   accountSvc = new AccountAPI();
   orderSvc = new OrderAPI();
   constructor(props) {
@@ -28,20 +28,18 @@ class Order extends React.Component {
   }
 
   render() {
-
-    const filteredOrders = this.props.orders.filter(
+    const orders = this.props.orders;
+    const filteredOrders = orders ? orders.filter(
       (od) => {
-
         return od.client.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || od.merchant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || od.code.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
           || (od.driverName !== undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
         ;
       }
-    );
+    ) : [];
     // console.log("FilterOrder:" + filteredOrders.length);
 
-    // const Menu = Menu;
     return (
       <div className="page">
 
@@ -105,28 +103,12 @@ class Order extends React.Component {
           if(orders && orders.length>0){
             this.props.selectOrder(orders[0]);
           }
-          this.setState({ orders, selectedOrder: orders[0] });
+          // this.setState({ orders, selectedOrder: orders[0] });
         });
-        // this.orderSvc.reqMissingWechatPayments().then((payments) => {
-        // this.orderSvc.checkStripePay().then((payments) => {
-        // this.orderSvc.checkWechatpay().then((payments) => {
-        // });
-
-        // const qMerchant = { type: MerchantType.GROCERY };
-        // const fields = ['_id', 'name', 'rules'];
-        // this.merchantSvc.find(qMerchant, fields).then(orders => {
-        //   this.scheduleSvc.find({}).then(schedules => {
-
-        //     orders.map(m => {
-        //       m.scheudles = schedules.filter(sc => sc.merchantId === m._id);
-        //     })
-        //     this.setState({orders});
-        //   });
-        // });
       } else {
         this.props.history.push('/login');
       }
-    })
+    });
   }
 
 }
@@ -142,4 +124,4 @@ const mapStateToProps = (state) => ({ orders: state.orders,deliverDateState: sta
 export default connect(
   mapStateToProps,
   { loadOrders, selectOrder }
-)(Order);
+)(OrderDetail);
