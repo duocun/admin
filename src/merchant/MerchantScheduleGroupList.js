@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import MerchantScheduleGroup from './MerchantScheduleGroup';
 
 export const MerchantScheduleGroupList = ({groups}) => {
-  const areas = Object.keys(groups);
+  const areas = groups ? Object.keys(groups) : [];
   return (
     <div className="list schedule-list">
     {
