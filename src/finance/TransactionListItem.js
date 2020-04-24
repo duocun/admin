@@ -2,7 +2,7 @@ import React from 'react';
 
 import "./TransactionListItem.scss";
 
-export const TransactionListItem = ({item}) => {
+export const TransactionListItem = ({transaction}) => {
 
   const mapDateToDisplay = (dateString) =>{
     if(!dateString){
@@ -13,18 +13,18 @@ export const TransactionListItem = ({item}) => {
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let weekday = date.getDay();
-    return month + "月" + day + "日" + " " + weekdays[weekday];
+    return month + "月" + day + "日" + "\n" + weekdays[weekday];
   }
 
   return (
     <div className="list-item transaction-item" >
-      <span>{mapDateToDisplay(item.created)}</span>
-      <span>{mapDateToDisplay(item.delivered)}</span>
+      <span>{mapDateToDisplay(transaction.created)}</span>
+      <span>{mapDateToDisplay(transaction.delivered)}</span>
       <span className="transaction-item-hide-mobile">描述</span>
-      <span className="transaction-item-hide-mobile">消费</span>
-      <span className="transaction-item-hide-mobile">付款</span>
-      <span>{item.amount}</span>
-      <span>{item.toBalance}</span>
+      {/* <span className="transaction-item-hide-mobile">消费</span>
+      <span className="transaction-item-hide-mobile">付款</span> */}
+      <span>{transaction.amount}</span>
+      <span>{transaction.toBalance}</span>
     </div>
   )
 }

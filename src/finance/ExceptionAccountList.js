@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getTransactionsAsync } from "../store/actions";
+import { getTransactionsByNameAsync } from "../store/actions";
 
 import { ExceptionAccountListItem } from "./ExceptionAccountListItem";
 
-const ExceptionAccountList = ({ accounts,transactionDate, getTransactionsAsyncDispatch }) => {
+//for finance exception use
+
+const ExceptionAccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
   //initialize with first account
   const firstAccount = accounts[0];
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -16,18 +18,13 @@ const ExceptionAccountList = ({ accounts,transactionDate, getTransactionsAsyncDi
 
   useEffect(() => {
     //avoiding "" or undefined send out a request
-    if (selectedAccount && selectedAccount.name !== "" && selectedAccount.name !== undefined) {
-      getTransactionsAsyncDispatch(selectedAccount, transactionDate);
+    if (selectedAccount !== "" && selectedAccount !== undefined) {
+      getTransactionsByNameAsyncDispatch(selectedAccount);
     }
   }, [selectedAccount]);
 
   return (
     <div className="list account-list">
-      <div
-      className="list-item account-item"
-    >
-      用户名
-    </div>
       {accounts &&
         accounts.length > 0 &&
         accounts.map((account, index) => (
@@ -42,13 +39,11 @@ const ExceptionAccountList = ({ accounts,transactionDate, getTransactionsAsyncDi
   );
 };
 
-const mapStateToProps = (state) => ({
-  transactionDate: state.transactionDate,
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  getTransactionsAsyncDispatch: (account, transactionDate) =>
-    dispatch(getTransactionsAsync(account, transactionDate)),
+  getTransactionsByNameAsyncDispatch: (account) =>
+    dispatch(getTransactionsByNameAsync(account)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExceptionAccountList);

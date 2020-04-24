@@ -1,12 +1,14 @@
 import {
   AccountAPI
 } from '../account/API';
+import {OrderType} from '../order/OrderModel';
+
 import {
   TransactionAPI
 } from '../transaction/API';
 import {OrderAPI} from '../order/API';
+import {MerchantAPI, ScheduleAPI} from '../merchant/API';
 import {OrderStatus} from '../order/OrderModel';
-
 
 export const loadOrders = payload => {
   return {
@@ -90,12 +92,33 @@ export const getProductCountByDriver = (payload) => ({
   payload
 });
 
+
+export const loadMerchants = (payload) => ({
+  type: 'LOAD_MERCHANTS',
+  payload
+});
+
+export const loadMerchantSchedules = payload => {
+  return {
+    type: 'LOAD_MERCHANT_SCHEDULES',
+    payload
+  }
+}
+
+// payload --- merchantSchedule object
+export const selectMerchantScheduleGroup = payload => ({
+  type: 'SELECT_MERCHANT_SCHEDULE_GROUP',
+  payload
+})
+
 // async actions
 export const getAccountsAsync = keyword => {
   const accountSvc = new AccountAPI();
   return (dispatch) => {
     return accountSvc.find(null, keyword).then(
-      (accounts) => dispatch(loadAccounts(accounts))
+      (accounts) => {
+        dispatch(loadAccounts(accounts))
+      }
     );
   }
 }
@@ -134,10 +157,62 @@ export const getTransactionsAsync = (account, transactionDate) => {
       created: {$gte: startDate, $lte: endDate}
     };
     return transactionSvc.find(q).then(
-      (accounts) => dispatch(loadTransactionsByAccount(accounts))
+      (transactions) => {
+        dispatch(loadTransactions(transactions))
+      }
     );
   }
 }
+
+export const getTransactionsByNameAsync = accountName => {
+  const transactionSvc = new TransactionAPI();
+  return (dispatch) => {
+  //get fromName or toName equals to accountName
+  const q = {
+      $or: [{
+          fromName: accountName
+        },
+        {
+          toName: accountName
+        }
+      ]
+    };
+  return transactionSvc.find(q).then(
+      (accounts) => dispatch(loadTransactions(accounts))
+    );
+  }
+}
+
+export const getMerchantsAsync = () => {
+  const merchantSvc = new MerchantAPI();
+  return (dispatch) => {
+    const q = {type: OrderType.GROCERY};
+    return merchantSvc.find(q).then(
+       merchants => dispatch(loadMerchants(merchants))
+    );
+  }
+}
+
+export const getMerchantSchedulesAsync = () => {
+  const scheduleSvc = new ScheduleAPI();
+  return (dispatch) => {
+    const q = {};
+    return scheduleSvc.find(q).then(
+       schedules => dispatch(loadMerchantSchedules(schedules))
+    );
+  }
+}
+
+export const updateMerchantSchedulesAsync = (d) => {
+  const scheduleSvc = new ScheduleAPI();
+  
+  return (dispatch) => {
+    return scheduleSvc.createOrUpdateMechantSchedules(d).then(
+      (schedules) => dispatch(loadMerchantSchedules(schedules))
+    );
+  }
+}
+
 
 export const getTransactionsByDateRangeAsync = (transactionDate) => {
   const transactionSvc = new TransactionAPI();
@@ -154,6 +229,7 @@ export const getTransactionsByDateRangeAsync = (transactionDate) => {
   }
 }
 
+
 /**
  * @param {Date} date The date, which is a new Date() UTC format
  */
@@ -161,6 +237,8 @@ export const getTransactionsByDateRangeAsync = (transactionDate) => {
 //this function transfer date to the format that works for query
 //this should be put somewhere else
 const transferDateToQueryForm = (date) =>{
+  let utcTime = Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
+ date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
   // const mm = utcTime.getMonth() + 1;
   // const dd = utcTime.getDate();
   // const yy = utcTime.getFullYear();

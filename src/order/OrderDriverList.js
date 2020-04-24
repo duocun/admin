@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { loadOrders,selectDriver } from '../store/actions';
 import OrderDriverListItem from './OrderDriverListItem';
+import './OrderDriverList.scss';
 
 // calculate quantities and group by merchants
 export const getDriverInfo = (orders) => {
@@ -63,7 +64,7 @@ function OrderDriverList({orders,selectDriver}) {
   }
   
     return (
-      <div className="driver-card">
+      <div className="list driver-list">
       <div className="title">
       <span>司机名称</span>
       <span>花费总额</span>

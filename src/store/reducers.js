@@ -93,12 +93,50 @@ export function counter(state = 0, action) {
   }
 }
 
+export const merchants = (state=[], action) => {
+  if(action && action.type === 'LOAD_MERCHANTS'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const merchant = (state={}, action) => {
+  if(action && action.type === 'SELECT_MERCHANT'){
+    return action.payload;
+  }
+  return state;
+}
+
+export const merchantSchedules = (state=[], action) => {
+  if(action && action.type === 'LOAD_MERCHANT_SCHEDULES'){
+    return action.payload;
+  }
+  return state;
+}
+
+// payload --- object {areaCode, schedules}
+export const merchantScheduleGroup = (state={}, action) => {
+  if(action && action.type === 'SELECT_MERCHANT_SCHEDULE_GROUP'){
+    return action.payload;
+  }
+  return state;
+}
+
 export const accountListDisplay = (state = [], action) => {
   if (action && action.type === "SET_ACCOUNT_LIST_DISPLAY") {
     return action.payload;
   }
   return state;
 };
+
+// export const productCountList = (state=[], action) => {
+//   if(action && action.type === 'GET_PRODUCT_COUNT_BY_DRIVER'){
+//     const {driverId, orders} = action.payload;
+//     const filteredOrders = orders.filter(order => order.driverId === driverId);
+//     return groupByProduct(filteredOrders);
+//   }
+//   return state;
+// }
 
 // orders --- orders belong to a driver
 // return --- [{productName, quantity} ...]

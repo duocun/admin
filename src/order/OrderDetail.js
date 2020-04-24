@@ -9,10 +9,10 @@ import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders, selectOrder } from '../store/actions';
 import {OrderStatus } from  './OrderModel';
-
 import OrderHeader from './OrderHeader';
 import OrderList from './OrderList';
 import OrderCard from './OrderCard';
+
 
 class Order extends React.Component {
   accountSvc = new AccountAPI();

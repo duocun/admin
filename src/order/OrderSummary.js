@@ -57,22 +57,26 @@ class OrderSummary extends React.Component {
           <OrderHeader />
 
           <div className="page-body">
-            <div className="summary-area" >
+            <div className="summary-upper-area">
+               <div className="list summary-area" >
               <div>统计</div>
               <div>商品总数: {totalItems}</div>
               <div>订单总数: {orders.length}</div>
 
-              <OrderMerchantList />
+
             </div>
             
-            <div className="merchants-area">
-
+               <div className="merchants-area">
+               <OrderMerchantList />
+            </div>
             </div>
 
-            <div className="drivers-area">
+          
+                  <div className="drivers-area">
               <OrderDriverCard />
               <OrderDriverList />
             </div>
+            
           </div>
         </div>
       

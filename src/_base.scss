@@ -1,39 +1,4 @@
-$cellphone: "(max-width:480px)";
-$mobile: "(max-width: 767px)";
-$tablet: "(min-width: 768px) and (max-width: 1199px)";
-$desktop: "(min-width: 1200px)";
-
-$green: rgb(24, 128, 56);
-$yellow: rgb(244, 160, 0);
-$red: rgb(219, 68, 55);
-$blue: #4285F3;
-
-$primary-color: #4285F3;
-$inverse-font-color: white;
-$bg-color: white;
-$border-color: #aaa;
-
-$selected-bg: lightgray;
-$info-bg: rgb(69,69,69);
-$info-fg: white;
-
-$head-h: 60px;
-$bottom-bar-h: 60px;
-$bottom-btn-w: 125px;
-
-$pagination-h: 36px;
-
-$input-h: 50px;
-$btn-h: 40px;
-
-$form-padding: 20px;
-$radius: 4px;
-
-$font-s: 12px;
-$font-m: 14px;
-$font-b: 16px;
-
-$nav-w: 160px;
+@import './variable';
 
 $list-item-padding-v: 8px;
 $list-item-padding-h: 15px;
@@ -57,6 +22,10 @@ a:hover, a:visited, a:link, a:active
   width: 100%;
   display: flex;
   overflow: hidden;
+}
+.page-body{
+  display: flex;
+  flex-direction: row;
 }
 
 .nav-menu-bar{

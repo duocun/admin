@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import { Merchant } from './merchant/Merchant';
+import MerchantSchedule from './merchant/MerchantSchedule';
 // import { Transaction } from './transaction/Transaction';
 import OrderDetail from './order/OrderDetail';
 import { Login } from './account/Login';
@@ -23,7 +24,7 @@ function App() {
 
         <Route exact path="/admin2/" component={Login} />
         <Route path="/login" component={Login} />
-        <Route exact path="/merchant/" component={Merchant} />
+        <Route exact path="/merchant/" component={MerchantSchedule} />
         <Route exact path="/order/" component={OrderDetail} />
         <Route exact path="/order/detail" component={OrderDetail} />
         <Route exact path="/order/summary" component={OrderSummary} />
