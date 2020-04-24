@@ -85,7 +85,7 @@ function OrderCard({ order }) {
 
           <div className="product-list">
           {
-            order.items.map(it => <div className="row product-row">
+            order.items.map(it => <div className="row product-row" key={it.productName}>
               <div className="col-product">{it.productName}</div>
               <div className="col-quantity">x{it.quantity}</div>
               <div className="col-price">${it.price}</div>
