@@ -89,8 +89,6 @@ $search-bar-h: 40px;
   }
 }
 
-
-
 .seperateLine{
   border: 0.5px solid rgb(190, 185, 185)
 }
@@ -106,10 +104,11 @@ $search-bar-h: 40px;
 }
 
 .left{
-  width: 20%; // vw
+  width: 60%;
 }
-
-
+.right{
+  width: 40%;
+}
 
 @media #{$mobile} {
 
@@ -133,47 +132,17 @@ $search-bar-h: 40px;
     float: left;
     width: 100%;
   }
-  
-  // .order-card{
-  //   height: calc(100% - #{$bottom-bar-h} - 100px);
-  // }
-  
 
-
-
-  // .orderPage{
-  //   display: flex;
-  //   flex-direction: row;
-  //   padding-left: 0px;
-  // }
-  .mobileHide{
-    display: none !important;
+  .col-code{
+    display: none;
   }
 
-
-// .button{
-//   margin-left: 10px;
-//     background-color: #007bff;
-//     border: none;
-//     color: white;
-//     text-align: center;
-//     text-decoration: none;
-//     cursor: pointer;
-//     width: 150px;
-//     display: block;
-//     font-variant: all-petite-caps;
-//     font-size: small;
-// }
-.left{
-  width: 60%; // vw
-}
-.right{
-  width: 40%;
-}
-
-
-
-  
+  .left{
+    width: 70%; // vw
+  }
+  .right{
+    width: 30%;
+  }
 }
 
 @media #{$cellphone} {
@@ -183,10 +152,10 @@ $search-bar-h: 40px;
     flex-direction: row;
 
     .left{
-      width: 60%; // vw
+      width: 70%;
     }
     .right{
-      width: 40%;
+      width: 30%;
     }
   }
 
@@ -203,50 +172,17 @@ $search-bar-h: 40px;
     align-self: center;
     margin-bottom: 15px;;
   }
-  // .order-card{
-  //   height: calc(100% - #{$bottom-bar-h} - 100px);
-  // }
-  
 
+  .col-code{
+    display: none;
+  }
 
-
-// .orderPage{
-//   display: flex;
-//   flex-direction: row;
-//   padding-left: 0px;
-// }
-
-// .button{
-// margin-left: 10px;
-//   background-color: #007bff;
-//   border: none;
-//   color: white;
-//   text-align: center;
-//   text-decoration: none;
-//   cursor: pointer;
-//   width: 150px;
-//   display: block;
-//   font-variant: all-petite-caps;
-//   font-size: small;
-// }
-
-
-// .search-bar {
-//   width: 250px;
-//   color: #212529;
-//   background: 0 0;
-//   outline: 0;
-//   margin-left: 10px;
-//   margin-top: 10px;
-//   font-weight: 400;
-//   font-family: Roboto,Helvetica,Arial,sans-serif;
-//   font-size: 14px;
-//   line-height: 18px;
-//   display: block;
-//   padding: 10px;
-// }
-
-
+  .left{
+    width: 70%; // vw
+  }
+  .right{
+    width: 30%;
+  }
 
 
 }

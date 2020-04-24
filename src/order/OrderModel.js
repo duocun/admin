@@ -20,3 +20,9 @@ export const MerchantType = {
     MERCHANT_CHECKED: 'MC'  // VIEWED BY MERCHANT
   };
   
+  export const PaymentMethod = {
+    CASH: 'CA',
+    WECHAT: 'W',
+    CREDIT_CARD: 'CC',
+    PREPAY: 'P'
+  };
