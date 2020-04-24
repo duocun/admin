@@ -9,6 +9,10 @@ export const MerchantScheduleGroupList = ({groups}) => {
     <div className="list schedule-list">
     {
       areas && areas.length > 0 &&
+      <div className="title">区域</div>
+    }
+    {
+      areas && areas.length > 0 &&
       areas.map(a => <MerchantScheduleGroup key={a} group={groups[a]}/>)
     }
     </div>
