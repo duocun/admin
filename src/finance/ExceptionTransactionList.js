@@ -5,8 +5,8 @@ import {ExceptionTransactionListItem} from './ExceptionTransactionListItem';
 
 const ExceptionTransactionList = ({transactionsByAccount}) => {
   return (
-    <div className="list transaction-list">
-      <div className="list-item transaction-item" >
+    <div className="list transaction-exception-list">
+      <div className="list-item transaction-exception-item transaction-item-header" >
       日期
       来自
       去往

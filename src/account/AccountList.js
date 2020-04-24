@@ -14,7 +14,7 @@ export const AccountList = ({
   accountListDisplay,
   transactionDate,
   onSelectAccountDispatch,
-  getTransactionsByNameAsyncDispatch
+  getTransactionsAsyncDispatch
 }) => {
   const [account, setAccount] = useState({});
 
@@ -25,7 +25,7 @@ export const AccountList = ({
 
   useEffect(() => {
     if(Object.keys(account).length !== 0 && account.constructor === Object){
-      getTransactionsByNameAsyncDispatch(account, transactionDate);
+      getTransactionsAsyncDispatch(account, transactionDate);
     }
   }, [JSON.stringify(account), JSON.stringify(transactionDate)]);
 
@@ -65,7 +65,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(selectAccount(account.username));
     dispatch(setAccountKeyword(account.username));
   },
-  getTransactionsByNameAsyncDispatch: (account, transactionDate) =>{
+  getTransactionsAsyncDispatch: (account, transactionDate) =>{
     dispatch(getTransactionsAsync(account, transactionDate));
   }
 });

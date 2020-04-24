@@ -11,8 +11,8 @@ export const ExceptionAccountListItem = ({
     <div
       className={
         selectedAccount === account
-          ? "list-item account-item-selected"
-          : "list-item account-item"
+          ? "list-item account-exception-item-selected"
+          : "list-item account-exception-item"
       }
       onClick={()=>setSelectedAccount(account)}
     >

@@ -142,7 +142,13 @@ export const getOrdersAsync = d => {
   }
 }
 
-export const getTransactionsAsync = (account, transactionDate) => {
+/**
+ * @param {Object} account account that selected
+ * @param {Object} transactionDate an object contains startdate and enddate
+ * @param {Boolean} isByAccount if this is for transation by account, if so, use transactionsByAccount
+ **/
+
+export const getTransactionsAsync = (account, transactionDate, isByAccount) => {
   const transactionSvc = new TransactionAPI();
   let {startDate,endDate} = transactionDate;
   return (dispatch) => {
@@ -158,31 +164,16 @@ export const getTransactionsAsync = (account, transactionDate) => {
     };
     return transactionSvc.find(q).then(
       (transactions) => {
-        dispatch(loadTransactions(transactions))
+        if(isByAccount){
+          dispatch(loadTransactionsByAccount(transactions));
+        }else{
+          dispatch(loadTransactions(transactions));
+        }
       }
     );
   }
 }
-
-export const getTransactionsByNameAsync = accountName => {
-  const transactionSvc = new TransactionAPI();
-  return (dispatch) => {
-  //get fromName or toName equals to accountName
-  const q = {
-      $or: [{
-          fromName: accountName
-        },
-        {
-          toName: accountName
-        }
-      ]
-    };
-  return transactionSvc.find(q).then(
-      (accounts) => dispatch(loadTransactions(accounts))
-    );
-  }
-}
-
+//MERCHANT
 export const getMerchantsAsync = () => {
   const merchantSvc = new MerchantAPI();
   return (dispatch) => {

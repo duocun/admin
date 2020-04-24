@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getTransactionsByNameAsync } from "../store/actions";
+import { getTransactionsAsync } from "../store/actions";
 
 import { ExceptionAccountListItem } from "./ExceptionAccountListItem";
 
 //for finance exception use
 
-const ExceptionAccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) => {
+const ExceptionAccountList = ({ accounts,transactionDate, getTransactionsAsyncDispatch }) => {
   //initialize with first account
   const firstAccount = accounts[0];
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -19,14 +19,14 @@ const ExceptionAccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) 
   useEffect(() => {
     //avoiding "" or undefined send out a request
     if (selectedAccount !== "" && selectedAccount !== undefined) {
-      getTransactionsByNameAsyncDispatch(selectedAccount);
+      getTransactionsAsyncDispatch(selectedAccount, transactionDate);
     }
-  }, [selectedAccount]);
+  }, [JSON.stringify(selectedAccount), JSON.stringify(transactionDate)]);
 
   return (
-    <div className="list account-list">
+    <div className="list account-exception-list">
       {accounts &&
-        accounts.length > 0 &&
+        accounts.length >= 0 &&
         accounts.map((account, index) => (
           <ExceptionAccountListItem
             key={index}
@@ -39,11 +39,13 @@ const ExceptionAccountList = ({ accounts, getTransactionsByNameAsyncDispatch }) 
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  transactionDate: state.transactionDate
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  getTransactionsByNameAsyncDispatch: (account) =>
-    dispatch(getTransactionsByNameAsync(account)),
+  getTransactionsAsyncDispatch: (account, transactionDate) =>
+    dispatch(getTransactionsAsync(account, transactionDate, true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExceptionAccountList);
