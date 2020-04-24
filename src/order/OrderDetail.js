@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -8,113 +8,132 @@ import './OrderDetail.scss';
 import { NavBar, Menu } from '../ui/NavBar';
 import { Footer } from '../ui/Footer';
 import { loadOrders, selectOrder } from '../store/actions';
-import {OrderStatus } from  './OrderModel';
+import { OrderStatus } from './OrderModel';
 import OrderHeader from './OrderHeader';
 import OrderList from './OrderList';
 import OrderCard from './OrderCard';
 
 
-class OrderDetail extends React.Component {
-  accountSvc = new AccountAPI();
-  orderSvc = new OrderAPI();
-  constructor(props) {
-    super(props);
-    this.state = { orders: props.orders, deliverDate: new Date(), search: '', selectedOrder: undefined };
-    // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
-  }
+const OrderDetail = ({ orders, order, loadOrders, selectOrder }) => {
 
-  updateSearch(e) {
-    this.setState({ search: e.target.value })
-  }
+  const [keyword, setSearchKeyword] = useState('');
+  const [date, setDeliverDate] = useState(new Date());
+  const [searchResults, setSearchResults] = useState([]);
 
-  render() {
-    const orders = this.props.orders;
-    const filteredOrders = orders ? orders.filter(
-      (od) => {
-        return od.client.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || od.merchant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || od.code.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
-          || (od.driverName !== undefined && od.driverName.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
-        ;
-      }
-    ) : [];
-    // console.log("FilterOrder:" + filteredOrders.length);
-
-    return (
-      <div className="page">
-
-        <div className="nav-menu-bar">
-          <NavBar selected={Menu.Order} />
-        </div>
-
-        <div className="page-content">
-
-          <OrderHeader />
-
-          <div className="page-body">
-
-            <div className="left">
-
-              <div className="search-bar">
-                <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="查订单号，客户，客户电话，商家或司机" />
-              </div>
-
-                <OrderCard />
-            </div>
-
-            <div className="right">
-
-              <div className="list order-list">
-
-                {/* <div className="mobileHide" >订单数: {filteredOrders.length}
-                </div> */}
-
-                <div className="title">
-                  <span className="mobileHide">订单号</span>
-                  <span>客户姓名</span>
-                </div>
-
-                <div>
-                  {
-                    filteredOrders && filteredOrders.length > 0 &&
-                    <OrderList orders={filteredOrders} />
-                  }
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div className="footer">
-          <Footer selected={Menu.Order} />
-        </div>
-      </div>
-    );
-  }
-
-  componentDidMount() {
-    this.accountSvc.getCurrentAccount().then(account => {
+  const handleSearch = e => {
+    setSearchKeyword(e.target.value);
+  };
+  useEffect(() => {
+    const accountSvc = new AccountAPI();
+    const orderSvc = new OrderAPI();
+    accountSvc.getCurrentAccount().then(account => {
       if (account) {
-        const deliverDate = this.state.deliverDate.toISOString().split('T')[0];
-        const q = { deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] }  };
-        this.orderSvc.find(q).then(orders => {
-          this.props.loadOrders(orders);
-          if(orders && orders.length>0){
-            this.props.selectOrder(orders[0]);
+        const deliverDate = date.toISOString().split('T')[0];
+        const q = { deliverDate, status: { $nin: [OrderStatus.BAD, OrderStatus.DELETED, OrderStatus.TEMP] } };
+        orderSvc.find(q).then(orders => {
+          loadOrders(orders);
+          if (orders && orders.length > 0 && !order) {
+            selectOrder(orders[0]);
           }
-          // this.setState({ orders, selectedOrder: orders[0] });
+          const results = filterByKeyword(orders, keyword);
+          setSearchResults(results);
         });
       } else {
         this.props.history.push('/login');
       }
     });
-  }
+  }, [keyword]);
 
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { orders: props.orders, deliverDate: new Date(), search: '', selectedOrder: undefined };
+  //   // this.handelDeliverDateChange = this.handelDeliverDateChange.bind(this);
+  // }
+
+  // updateSearch(e) {
+  //   this.setState({ search: e.target.value })
+  // }
+
+  // render() {
+  // const orders = this.props.orders;
+
+
+
+  // console.log("FilterOrder:" + filteredOrders.length);
+
+  return (
+    <div className="page">
+
+      <div className="nav-menu-bar">
+        <NavBar selected={Menu.Order} />
+      </div>
+
+      <div className="page-content">
+
+        <OrderHeader />
+
+        <div className="page-body">
+
+          <div className="left">
+
+            <div className="search-bar">
+              <input type="text" value={keyword} onChange={handleSearch} placeholder="查订单号，客户，客户电话，商家或司机" />
+            </div>
+
+            <OrderCard />
+          </div>
+
+          <div className="right">
+
+            <div className="list order-list">
+
+              {/* <div className="mobileHide" >订单数: {searchResults.length}
+                </div> */}
+
+              <div className="title">
+                <span className="col-code">订单号</span>
+                <span className="col-name">客户姓名</span>
+              </div>
+
+              <div>
+                {
+                  searchResults && searchResults.length > 0 &&
+                  <OrderList orders={searchResults} />
+                }
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div className="footer">
+        <Footer selected={Menu.Order} />
+      </div>
+    </div>
+  );
+  // }
 }
 
+const filterByKeyword = (orders, keyword) => {
+  if (keyword) {
+    return orders ? orders.filter(
+      (od) => od.client.username.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+          || od.merchant.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+          || od.code.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+          || (od.driverName !== undefined && od.driverName.toLowerCase().indexOf(keyword.toLowerCase()) !== -1)
+    ) : [];
+  } else {
+    return orders;
+  }
+}
 
-const mapStateToProps = (state) => ({ orders: state.orders,deliverDateState: state.deliverDate});
+const mapStateToProps = (state) => ({
+  orders: state.orders,
+  order: state.order,
+  deliverDateState: state.deliverDate
+});
 // const mapDispatchToProps = dispatch => ({
 //   onLoadOrders: property => {
 //     dispatch(loadOrders(property));
