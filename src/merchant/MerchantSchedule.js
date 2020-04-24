@@ -32,7 +32,7 @@ const MerchantSchedule = ({merchantSchedules, getMerchantSchedules}) => {
   const scheduleMap = groupByArea(merchantSchedules);
   return (
     <div className="page-content">
-      <div onClick={() => getMerchantSchedules()}>加载</div>
+      <div className="btn btn-primary" onClick={() => getMerchantSchedules()}>加载</div>
       <MerchantScheduleCard />
       {
         merchantSchedules && merchantSchedules.length > 0 &&

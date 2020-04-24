@@ -4,7 +4,9 @@ import {ProductCountListItem} from './ProductCountListItem';
 import './ProductCountList.scss';
 
 function ProductCountList({ productCountList }) {
+  console.log(productCountList);
   return (
+    
     productCountList.map(pc =>
       <ProductCountListItem item={pc}  key={pc.productId} />
     )

@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./AccountListItem.scss";
+import "./ExceptionAccountListItem.scss";
 
-export const AccountListItem = ({
+export const ExceptionAccountListItem = ({
   account,
   selectedAccount,
   setSelectedAccount,

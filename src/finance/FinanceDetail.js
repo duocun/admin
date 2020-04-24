@@ -7,6 +7,7 @@ import { NavBar, Menu } from "../ui/NavBar";
 
 import "./FinanceDetail.scss";
 
+//only for users
 const FinanceDetail = () => {
   return (
     <div className="page">
@@ -16,9 +17,9 @@ const FinanceDetail = () => {
       <div className="page-content">
         <FinanceHeader />
         <div className="finance-detail">
-          {/* <AccountSearchBox /> */}
-          {/* <AccountList />
-          <TransactionList /> */}
+          <AccountSearchBox />
+          <AccountList />
+          <TransactionList />
         </div>
       </div>
     </div>

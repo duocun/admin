@@ -2,6 +2,7 @@
 
 $search-bar-h: 50px;
 $btn-area-h: 32px;
+$label-w: 70px;
 
 .order-card{
   // box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.2);
@@ -23,12 +24,9 @@ $btn-area-h: 32px;
   }
 }
 
-
-
 .order-detail-content{
   width: 100%;
   height: calc(100% - #{$btn-area-h});
-  padding: 5px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -37,16 +35,34 @@ $btn-area-h: 32px;
   .detail-row{
     display: flex;
     flex-direction: row;
-    height: 22px;
+    height: auto;
     font-size: 12px;
+    margin-top: 6px;
   }
 }
 
 .label-md{
   display: flex;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
-  width: 56px;
+  width: $label-w;
+}
+
+.col-text{
+  width: calc(100% - #{$label-w});
+}
+
+.product-list{
+  padding:20px 10px 5px 0px;
+  font-size: 13px;
+}
+.col-product{
+  width: 80%;
+  float: left;
+}
+.col-price, .col-quantity{
+  width: 10%;
+  float: left;
 }
 
   @media #{$mobile} {

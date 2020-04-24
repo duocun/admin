@@ -7,9 +7,10 @@ import './OrderDriverList.scss';
 // calculate quantities and group by merchants
 export const getDriverInfo = (orders) => {
   let driverMap = {};
+
   for (let i = 0; i < orders.length; i++) {
-    const driver = orders[i].driver;
-    const did = driver ? driver._id : null;
+    let driver = orders[i].driver;
+    const did = driver ? driver._id : undefined;
     if (did !== undefined) {
       if (!driverMap[did]) {
         driverMap[did] = {
@@ -17,7 +18,7 @@ export const getDriverInfo = (orders) => {
           totalOrderQuantity: 0,
           totalProductQuantity: 0,
           totalCost: 0,
-          driverName: 0,
+          driverName: '',
           pickUpList: {}
         };
       }
@@ -26,7 +27,7 @@ export const getDriverInfo = (orders) => {
       driverMap[did].totalProductQuantity += orders[i].items.length;
       driverMap[did].totalCost += orders[i].cost;
       driverMap[did].driverName = driver ? driver.username : 'N/A'; 
-      const merchant = orders[i];
+      const merchant = orders[i].merchant;
       const mid = merchant ? merchant._id : null;
       if (!driverMap[did].pickUpList[mid]) {
         driverMap[did].pickUpList[mid] = {
@@ -40,7 +41,6 @@ export const getDriverInfo = (orders) => {
       driverMap[did].pickUpList[mid].merchantProductQuantity += orders[i].items.length;
     }
   }
-
   const driverArray = [];
   for (let did in driverMap) {
     driverArray.push({
@@ -53,22 +53,24 @@ export const getDriverInfo = (orders) => {
     });
   }
   
+  
+  
   return driverArray;
 }
 
 function OrderDriverList({orders,selectDriver}) {
   var driverArray = [];
   driverArray = getDriverInfo(orders);
-  if(driverArray.length>0){
-    selectDriver(driverArray[0])
-  }
-  
+  // if(driverArray.length>0){
+  //   selectDriver(driverArray[0])
+  // }
+
     return (
       <div className="list driver-list">
       <div className="title">
       <span>司机名称</span>
-      <span>花费总额</span>
-      <span>订单总数</span>
+      {/* <span>花费总额</span> */}
+      {/* <span>订单总数</span> */}
       <span>产品总数</span>
       </div>
           {
