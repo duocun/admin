@@ -58,7 +58,7 @@ const store = createStore(
       endDate: new Date(),
     },
     orders: [],
-    order: {},
+    order: null,
     driver: {},
     product: {},
     accounts: [],

@@ -6,7 +6,7 @@ import React from 'react';
 function OrderMerchantListItem({data}) {
   return(
 
-  <div className="order-row" key={data.merchantId}>
+  <div className="list-item" key={data.merchantId}>
   <div className="col">{data.details[3]}</div>
   <div className="col">{data.details[2].reduce(function(a, b){
       var num =a+b;  

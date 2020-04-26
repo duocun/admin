@@ -107,6 +107,7 @@ export const merchant = (state={}, action) => {
   return state;
 }
 
+
 export const merchantSchedules = (state=[], action) => {
   if(action && action.type === 'LOAD_MERCHANT_SCHEDULES'){
     return action.payload;
@@ -129,33 +130,39 @@ export const accountListDisplay = (state = [], action) => {
   return state;
 };
 
-// export const productCountList = (state=[], action) => {
-//   if(action && action.type === 'GET_PRODUCT_COUNT_BY_DRIVER'){
-//     const {driverId, orders} = action.payload;
-//     const filteredOrders = orders.filter(order => order.driverId === driverId);
-//     return groupByProduct(filteredOrders);
-//   }
-//   return state;
-// }
+
+export const productCountList = (state=[], action) => {
+  if(action && action.type === 'GET_PRODUCT_COUNT_BY_DRIVER'){
+    const {driverId, orders} = action.payload;
+    const filteredOrders = orders.filter(order => order.driver._id === driverId);
+    return groupByProduct(filteredOrders);
+  }
+  return state;
+}
+
 
 // orders --- orders belong to a driver
 // return --- [{productName, quantity} ...]
 const groupByProduct = (orders) => {
   const productMap = {};
-  const rs = orders.filter((order) => order.type === OrderType.GROCERY);
-  rs.map((r) => {
-    r.items.map((it) => {
-      productMap[it.productId] = { productName: it.product.name, quantity: 0 };
+
+  orders.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId] = { productName: it.productName, quantity: 0, pid:'' };
     });
   });
-  rs.map((r) => {
-    r.items.map((it) => {
+  orders.forEach(r => {
+    r.items.forEach(it => {
       productMap[it.productId].quantity += it.quantity;
     });
   });
-
-  return Object.keys(productMap).map((pId) => productMap[pId]);
-};
+  orders.forEach(r => {
+    r.items.forEach(it => {
+      productMap[it.productId].pid = it.productId;
+    });
+  });
+  return Object.keys(productMap).map(pId => productMap[pId]);
+}
 
 export const productCountList = (state = [], action) => {
   if (action && action.type === "GET_PRODUCT_COUNT_BY_DRIVER") {
