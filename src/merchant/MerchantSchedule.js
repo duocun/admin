@@ -52,7 +52,7 @@ const MerchantSchedule = ({ merchantSchedules, loadMerchantSchedules, loadMercha
         });
       });
     }
-  });
+  },[]);
 
   return (
     <div className="page-content">
