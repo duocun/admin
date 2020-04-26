@@ -126,18 +126,17 @@ export const productCountList = (state=[], action) => {
 // return --- [{productName, quantity} ...]
 const groupByProduct = (orders) => {
   const productMap = {};
-  const rs = orders.filter(order => order.type === OrderType.GROCERY);
-  rs.forEach(r => {
+  orders.forEach(r => {
     r.items.forEach(it => {
-      productMap[it.productId] = { productName: it.product.name, quantity: 0, pid:'' };
+      productMap[it.productId] = { productName: it.productName, quantity: 0, pid:'' };
     });
   });
-  rs.forEach(r => {
+  orders.forEach(r => {
     r.items.forEach(it => {
       productMap[it.productId].quantity += it.quantity;
     });
   });
-  rs.forEach(r => {
+  orders.forEach(r => {
     r.items.forEach(it => {
       productMap[it.productId].pid = it.productId;
     });
