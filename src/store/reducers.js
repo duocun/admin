@@ -164,13 +164,4 @@ const groupByProduct = (orders) => {
   return Object.keys(productMap).map(pId => productMap[pId]);
 }
 
-export const productCountList = (state = [], action) => {
-  if (action && action.type === "GET_PRODUCT_COUNT_BY_DRIVER") {
-    const { driverId, orders } = action.payload;
-    const filteredOrders = orders.filter(
-      (order) => order.driverId === driverId
-    );
-    return groupByProduct(filteredOrders);
-  }
-  return state;
-};
+
