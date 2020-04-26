@@ -14,7 +14,7 @@ const FinanceDetail = () => {
       <div className="nav-menu-bar">
         <NavBar selected={Menu.Order} />
       </div>
-      <div className="page-content">
+      <div className="page-content finance-page">
         <FinanceHeader />
         <div className="finance-detail">
           <AccountSearchBox />

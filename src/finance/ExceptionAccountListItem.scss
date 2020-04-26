@@ -1,5 +1,9 @@
 .account-item{}
 
-.account-item-selected{
+.account-exception-item-selected{
   background-color: lightgrey;
+}
+
+.account-exception-item:hover, .account-exception-item-selected:hover{
+  cursor: pointer;
 }

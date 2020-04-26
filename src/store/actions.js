@@ -70,6 +70,11 @@ export const loadTransactions = (payload) => ({
   payload
 });
 
+export const loadTransactionsByAccount = (payload) => ({
+  type: 'LOAD_TRANSACTIONS_BY_ACCOUNT',
+  payload
+});
+
 //finance exception
 export const setTransactionDate = payload => ({
   type: 'SET_TRANSACTION_DATE',
@@ -112,7 +117,6 @@ export const getAccountsAsync = keyword => {
   return (dispatch) => {
     return accountSvc.find(null, keyword).then(
       (accounts) => {
-        console.log(accounts)
         dispatch(loadAccounts(accounts))
       }
     );
@@ -138,8 +142,15 @@ export const getOrdersAsync = d => {
   }
 }
 
-export const getTransactionsAsync = account => {
+/**
+ * @param {Object} account account that selected
+ * @param {Object} transactionDate an object contains startdate and enddate
+ * @param {Boolean} isByAccount if this is for transation by account, if so, use transactionsByAccount
+ **/
+
+export const getTransactionsAsync = (account, transactionDate, isByAccount) => {
   const transactionSvc = new TransactionAPI();
+  let {startDate,endDate} = transactionDate;
   return (dispatch) => {
     const q = {
       $or: [{
@@ -148,35 +159,21 @@ export const getTransactionsAsync = account => {
         {
           toId: account._id
         }
-      ]
+      ],
+      created: {$gte: startDate, $lte: endDate}
     };
     return transactionSvc.find(q).then(
       (transactions) => {
-        dispatch(loadTransactions(transactions))
+        if(isByAccount){
+          dispatch(loadTransactionsByAccount(transactions));
+        }else{
+          dispatch(loadTransactions(transactions));
+        }
       }
     );
   }
 }
-
-export const getTransactionsByNameAsync = accountName => {
-  const transactionSvc = new TransactionAPI();
-  return (dispatch) => {
-  //get fromName or toName equals to accountName
-  const q = {
-      $or: [{
-          fromName: accountName
-        },
-        {
-          toName: accountName
-        }
-      ]
-    };
-  return transactionSvc.find(q).then(
-      (accounts) => dispatch(loadTransactions(accounts))
-    );
-  }
-}
-
+//MERCHANT
 export const getMerchantsAsync = () => {
   const merchantSvc = new MerchantAPI();
   return (dispatch) => {
@@ -240,4 +237,5 @@ const transferDateToQueryForm = (date) =>{
   // const min = utcTime.getMinutes();
   // const sec = utcTime.getSeconds();
   // return yy + '-' + (mm > 9 ? mm : '0' + mm) + '-' + (dd > 9 ? dd : '0' + dd) + 'T' + hour + ":" + min + ":" + sec;
+  return date.toISOString();
 }

@@ -1,6 +1,17 @@
-@import '../variable';
+@import "../_variable.scss";
 
-.finance-detail{
+$label-w: 84px;
+
+.finance-page{
+  .react-datepicker-wrapper {
+      width: calc(100% - #{$label-w});
+    .date-picker {
+      width: 100%;
+    }
+  }
+}
+
+.finance-detail {
   padding: 5px;
   height: auto;
   position: relative;

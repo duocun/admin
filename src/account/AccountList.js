@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+
+import { selectAccount, setAccountKeyword, getTransactionsAsync } from "../store/actions";
 
 import AccountListItem from "./AccountListItem";
 
@@ -7,7 +9,26 @@ import "./AccountList.scss";
 
 //for finance page use
 
-export const AccountList = ({ accounts, accountListDisplay }) => {
+export const AccountList = ({
+  accounts,
+  accountListDisplay,
+  transactionDate,
+  onSelectAccountDispatch,
+  getTransactionsAsyncDispatch
+}) => {
+  const [account, setAccount] = useState({});
+
+  const onSelectAccount = (account) => {
+    onSelectAccountDispatch(account);
+    setAccount(account);
+  };
+
+  useEffect(() => {
+    if(Object.keys(account).length !== 0 && account.constructor === Object){
+      getTransactionsAsyncDispatch(account, transactionDate);
+    }
+  }, [JSON.stringify(account), JSON.stringify(transactionDate)]);
+
   return (
     <div
       className={
@@ -15,14 +36,20 @@ export const AccountList = ({ accounts, accountListDisplay }) => {
           ? accountListDisplay
             ? "list account-list account-list-scroll"
             : "list account-list account-list-scroll hide"
-          : (accountListDisplay
-            ? "list account-list account-list"
-            : "list account-list account-list hide")
+          : accountListDisplay
+          ? "list account-list account-list"
+          : "list account-list account-list hide"
       }
     >
       {accounts &&
         accounts.length > 0 &&
-        accounts.map((a) => <AccountListItem key={a._id} item={a} />)}
+        accounts.map((a) => (
+          <AccountListItem
+            key={a._id}
+            item={a}
+            onSelectAccount={onSelectAccount}
+          />
+        ))}
     </div>
   );
 };
@@ -30,5 +57,17 @@ export const AccountList = ({ accounts, accountListDisplay }) => {
 const mapStateToProps = (state) => ({
   accounts: state.accounts,
   accountListDisplay: state.accountListDisplay,
+  transactionDate: state.transactionDate,
 });
-export default connect(mapStateToProps)(AccountList);
+
+const mapDispatchToProps = (dispatch) => ({
+  onSelectAccountDispatch: (account) => {
+    dispatch(selectAccount(account.username));
+    dispatch(setAccountKeyword(account.username));
+  },
+  getTransactionsAsyncDispatch: (account, transactionDate) =>{
+    dispatch(getTransactionsAsync(account, transactionDate));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountList);
