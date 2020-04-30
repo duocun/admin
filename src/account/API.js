@@ -21,16 +21,19 @@ export class AccountAPI {
 
   getCurrentAccount() {
     const accessTokenId = this.getAccessTokenId();
-    const url = this.url + '/current?tokenId=' + accessTokenId;
-
     return new Promise((resolve, reject) => {
-      this.http.get(url).then(rsp => {
-        if (rsp.status === HttpStatus.OK.code) {
-          resolve(rsp.data);
-        } else {
-          resolve();
-        }
-      });
+    if(accessTokenId && accessTokenId!==null){
+        const url = this.url + '/current?tokenId=' + accessTokenId;
+        this.http.get(url).then(rsp => {
+          if (rsp.status === HttpStatus.OK.code) {
+            resolve(rsp.data);
+          } else {
+            resolve();
+          }
+        });
+      }else{
+        resolve();
+      }
     });
   }
 
